@@ -9,6 +9,13 @@ import RecipesContainer from '../../containers/Recipes';
 import RecipesComponent from '../components/Recipes';
 import RecipeViewComponent from '../components/Recipe';
 
+import PorkiesContainer from '../../containers/Porkies';
+import PorkiesComponent from '../components/Porkies';
+import PorkyViewComponent from '../components/Porky';
+
+import NewPorkyContainer from '../../containers/Porkies/NewPorky';
+import NewPorkyComponent from '../components/Porkies/NewPorky';
+
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/SignUp';
 
@@ -52,6 +59,23 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+        </Stack>
+
+        <Stack
+          key="porkies"
+          title="PORKIES"
+          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="porkies" component={PorkiesContainer} Layout={PorkiesComponent} />
+          <Scene
+            back
+            key="newPorky"
+            title="New porky"
+            {...DefaultProps.navbarProps}
+            component={NewPorkyContainer}
+            Layout={NewPorkyComponent}
+          />
         </Stack>
 
         <Stack
@@ -105,6 +129,15 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={RecipesContainer}
       Layout={RecipeViewComponent}
+    />
+    <Scene
+      back
+      clone
+      key="porky"
+      title="PORKY"
+      {...DefaultProps.navbarProps}
+      component={PorkiesContainer}
+      Layout={PorkyViewComponent}
     />
   </Stack>
 );

@@ -18,4 +18,8 @@ export default {
   // Recipes
   recipe404: 'Recipe not found',
   missingMealId: 'Missing meal definition',
+
+  // Porkies
+  missingName: 'Name is missing',
+  missingChildName: 'Childname is missing',
 };

@@ -1,8 +1,8 @@
 export default {
-  apiKey: 'AIzaSyAHshJehJ-E_9AoUN3kfY8BLvZtFoXxFto',
-  authDomain: 'react-native-starter-app.firebaseapp.com',
-  databaseURL: 'https://react-native-starter-app.firebaseio.com',
-  projectId: 'react-native-starter-app',
-  storageBucket: 'react-native-starter-app.appspot.com',
+  apiKey: 'AIzaSyB94J0hGWw48O51DkkFPhh11tN-y3_HVQ8 ',
+  authDomain: 'shiny-porky-99246.firebaseapp.com',
+  databaseURL: 'https://shiny-porky-99246.firebaseio.com/',
+  projectId: 'shiny-porky-99246',
+  storageBucket: 'shiny-porky-99246.appspot.com',
   messagingSenderId: '762822550667',
 };
