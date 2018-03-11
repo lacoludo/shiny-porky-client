@@ -28,6 +28,9 @@ import ForgotPasswordComponent from '../components/ForgotPassword';
 import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
 
+import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
+import CreditCardUserComponent from '../components/Profile/CreditCardUser';
+
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
@@ -121,6 +124,14 @@ const Index = (
             {...DefaultProps.navbarProps}
             component={UpdateProfileContainer}
             Layout={UpdateProfileComponent}
+          />
+          <Scene
+            back
+            key="creditCardUser"
+            title="CREDIT CARD INFORMATIONS"
+            {...DefaultProps.navbarProps}
+            component={CreditCardUserContainer}
+            Layout={CreditCardUserComponent}
           />
         </Stack>
       </Tabs>
