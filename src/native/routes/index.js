@@ -10,7 +10,7 @@ import RecipesComponent from '../components/Recipes';
 import RecipeViewComponent from '../components/Recipe';
 
 import PorkiesContainer from '../../containers/Porkies';
-import PorkiesComponent from '../components/Porkies';
+import PorkiesComponent from '../components/Porkies/Porkies';
 import PorkyViewComponent from '../components/Porky';
 
 import NewPorkyContainer from '../../containers/Porkies/NewPorky';

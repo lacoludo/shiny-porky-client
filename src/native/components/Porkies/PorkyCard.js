@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text, Button } from 'native-base';
+import { Container, Content, Card, CardItem, Body, Text, Button, Left, Right, Thumbnail, Icon } from 'native-base';
 
-import NewPorkyCard from './NewPorkyCard';
+import NewPorkyCardItem from './NewPorkyCardItem';
+import PorkyCardItem from './PorkyCardItem';
 import Spacer from './../Spacer';
 
 class PorkyCard extends Component {
@@ -12,29 +12,16 @@ class PorkyCard extends Component {
     reFetch: PropTypes.func,
     onPress: PropTypes.func.isRequired,
   };
+
   render = () => {
     const { porky, onPress } = this.props;
 
     return (
-      <Card transparent style={{ paddingHorizontal: 6, maxWidth: '50%' }}>
-        {porky.id ? (
-          <CardItem cardBody>
-            <Body>
-
-            <Spacer size={130} />
-                <Text style={{ fontWeight: '800' }}>{porky.name}</Text>
-                <Button
-                    block
-                    bordered
-                    small
-                    onPress={() => onPress(porky)}
-                >
-                    <Text>Nourrir</Text>
-                </Button>
-            </Body>
-          </CardItem>
+      <Card style={{ paddingHorizontal: 6 }}>
+        {porky.id !== 0 ? (
+            <PorkyCardItem porky={porky} onPress={onPress}/>
           ) : (
-            <NewPorkyCard />
+            <NewPorkyCardItem />
         )}
       </Card>
     );

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Text, Button } from 'native-base';
-import PorkyCard from './Porkies/PorkyCard';
+import PorkyCard from './PorkyCard';
 import { Actions } from 'react-native-router-flux';
-import Loading from './Loading';
-import Error from './Error';
-import Header from './Header';
-import Spacer from './Spacer';
+import Loading from './../Loading';
+import Error from './../Error';
+import Header from './../Header';
+import Spacer from './../Spacer';
 
 class PorkyListing extends Component {
   static propTypes = {
@@ -25,7 +25,7 @@ class PorkyListing extends Component {
   constructor(props) {
     super(props);
     const { porkies } = props;
-    porkies.push({});
+    porkies.push({id: 0});
     this.state = { porkies };
   }
 
@@ -47,7 +47,6 @@ class PorkyListing extends Component {
             content="List of user's porkies"
           />
           <FlatList
-            numColumns={2}
             data={porkies}
             renderItem={({ item }) => (
               <PorkyCard porky={item} onPress={onPress} reFetch={reFetch}/>

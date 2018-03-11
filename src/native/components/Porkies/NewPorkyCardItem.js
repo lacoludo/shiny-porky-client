@@ -8,7 +8,7 @@ import AddIcon from './add-square-button.png';
 
 import Spacer from './../Spacer';
 
-class NewPorkyCard extends Component {
+class NewPorkyCardItem extends Component {
   render = () => {
     return (
       <CardItem cardBody style={{height: 200}}>
@@ -23,4 +23,4 @@ class NewPorkyCard extends Component {
   }
 }
 
-export default NewPorkyCard;
+export default NewPorkyCardItem;
