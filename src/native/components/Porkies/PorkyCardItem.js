@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Content, CardItem, Body, Text, Left, Right, Thumbnail, Icon } from 'native-base';
+import { CardItem, Body, Text, Left, Right, Thumbnail, Icon } from 'native-base';
 import { Image, TouchableOpacity } from 'react-native';
 
 import PorkyIcon from './../../../images/porky-icon.png';
