@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'react-native';
-import { Container, Content, Card, CardItem, Body, H3, List, ListItem, Text } from 'native-base';
+import { StyleSheet, Image } from 'react-native';
+import { Container, Content, Card, CardItem, Body, H1, List, ListItem, Text } from 'native-base';
 import ErrorMessages from '../../constants/errors';
 import Error from './Error';
 import Spacer from './Spacer';
+
+const styles = StyleSheet.create({
+  title: {
+    width: '100%',
+    textAlign: 'center',
+  },
+  red: {
+    color: 'red',
+  },
+});
 
 const PorkyView = ({
   error,
@@ -23,7 +33,7 @@ const PorkyView = ({
     <Container>
       <Content padder>
         <Spacer size={25} />
-        <H3>{porky.name}</H3>
+        <H1 style={styles.title}>{porky.name}</H1>
         <Text>by {porky.gramme}</Text>
         <Spacer size={15} />
         <Spacer size={20} />

@@ -1,65 +1,70 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FlatList, TouchableOpacity, RefreshControl, Image } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Text, Button } from 'native-base';
 import PorkyCard from './Porkies/PorkyCard';
-import NewPorkyCard from './Porkies/NewPorkyCard';
 import { Actions } from 'react-native-router-flux';
 import Loading from './Loading';
 import Error from './Error';
 import Header from './Header';
 import Spacer from './Spacer';
 
-const PorkieListing = ({
-  error,
-  loading,
-  porkies,
-  reFetch,
-}) => {
-  if (loading) return <Loading />;
-  if (error) return <Error content={error} />;
+class PorkyListing extends Component {
+  static propTypes = {
+    error: PropTypes.string,
+    loading: PropTypes.bool.isRequired,
+    porkies: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    reFetch: PropTypes.func,
+  };
 
-  const keyExtractor = item => item.id;
-  const onPress = item => { Actions.porky({ match: { params: { id: String(item.id) } } })};
+  static defaultProps = {
+    error: null,
+    reFetch: null,   
+  };
 
-  return (
-    <Container>
-      <Content padder>
-        <Header
-          title="My porkies"
-          content="List of user's porkies"
-        />
-        <FlatList
-          numColumns={2}
-          data={porkies}
-          renderItem={({ item }) => (
-            <PorkyCard porky={item} onPress={onPress} reFetch={reFetch} />
-          )}
-          keyExtractor={keyExtractor}
-          refreshControl={
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={reFetch}
-            />
-          }
-        />
-        <NewPorkyCard />
-        <Spacer size={20} />
-      </Content>
-    </Container>
-  );
-};
+  constructor(props) {
+    super(props);
+    const { porkies } = props;
+    porkies.push({});
+    this.state = { porkies };
+  }
 
-PorkieListing.propTypes = {
-  error: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
-  porkies: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  reFetch: PropTypes.func,
-};
+  render() {
+    const { error, loading, reFetch } = this.props;
+    const { porkies } = this.state;
 
-PorkieListing.defaultProps = {
-  error: null,
-  reFetch: null,
-};
+    if (loading) return <Loading />;
+    if (error) return <Error content={error} />;
+  
+    const keyExtractor = item => item.id;
+    const onPress = item => { Actions.porky({ match: { params: { id: String(item.id) } } })};
 
-export default PorkieListing;
+    return (
+      <Container>
+        <Content padder>
+          <Header
+            title="My porkies"
+            content="List of user's porkies"
+          />
+          <FlatList
+            numColumns={2}
+            data={porkies}
+            renderItem={({ item }) => (
+              <PorkyCard porky={item} onPress={onPress} reFetch={reFetch}/>
+            )}
+            keyExtractor={keyExtractor}
+            refreshControl={
+              <RefreshControl
+                refreshing={loading}
+                onRefresh={reFetch}
+              />
+            }
+          />
+          <Spacer size={20} />
+        </Content>
+      </Container>
+    );
+  }
+}
+
+export default PorkyListing;

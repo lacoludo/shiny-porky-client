@@ -67,7 +67,12 @@ const Index = (
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="porkies" component={PorkiesContainer} Layout={PorkiesComponent} />
+          <Scene
+            key="porkies"
+            {...DefaultProps.navbarProps}
+            component={PorkiesContainer}
+            Layout={PorkiesComponent} 
+          />
           <Scene
             back
             key="newPorky"
