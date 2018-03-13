@@ -7,20 +7,27 @@ import Loading from './../Loading';
 import Header from './../Header';
 import Spacer from './../Spacer';
 
-var stripe = require('stripe-client')('pk_test_7lMCWcAX9YQNeP5uEuGTFGsv');
-
 class CreditCardUser extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-        number: '4242424242424242',
-        exp_month: '02',
-        exp_year: '21',
-        cvc: '999',
-        name: 'Billy Joe'
-    };
+    const {creditCard} = props;
+    if (creditCard) {
+      this.state = {
+        number: `************${props.creditCard.last4}`,
+        exp_month: props.creditCard.exp_month,
+        exp_year: props.creditCard.exp_year,
+        name: props.creditCard.fullName,
+      };
+    } else {
+      this.state = {
+        number: '',
+        exp_month: '',
+        exp_year: '',
+        name: '',
+        cvc: '',
+      };
+    }
   }
 
   handleChange = (name, val) => {
@@ -30,26 +37,26 @@ class CreditCardUser extends React.Component {
     });
   }
 
+  handleSubmit = () => {
+    this.props.onFormSubmit(this.state)
+      .then(() => console.log('Profile Updated'))
+      .catch(e => console.log(`Error: ${e}`));
+  }
   
   render() {
     const { loading, error, success } = this.props;
     if (loading) return <Loading />;
 
-    async function createCard(information) {
-      var card = await stripe.createToken({ card: information});
-      // send token to backend for processing
-    };
-  
     return (
       <Container>
         <Content padder>
           <Header title="Update credit card account" />
-
+          {error && <Messages message={error} />}
           <Form>
             <Item stackedLabel>
               <Label>Number</Label>
               <Input
-                value={this.state.number}
+                value={`${this.state.number}`}
                 onChangeText={v => this.handleChange('number', v)}
               />
             </Item>
@@ -57,7 +64,7 @@ class CreditCardUser extends React.Component {
             <Item stackedLabel>
               <Label>Mois d'expiration</Label>
               <Input
-                value={this.state.exp_month}
+                value={`${this.state.exp_month}`}
                 onChangeText={v => this.handleChange('exp_month', v)}
               />
             </Item>
@@ -65,7 +72,7 @@ class CreditCardUser extends React.Component {
             <Item stackedLabel>
               <Label>Année d'expiration</Label>
               <Input
-                value={this.state.exp_year}
+                value={`${this.state.exp_year}`}
                 onChangeText={v => this.handleChange('exp_year', v)}
               />
             </Item>
@@ -86,7 +93,7 @@ class CreditCardUser extends React.Component {
               />
             </Item>
 
-            <Button block onPress={() => createCard(this.state)}>
+            <Button block onPress={this.handleSubmit}>
               <Text>Update credit card</Text>
             </Button>
           </Form>

@@ -29,9 +29,17 @@ export function signUp(formData) {
     return Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
+        const creditCard = {
+          last4: null,
+          fullName: null,
+          exp_month: null,
+          exp_year: null,
+          token: null,
+        }
         // Send user details to Firebase database
         if (res && res.uid) {
           FirebaseRef.child(`users/${res.uid}`).set({
+            creditCard,
             firstName,
             lastName,
             signedUp: Firebase.database.ServerValue.TIMESTAMP,
@@ -60,7 +68,6 @@ function getUserData(dispatch) {
 
   return ref.on('value', (snapshot) => {
     const userData = snapshot.val() || [];
-
     return dispatch({
       type: 'USER_DETAILS_UPDATE',
       data: userData,
