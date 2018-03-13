@@ -22,4 +22,7 @@ export default {
   // Porkies
   missingName: 'Name is missing',
   missingChildName: 'Childname is missing',
+
+  //CreditCard
+  missingCVC: 'CVC is missing',
 };

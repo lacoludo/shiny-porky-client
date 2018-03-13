@@ -26,6 +26,14 @@ const Profile = ({ member, logout }) => (
                 <Text>Update My Profile</Text>
               </Body>
             </ListItem>
+            <ListItem onPress={Actions.creditCardUser} icon>
+              <Left>
+                <Icon name="card" />
+              </Left>
+              <Body>
+                <Text>Credit Card Informations</Text>
+              </Body>
+            </ListItem>
             <ListItem onPress={logout} icon>
               <Left>
                 <Icon name="power" />
