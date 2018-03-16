@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getUserPorkies, setError } from '../actions/porkies';
+import { getUserPorkies, favoritePorky, setError } from '../actions/porkies';
 
 class PorkieListing extends Component {
   static propTypes = {
@@ -36,6 +36,10 @@ class PorkieListing extends Component {
       });
   }
 
+  onFavoritePorky = (id) => {
+    this.props.favoritePorky(id);
+  }
+
   render = () => {
     const { Layout, porkies, match } = this.props;
     const id = (match && match.params && match.params.id) ? match.params.id : null;
@@ -46,6 +50,7 @@ class PorkieListing extends Component {
         error={porkies.error}
         loading={porkies.loading}
         porkies={porkies.porkies}
+        onFavoritePorky={this.onFavoritePorky}
         reFetch={() => this.fetchPorkies()}
       />
     );
@@ -58,6 +63,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getUserPorkies,
+  favoritePorky,
   setError,
 };
 

@@ -11,15 +11,16 @@ class PorkyCard extends Component {
     porky: PropTypes.shape().isRequired,
     reFetch: PropTypes.func,
     onPress: PropTypes.func.isRequired,
+    onFavoritePorky: PropTypes.func.isRequired,
   };
 
   render = () => {
-    const { porky, onPress } = this.props;
+    const { porky, onPress, onFavoritePorky } = this.props;
 
     return (
       <Card style={{ paddingHorizontal: 6 }}>
         {porky.id !== 0 ? (
-            <PorkyCardItem porky={porky} onPress={onPress}/>
+            <PorkyCardItem onFavoritePorky={onFavoritePorky} porky={porky} onPress={onPress}/>
           ) : (
             <NewPorkyCardItem />
         )}

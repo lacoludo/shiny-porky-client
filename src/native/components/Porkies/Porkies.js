@@ -14,6 +14,7 @@ class PorkyListing extends Component {
     error: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     porkies: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    onFavoritePorky: PropTypes.func.isRequired,
     reFetch: PropTypes.func,
   };
 
@@ -30,7 +31,7 @@ class PorkyListing extends Component {
   }
 
   render() {
-    const { error, loading, reFetch } = this.props;
+    const { error, loading, reFetch, onFavoritePorky } = this.props;
     const { porkies } = this.state;
 
     if (loading) return <Loading />;
@@ -49,7 +50,7 @@ class PorkyListing extends Component {
           <FlatList
             data={porkies}
             renderItem={({ item }) => (
-              <PorkyCard porky={item} onPress={onPress} reFetch={reFetch}/>
+              <PorkyCard onFavoritePorky={onFavoritePorky} porky={item} onPress={onPress} reFetch={reFetch}/>
             )}
             keyExtractor={keyExtractor}
             refreshControl={

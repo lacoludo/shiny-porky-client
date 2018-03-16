@@ -11,23 +11,14 @@ class CreditCardUser extends React.Component {
 
   constructor(props) {
     super(props);
+
     const {creditCard} = props;
-    if (creditCard) {
-      this.state = {
-        number: `************${props.creditCard.last4}`,
-        exp_month: props.creditCard.exp_month,
-        exp_year: props.creditCard.exp_year,
-        name: props.creditCard.fullName,
-      };
-    } else {
-      this.state = {
-        number: '',
-        exp_month: '',
-        exp_year: '',
-        name: '',
-        cvc: '',
-      };
-    }
+    this.state = {
+      number: `************${props.creditCard.number}`,
+      exp_month: props.creditCard.expMonth,
+      exp_year: props.creditCard.expYear,
+      name: props.creditCard.fullName,
+    };
   }
 
   handleChange = (name, val) => {
@@ -46,7 +37,6 @@ class CreditCardUser extends React.Component {
   render() {
     const { loading, error, success } = this.props;
     if (loading) return <Loading />;
-
     return (
       <Container>
         <Content padder>

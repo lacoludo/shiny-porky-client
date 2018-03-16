@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { createToken } from '../../actions/stripes';
+import { createToken, getUserCreditCard } from '../../actions/stripes';
 
 class CreditCardUser extends Component {
   static propTypes = {
@@ -11,30 +11,36 @@ class CreditCardUser extends Component {
     errorMessage: PropTypes.string,
     successMessage: PropTypes.string,
     onFormSubmit: PropTypes.func.isRequired,
-    member: PropTypes.shape({}).isRequired,
+    getUserCreditCard: PropTypes.func.isRequired,
+    creditCard: PropTypes.shape({}).isRequired,
+  }
+
+  componentDidMount() {
+    this.props.getUserCreditCard();
   }
 
   render () {
-    const { member, Layout, onFormSubmit, errorMessage, successMessage, isLoading } = this.props;
+    const { creditCard, Layout, onFormSubmit, errorMessage, successMessage, isLoading } = this.props;
     return <Layout 
       error={errorMessage}
       success={successMessage}
       loading={isLoading}
       onFormSubmit={onFormSubmit}
-      creditCard={member.creditCard}
+      creditCard={creditCard}
     />;
   }
 }
 
-
 const mapStateToProps = state => ({
-  member: state.member || {},
+  creditCard: state.creditCard || null,
   isLoading: state.status.loading || false,
   errorMessage: state.status.error || null,
   successMessage: state.status.success || null,
 });
 
 const mapDispatchToProps = {
-  onFormSubmit: createToken
+  onFormSubmit: createToken,
+  getUserCreditCard: getUserCreditCard
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(CreditCardUser);
