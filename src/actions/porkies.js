@@ -5,26 +5,34 @@ import statusMessage from './status';
 /**
   * Create user porky
   */
-  export function createPorky(formData) {
-    const {
-      name,
-      childName
-    } = formData;
-  
-    return dispatch => new Promise(async (resolve, reject) => {
-      // Are they a user?
-      const UID = Firebase.auth().currentUser.uid;
-      if (!UID) return reject({ message: ErrorMessages.name });
+export function createPorky(formData) {
 
-      // Validation checks
-      if (!name) return reject({ message: ErrorMessages.missingName });
-      if (!childName) return reject({ message: ErrorMessages.missingChildName });
-      const gramme = 0;
-      // Go to Firebase
-      FirebaseRef.child(`porkies/${UID}`).push({ name, childName, gramme })
-      resolve();
-    }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
-  }
+  return dispatch => new Promise(async (resolve, reject) => {
+    // Are they a user?
+
+    const UID = Firebase.auth().currentUser.uid;
+    if (!UID) return reject({ message: ErrorMessages.name });
+
+    // Validation checks
+    if (!name) return reject({ message: ErrorMessages.missingName });
+    if (!childName) return reject({ message: ErrorMessages.missingChildName });
+    const gramme = 0;
+    // Go to Firebase
+    FirebaseRef.child(`porkies/${UID}`).push({ name, childName, gramme })
+    resolve();
+  }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+}
+
+/**
+  * Set a favorite porky to authenticate user
+  */
+export function favoritePorky(id) {
+  return dispatch => new Promise(async (resolve, reject) => {
+    const UID = Firebase.auth().currentUser.uid;
+    FirebaseRef.child(`users/${UID}`).update({ favoritePorky: id })
+    resolve();
+  }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+}
 
 /**
   * Get this User's Porkies
@@ -74,4 +82,25 @@ export function setError(message) {
     type: 'PORKIES_ERROR',
     data: message,
   })));
+}
+
+/**
+  * Get this User's Favourite Porky
+  */
+export function getFavouritePorky(porkyId) {
+  return dispatch => new Promise(async (resolve, reject) => {
+    Firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
+        
+        return ref.on('value', (snapshot) => {
+          const porky = snapshot.val() || [];
+          return dispatch({
+            type: 'FAVOURITE_PORKY_REPLACE',
+            data: porky,
+          });
+        });
+      }
+    });
+  });
 }

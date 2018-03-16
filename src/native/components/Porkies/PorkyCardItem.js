@@ -9,10 +9,15 @@ class PorkyCardItem extends Component {
   static propTypes = {
     porky: PropTypes.shape().isRequired,
     onPress: PropTypes.func.isRequired,
+    onFavoritePorky: PropTypes.func.isRequired,
   };
 
+  favoritePorky = (id) => {
+    this.props.onFavoritePorky(id);
+  }
+
   render() {
-    const { porky, onPress } = this.props;
+    const { porky, onPress, onFavoritePorky } = this.props;
 
     return (
       <TouchableOpacity onPress={() => onPress(porky)}>
@@ -35,7 +40,9 @@ class PorkyCardItem extends Component {
             <Text>{`Appartient à ${porky.childName}`}</Text>
           </Left>
           <Right>
-            <Icon active name="ios-heart" />
+            <TouchableOpacity onPress={() => this.favoritePorky(porky.id)}>
+              <Icon style={{color: '#000'}} active name="ios-heart" />
+            </TouchableOpacity>
           </Right>
         </CardItem>
       </TouchableOpacity>

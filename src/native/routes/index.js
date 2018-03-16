@@ -31,10 +31,12 @@ import UpdateProfileComponent from '../components/UpdateProfile';
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
 import CreditCardUserComponent from '../components/Profile/CreditCardUser';
 
+import PurchasePageComponent from '../../containers/PurchasePage';
+
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
-import AboutComponent from '../components/About';
+import HomeComponent from '../../containers/Home/Home';
 
 const Index = (
   <Stack>
@@ -52,7 +54,7 @@ const Index = (
           icon={() => <Icon name="planet" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="home" component={AboutComponent} />
+          <Scene key="home" component={HomeComponent} />
         </Stack>
 
         <Stack
@@ -136,6 +138,15 @@ const Index = (
         </Stack>
       </Tabs>
     </Scene>
+
+    <Scene
+      back
+      clone
+      key="purchase"
+      title="PURCHASE"
+      {...DefaultProps.navbarProps}
+      component={PurchasePageComponent}
+    />
 
     <Scene
       back

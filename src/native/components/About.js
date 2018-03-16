@@ -1,11 +1,18 @@
 import React from 'react';
 import { Container, Content, Text, H1, H2, H3, Button } from 'native-base';
 import Spacer from './Spacer';
+import { Actions } from 'react-native-router-flux';
 
-const About = () => (
+const About = () => {
+  console.log(Actions);
+  return (
+
   <Container>
     <Content padder>
       <Spacer size={30} />
+      <Button onPress={() => Actions.purchase()}>
+        <Text>Purchase</Text>
+      </Button>
       <H1>Heading 1</H1>
       <Spacer size={10} />
       <Text>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </Text>
@@ -21,6 +28,6 @@ const About = () => (
       <Text>Elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </Text>
     </Content>
   </Container>
-);
-
+  );
+}
 export default About;
