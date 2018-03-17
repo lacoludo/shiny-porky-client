@@ -11,7 +11,6 @@ export default function appReducer(state = initialState, action) {
     case 'CREDIT_CARD_REPLACE': {
 
       return {
-        ...state,
         token: action.data.token || '',
         number: action.data.last4 || '',
         expMonth: action.data.exp_month || '',

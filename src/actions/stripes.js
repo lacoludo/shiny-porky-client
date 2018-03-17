@@ -25,7 +25,6 @@ export function createToken(formData) {
   return await stripe.createToken({ card: formData})
     .then(async (card) => {
     if (card.error) return reject({ message: card.error.message });
-    console.log(card);
     const creditCard = {        
       token: card.id,
       exp_month: card.card.exp_month,
@@ -86,16 +85,13 @@ export function updateCreditCard(dispatch, formData) {
 /**
   * Update Profile
   */
-export function purchaseGold() {
-  const body = {
-    amount: 100,
-    currency: 'eur',
-    description: 'summary',
-    source: 'cus_CULVaO1mVcUrTe',
-  };
+export function purchaseGold(token, gramme) {
+  console.log(gramme);
+  const amount = gramme * 100;
+  const description = `${gramme}g of golds`;
+
   return dispatch => new Promise((resolve) => {
-      console.log('je passe');
-      return fetch('https://api.stripe.com/v1/charges?source=tok_1C5MfoJF2BGqRFWmlRAzGpR2&currency=eur&amount=100', {
+      return fetch(`https://api.stripe.com/v1/charges?source=${token}&currency=eur&amount=${amount}&description=${description}`, {
         method: 'post',
         headers: {
           'Accept': 'application/json',

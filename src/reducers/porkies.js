@@ -12,8 +12,6 @@ export default function porkieReducer(state = initialState, action) {
     }
     case 'PORKIES_REPLACE': {
       let porkies = [];
-
-      // Pick out the props I need
       if (action.data && typeof action.data === 'object') {
         const data = action.data;
         porkies = Object.keys(action.data).map((key, item) => ({
