@@ -9,7 +9,10 @@ export function createPorky(formData) {
 
   return dispatch => new Promise(async (resolve, reject) => {
     // Are they a user?
-
+    const {
+      name,
+      childName,
+    } = formData;
     const UID = Firebase.auth().currentUser.uid;
     if (!UID) return reject({ message: ErrorMessages.name });
 

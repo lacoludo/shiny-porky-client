@@ -29,7 +29,7 @@ class CreditCardUser extends React.Component {
   }
 
   handleSubmit = () => {
-    this.props.onFormSubmit(this.state)
+    this.props.onFormSubmit(this.props.member.customerStripe, this.state)
       .then(() => console.log('Profile Updated'))
       .catch(e => console.log(`Error: ${e}`));
   }

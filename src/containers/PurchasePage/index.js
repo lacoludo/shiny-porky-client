@@ -15,7 +15,9 @@ const GRAMME_BY_LEVEL = 50;
 class PurchasePage extends Component {
   static propTypes = {
     favouritePorky: PropTypes.shape({}).isRequired,
+    member: PropTypes.shape({}).isRequired,
   }
+
   constructor(props) {
     super();
     const grammeBase = 10;
@@ -25,8 +27,9 @@ class PurchasePage extends Component {
 
   purchaseGold = () => {
     const { token } = this.props.creditCard;
+    const { customerStripe } = this.props.member;
     const { grammeAdded } = this.state;
-    this.props.purchaseGold(token, grammeAdded);
+    this.props.purchaseGold(token, customerStripe, grammeAdded);
   }
 
   addGold = () => {
@@ -91,6 +94,7 @@ class PurchasePage extends Component {
 }
 
 const mapStateToProps = state => ({
+  member: state.member || {},
   creditCard: state.creditCard || null,
   errorMessage: state.status.error || null,
   successMessage: state.status.success || null,
