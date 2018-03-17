@@ -36,7 +36,7 @@ import PurchasePageComponent from '../../containers/PurchasePage';
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
-import HomeComponent from '../../containers/Home/Home';
+import HomeComponent from '../../containers/Home';
 
 const Index = (
   <Stack>
@@ -49,12 +49,12 @@ const Index = (
         {...DefaultProps.tabProps}
       >
         <Stack
-          key="home"
+          key="favouritePorky"
           title={AppConfig.appName.toUpperCase()}
           icon={() => <Icon name="planet" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="home" component={HomeComponent} />
+          <Scene key="favouritePorky" component={HomeComponent} />
         </Stack>
 
         <Stack

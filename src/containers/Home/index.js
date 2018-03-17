@@ -10,7 +10,7 @@ import PorkyCard from './../../native/components/Porkies/PorkyCard';
 class Home extends Component {
   static propTypes = {
     getFavouritePorky: PropTypes.func.isRequired,
-    home: PropTypes.shape({}).isRequired,
+    favouritePorky: PropTypes.shape({}).isRequired,
   }
 
   constructor(props) {
@@ -23,12 +23,17 @@ class Home extends Component {
   };
 
   onPress = item => { Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } })};
+  onPressPurchase = item => { Actions.purchase({ match: { params: { id: this.props.member.favoritePorky  } } })};
 
   render = () => {
     return (
         <Container>
             <Content padder>
-                {!this.props.home.loading && <PorkyCard onFavoritePorky={null} porky={this.props.home} onPress={this.onPress}/>}
+                <H3>Mon Porky favoris</H3>
+                {!this.props.favouritePorky.loading && <PorkyCard onFavoritePorky={null} porky={this.props.favouritePorky} onPress={this.onPress}/>}
+                <Button onPress={this.onPressPurchase}>
+                  <Text>APPROVISIONNER</Text>
+                </Button>
             </Content>
         </Container>
     )
@@ -36,7 +41,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-    home: state.home || null,
+    favouritePorky: state.favouritePorky || null,
     member: state.member || {},
 });
 
