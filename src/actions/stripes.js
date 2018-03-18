@@ -6,7 +6,7 @@ import statusMessage from './status';
 /**
   * Update Profile
   */
-export function createToken(customerId, formData) {
+export function createToken(customerId, formData, dispatch) {
   const {
     number,
     exp_month,
@@ -14,31 +14,28 @@ export function createToken(customerId, formData) {
     cvc,
     name,
   } = formData;
-
-  return dispatch => new Promise(async (resolve, reject) => {
-    const UID = Firebase.auth().currentUser.uid;
-    if (!UID) return reject({ message: ErrorMessages.missingFirstName });
-    if (!cvc) return reject({ message: ErrorMessages.missingCVC });
-    await statusMessage(dispatch, 'loading', true);
-    return fetch(`https://api.stripe.com/v1/customers/${customerId}/sources?source=tok_visa`,
-    {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
-        }
-      })
-      .then((resp) => resp.json())
-      .then((creditCard) => {
-        console.log(creditCard);
-        updateCreditCard(dispatch, creditCard);
-        return dispatch({
-          type: 'CREDIT_CARD_REPLACE',
-          data: creditCard,
-        });
-      }).then(() => statusMessage(dispatch, 'loading', false).then(resolve))
+  const UID = Firebase.auth().currentUser.uid;
+  dispatch({ type: 'CREDIT_CARD', data: null });
+  if (!UID) dispatch({ type: 'CREDIT_CARD_ERROR', data: { error: 'User not found'} });
+  if (!cvc) dispatch({ type: 'CREDIT_CARD_ERROR', data: { error: 'CVC is missing'} });
+  
+  fetch(`https://api.stripe.com/v1/customers/${customerId}/sources?source=tok_visa`,
+  {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
+    }
+  })
+  .then((resp) => resp.json())
+  .then((creditCard) => {
+    updateCreditCard(dispatch, creditCard);
+    dispatch({
+      type: 'CREDIT_CARD_SUCCESS',
+      data: creditCard,
     });
+  });
 }
 
 
@@ -57,7 +54,7 @@ export function getUserCreditCard() {
         return ref.on('value', (snapshot) => {
           const userData = snapshot.val() || [];
           return dispatch({
-            type: 'CREDIT_CARD_REPLACE',
+            type: 'CREDIT_CARD_SUCCESS',
             data: userData,
           });
         });
@@ -74,7 +71,6 @@ export function getUserCreditCard() {
 export function updateCreditCard(dispatch, creditCard) {
   const UID = Firebase.auth().currentUser.uid;
   if (!UID) return reject({ message: ErrorMessages.missingFirstName });
-  console
   FirebaseRef.child(`users/${UID}/creditCard`).set({
     token: creditCard.id,
     full_name: creditCard.name,
