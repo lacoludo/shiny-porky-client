@@ -13,6 +13,7 @@ class CreditCardUser extends Component {
     onFormSubmit: PropTypes.func.isRequired,
     getUserCreditCard: PropTypes.func.isRequired,
     creditCard: PropTypes.shape({}).isRequired,
+    member: PropTypes.shape({}).isRequired,
   }
 
   componentDidMount() {
@@ -27,11 +28,13 @@ class CreditCardUser extends Component {
       loading={isLoading}
       onFormSubmit={onFormSubmit}
       creditCard={creditCard}
+      member={this.props.member}
     />;
   }
 }
 
 const mapStateToProps = state => ({
+  member: state.member || {},
   creditCard: state.creditCard || null,
   isLoading: state.status.loading || false,
   errorMessage: state.status.error || null,

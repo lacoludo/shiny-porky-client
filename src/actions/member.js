@@ -36,18 +36,36 @@ export function signUp(formData) {
           exp_year: null,
           token: null,
         }
-        // Send user details to Firebase database
-        if (res && res.uid) {
-          FirebaseRef.child(`users/${res.uid}`).set({
-            creditCard,
-            firstName,
-            lastName,
-            signedUp: Firebase.database.ServerValue.TIMESTAMP,
-            lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
-          }).then(() => statusMessage(dispatch, 'loading', false).then(resolve));
-        }
+
+        addStripeCustomer(email)
+          .then((resp) => resp.json())
+          .then((customer) => {
+            const customerStripe = customer.id
+            if (res && res.uid) {
+              FirebaseRef.child(`users/${res.uid}`).set({
+                customerStripe,
+                creditCard,
+                firstName,
+                lastName,
+                signedUp: Firebase.database.ServerValue.TIMESTAMP,
+                lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+              }).then(() => statusMessage(dispatch, 'loading', false).then(resolve));
+            }          
+        });
       }).catch(reject);
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+}
+
+export function addStripeCustomer(email) {   
+  console.log('d'); 
+  return fetch(`https://api.stripe.com/v1/customers?email=${email}`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
+    }
+  });
 }
 
 /**

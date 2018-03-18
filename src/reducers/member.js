@@ -27,6 +27,7 @@ export default function userReducer(state = initialState, action) {
           lastName: action.data.lastName,
           signedUp: action.data.signedUp,
           role: action.data.role,
+          customerStripe: action.data.customerStripe,
           creditCard: action.data.creditCard,
           favoritePorky: action.data.favoritePorky,
         };
