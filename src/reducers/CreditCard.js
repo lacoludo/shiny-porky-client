@@ -4,18 +4,39 @@ export const initialState = {
   expMonth: null,
   expYear: null,
   fullName: null,
+  isLoading: false,
+  error: null,
+  success: false,
 };
 
 export default function appReducer(state = initialState, action) {
   switch (action.type) {
-    case 'CREDIT_CARD_REPLACE': {
-
+    case 'CREDIT_CARD': {
+      return { 
+        ...state,
+        isLoading :true,
+        error: null,
+      };
+    }
+    case 'CREDIT_CARD_SUCCESS': {
       return {
+        error: null,
+        isLoading: false,
+        success: true,
         token: action.data.id || '',
         number: action.data.last4 || '',
         expMonth: action.data.exp_month || '',
         expYear: action.data.exp_year || '',
         fullName: action.data.fullName || '',
+      };
+    }
+    case 'CREDIT_CARD_ERROR': {
+
+      return {
+        ...state,
+        isLoading: false,
+        success: false,
+        error: action.data.error,
       };
     }
     default:

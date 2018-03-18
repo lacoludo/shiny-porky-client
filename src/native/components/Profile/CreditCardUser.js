@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
+import { ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Messages from './../Messages';
 import Loading from './../Loading';
@@ -29,19 +30,18 @@ class CreditCardUser extends React.Component {
   }
 
   handleSubmit = () => {
-    this.props.onFormSubmit(this.props.member.customerStripe, this.state)
-      .then(() => console.log('Profile Updated'))
-      .catch(e => console.log(`Error: ${e}`));
+    this.props.onFormSubmit(this.props.member.customerStripe, this.state);
   }
   
   render() {
-    const { loading, error, success } = this.props;
-    if (loading) return <Loading />;
+    const { isLoading, error, success } = this.props;
+
     return (
       <Container>
         <Content padder>
           <Header title="Update credit card account" />
           {error && <Messages message={error} />}
+          {success && <Messages message={'Informations enregistrées !'} type={'success'}/>}
           <Form>
             <Item stackedLabel>
               <Label>Number</Label>
@@ -82,10 +82,17 @@ class CreditCardUser extends React.Component {
                 onChangeText={v => this.handleChange('name', v)}
               />
             </Item>
+            {!isLoading ? (
+              <Button block onPress={this.handleSubmit}>
+                <Text>Update credit card</Text>
+              </Button>
+              ) : (
+              <Button block>
+                <ActivityIndicator size="large" color="#fff" />
+              </Button>                
+              )
+            }
 
-            <Button block onPress={this.handleSubmit}>
-              <Text>Update credit card</Text>
-            </Button>
           </Form>
         </Content>
       </Container>

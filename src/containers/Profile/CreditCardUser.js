@@ -7,9 +7,6 @@ import { createToken, getUserCreditCard } from '../../actions/stripes';
 class CreditCardUser extends Component {
   static propTypes = {
     Layout: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    errorMessage: PropTypes.string,
-    successMessage: PropTypes.string,
     onFormSubmit: PropTypes.func.isRequired,
     getUserCreditCard: PropTypes.func.isRequired,
     creditCard: PropTypes.shape({}).isRequired,
@@ -20,13 +17,18 @@ class CreditCardUser extends Component {
     this.props.getUserCreditCard();
   }
 
+  onFormSubmit = (customer, formData) => {
+    const { dispatch } = this.props;
+    this.props.onFormSubmit(customer, formData, dispatch);
+  }
+
   render () {
-    const { creditCard, Layout, onFormSubmit, errorMessage, successMessage, isLoading } = this.props;
+    const { creditCard, Layout } = this.props;
     return <Layout 
-      error={errorMessage}
-      success={successMessage}
-      loading={isLoading}
-      onFormSubmit={onFormSubmit}
+      onFormSubmit={this.onFormSubmit}
+      error={creditCard.error}
+      success={creditCard.success}
+      isLoading={creditCard.isLoading}
       creditCard={creditCard}
       member={this.props.member}
     />;
@@ -36,14 +38,14 @@ class CreditCardUser extends Component {
 const mapStateToProps = state => ({
   member: state.member || {},
   creditCard: state.creditCard || null,
-  isLoading: state.status.loading || false,
-  errorMessage: state.status.error || null,
-  successMessage: state.status.success || null,
 });
 
-const mapDispatchToProps = {
-  onFormSubmit: createToken,
-  getUserCreditCard: getUserCreditCard
+function mapDispatchToProps(dispatch) {
+  return {
+    onFormSubmit: (customer, formData, dispatch) => createToken(customer, formData, dispatch),
+    getUserCreditCard: () => getUserCreditCard,
+    dispatch,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreditCardUser);
