@@ -36,7 +36,8 @@ import PurchasePageComponent from '../../containers/PurchasePage';
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
-import HomeComponent from '../../containers/Home';
+// import HomeComponent from '../../containers/Home';
+import AboutComponent from '../components/About';
 
 const Index = (
   <Stack>
@@ -54,7 +55,7 @@ const Index = (
           icon={() => <Icon name="planet" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="favouritePorky" component={HomeComponent} />
+          <Scene key="favouritePorky" component={AboutComponent} />
         </Stack>
 
         <Stack
@@ -63,7 +64,11 @@ const Index = (
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+          <Scene
+            key="recipes"
+            component={RecipesContainer}
+            Layout={RecipesComponent}
+          />
         </Stack>
 
         <Stack
@@ -76,7 +81,7 @@ const Index = (
             key="porkies"
             {...DefaultProps.navbarProps}
             component={PorkiesContainer}
-            Layout={PorkiesComponent} 
+            Layout={PorkiesComponent}
           />
           <Scene
             back
@@ -94,7 +99,11 @@ const Index = (
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene
+            key="profileHome"
+            component={MemberContainer}
+            Layout={ProfileComponent}
+          />
           <Scene
             back
             key="signUp"
