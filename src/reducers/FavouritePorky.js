@@ -3,12 +3,18 @@ export const initialState = {
     name: null,
     childName: null,
     gramme: null,
-    loading: true,
+    loading: false,
 };
   
   export default function appReducer(state = initialState, action) {
     switch (action.type) {
-      case 'FAVOURITE_PORKY_REPLACE': {
+      case 'FAVOURITE_PORKY': {
+        return {
+            ...state,
+            loading: true,
+        };
+      }
+      case 'FAVOURITE_PORKY_SUCCESS': {
         return {
             ...state,
             loading: false,
