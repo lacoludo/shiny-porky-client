@@ -35,7 +35,8 @@ import PurchasePageComponent from '../../containers/PurchasePage';
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
-import HomeComponent from '../../containers/Home';
+// import HomeComponent from '../../containers/Home';
+import AboutComponent from '../components/About';
 
 const Index = (
   <Stack>
@@ -66,7 +67,7 @@ const Index = (
             key="porkies"
             {...DefaultProps.navbarProps}
             component={PorkiesContainer}
-            Layout={PorkiesComponent} 
+            Layout={PorkiesComponent}
           />
           <Scene
             back
@@ -84,7 +85,11 @@ const Index = (
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene
+            key="profileHome"
+            component={MemberContainer}
+            Layout={ProfileComponent}
+          />
           <Scene
             back
             key="signUp"
