@@ -10,6 +10,7 @@ class PorkyCardItem extends Component {
     porky: PropTypes.shape().isRequired,
     onPress: PropTypes.func.isRequired,
     onFavoritePorky: PropTypes.func,
+    favouritePorkyId: PropTypes.string,
   };
 
   favoritePorky = (id) => {
@@ -17,7 +18,7 @@ class PorkyCardItem extends Component {
   }
 
   render() {
-    const { porky, onPress, onFavoritePorky } = this.props;
+    const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
 
     return (
       <TouchableOpacity onPress={() => onPress(porky)}>
@@ -42,7 +43,7 @@ class PorkyCardItem extends Component {
           {onFavoritePorky &&
             <Right>
               <TouchableOpacity onPress={() => this.favoritePorky(porky.id)}>
-                <Icon style={{color: '#000'}} active name="ios-heart" />
+                <Icon style={{color: '#000'}} active={favouritePorkyId === porky.id} name="heart" />
               </TouchableOpacity>
             </Right>
           }

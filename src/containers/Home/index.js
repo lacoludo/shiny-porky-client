@@ -26,11 +26,12 @@ class Home extends Component {
   onPressPurchase = item => { Actions.purchase({ match: { params: { id: this.props.member.favoritePorky  } } })};
 
   render = () => {
+    const { favouritePorky } = this.props;
     return (
         <Container>
             <Content padder>
                 <H3>Mon Porky favoris</H3>
-                {!this.props.favouritePorky.loading && <PorkyCard onFavoritePorky={null} porky={this.props.favouritePorky} onPress={this.onPress}/>}
+                {<PorkyCard onFavoritePorky={null} isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
                 <Button onPress={this.onPressPurchase}>
                   <Text>APPROVISIONNER</Text>
                 </Button>
@@ -44,9 +45,11 @@ const mapStateToProps = state => ({
     favouritePorky: state.favouritePorky || null,
     member: state.member || {},
 });
-
-const mapDispatchToProps = {
-  getFavouritePorky,
+function mapDispatchToProps(dispatch) {
+  return {
+    getFavouritePorky: (porkyId) => getFavouritePorky(porkyId, dispatch),
+    dispatch,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

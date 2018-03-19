@@ -16,6 +16,7 @@ export default function appReducer(state = initialState, action) {
         ...state,
         isLoading :true,
         error: null,
+        success: false,
       };
     }
     case 'CREDIT_CARD_SUCCESS': {
