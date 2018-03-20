@@ -7,7 +7,7 @@ import { View , TouchableOpacity } from 'react-native';
 import { purchaseGold } from '../../actions/stripes';
 import { Card, CardItem } from 'native-base';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import PurchaseButtonView from './PurchaseButtonView'
+import ButtonView from './../../components/ButtonView';
 
 const GOLD_COLOR = '#D4AF37';
 const GRAMME_BY_LEVEL = 50;
@@ -87,7 +87,7 @@ class PurchasePage extends Component {
             </Right>
           </CardItem>
         </Card>
-        <PurchaseButtonView onPress={this.purchaseGold} />
+        <ButtonView onPress={this.purchaseGold} label={'Acheter'}/>
       </Content>
     </Container>);
   }

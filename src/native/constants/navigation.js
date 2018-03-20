@@ -2,11 +2,12 @@ import Colors from '../../../native-base-theme/variables/commonColor';
 
 export default {
   navbarProps: {
-    navigationBarStyle: { backgroundColor: 'white' },
+    navigationBarStyle: { backgroundColor: '#D4AF37' },
     titleStyle: {
-      color: Colors.textColor,
+      color: 'white',
       alignSelf: 'center',
       letterSpacing: 2,
+      fontWeight: 'bold',
       fontSize: Colors.fontSizeBase,
     },
     backButtonTintColor: Colors.textColor,
@@ -15,8 +16,8 @@ export default {
   tabProps: {
     swipeEnabled: false,
     activeBackgroundColor: 'rgba(255,255,255,0.1)',
-    inactiveBackgroundColor: Colors.brandPrimary,
-    tabBarStyle: { backgroundColor: Colors.brandPrimary },
+    inactiveBackgroundColor: '#D4AF37',
+    tabBarStyle: { backgroundColor: '#D4AF37' },
   },
 
   icons: {

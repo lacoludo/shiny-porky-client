@@ -29,7 +29,6 @@ import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
 
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
-import CreditCardUserComponent from '../components/Profile/CreditCardUser';
 
 import PurchasePageComponent from '../../containers/PurchasePage';
 
@@ -51,25 +50,16 @@ const Index = (
         <Stack
           key="favouritePorky"
           title={AppConfig.appName.toUpperCase()}
-          icon={() => <Icon name="planet" {...DefaultProps.icons} />}
+          icon={() => <Icon name="home" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="favouritePorky" component={HomeComponent} />
         </Stack>
 
         <Stack
-          key="recipes"
-          title="RECIPES"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
-        </Stack>
-
-        <Stack
           key="porkies"
           title="PORKIES"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          icon={() => <Icon name="apps" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
           <Scene
@@ -133,7 +123,6 @@ const Index = (
             title="CREDIT CARD INFORMATIONS"
             {...DefaultProps.navbarProps}
             component={CreditCardUserContainer}
-            Layout={CreditCardUserComponent}
           />
         </Stack>
       </Tabs>

@@ -158,7 +158,7 @@ export default {
 
   // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#2874F0',
+  toolbarDefaultBg: '#FFF',
   toolbarHeight: platform === 'ios' ? (isIphoneX ? 88 : 64) : 56,
   toolbarIconSize: platform === 'ios' ? 20 : 22,
   toolbarSearchIconSize: platform === 'ios' ? 20 : 23,
@@ -249,7 +249,7 @@ export default {
   inverseSpinnerColor: '#1A191B',
 
   // Tabs
-  tabBgColor: '#F8F8F8',
+  tabBgColor: '#FFF',
   tabFontSize: 15,
   tabTextColor: '#222222',
 
