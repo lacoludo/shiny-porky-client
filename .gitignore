@@ -1,4 +1,5 @@
-node_modules/
-.vscode/
-.expo/
+.idea
+.vscode
+.expo
+node_modules
 npm-debug.*
