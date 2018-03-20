@@ -68,6 +68,7 @@
     "react-native-progress": "^3.4.0",
     "react-native-pure-chart": "^0.0.18",
     "react-native-router-flux": "^4.0.0-beta.24",
+    "react-native-svg-charts": "^4.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^5.0.0-alpha.4",
