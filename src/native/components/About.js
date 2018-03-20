@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, ActivityIndicator, View } from 'react-native';
 import { Text } from 'native-base';
+import PureChart from 'react-native-pure-chart';
 
 export class About extends React.Component {
   constructor(props) {
@@ -40,8 +41,13 @@ export class About extends React.Component {
         </View>
       )
     }
+    let sampleData = [30, 200, 170, 250, 10]
     return (
       <View style={{ flex: 1, paddingTop: 20 }}>
+        <PureChart
+          data={sampleData}
+          type='line'
+        />
         <FlatList
           data={dataSource}
           renderItem={({ item }) => <Text>{`${item.date} : ${item.value}`}</Text>}
