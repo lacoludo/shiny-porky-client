@@ -39,6 +39,7 @@ export function favoritePorky(id, dispatch) {
   * Get this User's Porkies
   */
 export function call(dispatch) {
+  return ;
   const UID = Firebase.auth().currentUser.uid;
 
   if (!UID) return false;

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
+import { Actions } from 'react-native-router-flux';
+import MessageView from './../../components/MessageView';
+import HeaderView from './../../components/HeaderView';
+import SpacerView from './../../components/Spacer';
+import CreditCardForm from './CreditCardForm';
 
 import { createToken, getUserCreditCard } from '../../actions/stripes';
 
 class CreditCardUser extends Component {
   static propTypes = {
-    Layout: PropTypes.func.isRequired,
-    onFormSubmit: PropTypes.func.isRequired,
+    createCard: PropTypes.func.isRequired,
     getUserCreditCard: PropTypes.func.isRequired,
     creditCard: PropTypes.shape({}).isRequired,
     member: PropTypes.shape({}).isRequired,
@@ -17,21 +22,27 @@ class CreditCardUser extends Component {
     this.props.getUserCreditCard();
   }
 
-  onFormSubmit = (customer, formData) => {
-    const { dispatch } = this.props;
-    this.props.onFormSubmit(customer, formData, dispatch);
+  shouldComponentUpdate(nextProps) {
+    return nextProps.creditCard !== this.props.creditCard;
+  }
+
+  createCard = (formData) => {
+    const { dispatch, member } = this.props;
+    this.props.createCard(member.customerStripe, formData, dispatch);
   }
 
   render () {
     const { creditCard, Layout } = this.props;
-    return <Layout 
-      onFormSubmit={this.onFormSubmit}
-      error={creditCard.error}
-      success={creditCard.success}
-      isLoading={creditCard.isLoading}
-      creditCard={creditCard}
-      member={this.props.member}
-    />;
+    return ( 
+      <Container>
+        <Content padder>
+          <HeaderView title="Update credit card account" />
+          {creditCard.error && <MessageView message={creditCard.error} />}
+          {creditCard.success && <MessageView message={'Informations enregistrées !'} type={'success'}/>}
+          <CreditCardForm creditCard={creditCard} onSubmitForm={this.createCard} />
+        </Content>
+      </Container>
+    )
   }
 }
 
@@ -42,8 +53,8 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onFormSubmit: (customer, formData, dispatch) => createToken(customer, formData, dispatch),
-    getUserCreditCard: () => getUserCreditCard,
+    createCard: (customer, formData, dispatch) => createToken(customer, formData, dispatch),
+    getUserCreditCard: () => getUserCreditCard(dispatch),
     dispatch,
   };
 };

@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { getFavouritePorky } from '../../actions/porkies';
 import { Container, Content, Text, H1, H2, H3, Button } from 'native-base';
 
+import ButtonView from './../../components/ButtonView';
 import PorkyCard from './../../native/components/Porkies/PorkyCard';
 
 class Home extends Component {
@@ -22,21 +23,19 @@ class Home extends Component {
       this.props.getFavouritePorky(this.props.member.favoritePorky);
   };
 
-  onPress = item => { Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } })};
-  onPressPurchase = item => { Actions.purchase({ match: { params: { id: this.props.member.favoritePorky  } } })};
+  onPress = item => Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } });
+  onPressPurchase = item => Actions.purchase({ match: { params: { id: this.props.member.favoritePorky  } } });
 
   render = () => {
     const { favouritePorky } = this.props;
     return (
-        <Container>
-            <Content padder>
-                <H3>Mon Porky favoris</H3>
-                {<PorkyCard onFavoritePorky={null} isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
-                <Button onPress={this.onPressPurchase}>
-                  <Text>APPROVISIONNER</Text>
-                </Button>
-            </Content>
-        </Container>
+      <Container>
+        <Content padder>
+          <H3>Mon Porky favoris</H3>
+          {<PorkyCard onFavoritePorky={null} isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
+          <ButtonView onPress={this.onPressPurchase} label={'APPROVISIONNER'} />
+        </Content>
+      </Container>
     )
   }
 }

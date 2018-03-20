@@ -57,7 +57,6 @@ export function signUp(formData) {
 }
 
 export function addStripeCustomer(email) {   
-  console.log('d'); 
   return fetch(`https://api.stripe.com/v1/customers?email=${email}`, {
     method: 'post',
     headers: {
