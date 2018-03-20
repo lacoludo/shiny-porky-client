@@ -39,8 +39,13 @@ export function favoritePorky(id, dispatch) {
   * Get this User's Porkies
   */
 export function call(dispatch) {
-  return ;
-  const UID = Firebase.auth().currentUser.uid;
+  const UID = (
+    FirebaseRef
+    && Firebase
+    && Firebase.auth()
+    && Firebase.auth().currentUser
+    && Firebase.auth().currentUser.uid
+  ) ? Firebase.auth().currentUser.uid : null;
 
   if (!UID) return false;
   const ref = FirebaseRef.child(`porkies/${UID}`);
@@ -81,6 +86,7 @@ export function getFavouritePorky(porkyId, dispatch) {
       const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
       return ref.on('value', (snapshot) => {
         const porky = snapshot.val() || [];
+        console.log('a',porky);
         return dispatch({
           type: 'FAVOURITE_PORKY_SUCCESS',
           data: porky,

@@ -16,12 +16,11 @@ export const initialState = {
       }
       case 'FAVOURITE_PORKY_SUCCESS': {
         return {
-            ...state,
-            loading: false,
-            id: action.data.id,
-            name: action.data.name,
-            childName: action.data.childName,
-            gramme: action.data.gramme,
+          loading: false,
+          id: action.data.id,
+          name: action.data.name,
+          childName: action.data.childName,
+          gramme: action.data.gramme,
         };
       }
       default:
