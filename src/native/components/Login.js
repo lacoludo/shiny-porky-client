@@ -17,34 +17,9 @@ class Login extends React.Component {
     onFormSubmit: PropTypes.func.isRequired,
   }
 
-  static defaultProps = {
-    error: null,
-    member: {},
-  }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: (props.member && props.member.email) ? props.member.email : '',
-      password: '',
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange = (name, val) => {
-    this.setState({
-      ...this.state,
-      [name]: val,
-    });
-  }
-
-  handleSubmit = () => {
-    this.props.onFormSubmit(this.state)
-      .then(() => Actions.home())
-      .catch(e => console.log(`Error: ${e}`));
-  }
 
   render() {
     const { loading, error } = this.props;

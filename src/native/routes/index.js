@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Scene, Tabs, Stack } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 
@@ -48,12 +48,12 @@ const Index = (
         {...DefaultProps.tabProps}
       >
         <Stack
-          key="favouritePorky"
+          key="home"
           title={AppConfig.appName.toUpperCase()}
           icon={() => <Icon name="home" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="favouritePorky" component={HomeComponent} />
+          <Scene key="home" component={HomeComponent} />
         </Stack>
 
         <Stack
@@ -92,14 +92,6 @@ const Index = (
             {...DefaultProps.navbarProps}
             component={SignUpContainer}
             Layout={SignUpComponent}
-          />
-          <Scene
-            back
-            key="login"
-            title="LOGIN"
-            {...DefaultProps.navbarProps}
-            component={LoginContainer}
-            Layout={LoginComponent}
           />
           <Scene
             back

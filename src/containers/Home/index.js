@@ -19,8 +19,10 @@ class Home extends Component {
     this.state = { loading: true };
   }
 
-  componentDidMount = () => {
-      this.props.getFavouritePorky(this.props.member.favoritePorky);
+  componentDidMount() {
+      const { dispatch } = this.props;
+      console.log(Actions);
+      this.props.getFavouritePorky(this.props.member.favoritePorky, dispatch);
   };
 
   onPress = item => Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } });
@@ -46,7 +48,7 @@ const mapStateToProps = state => ({
 });
 function mapDispatchToProps(dispatch) {
   return {
-    getFavouritePorky: (porkyId) => getFavouritePorky(porkyId, dispatch),
+    getFavouritePorky: (porkyId, dispatch) => getFavouritePorky(porkyId, dispatch),
     dispatch,
   };
 };
