@@ -3,19 +3,24 @@ export const initialState = {
     name: null,
     childName: null,
     gramme: null,
-    loading: true,
+    loading: false,
 };
   
   export default function appReducer(state = initialState, action) {
     switch (action.type) {
-      case 'FAVOURITE_PORKY_REPLACE': {
+      case 'FAVOURITE_PORKY': {
         return {
             ...state,
-            loading: false,
-            id: action.data.id,
-            name: action.data.name,
-            childName: action.data.childName,
-            gramme: action.data.gramme,
+            loading: true,
+        };
+      }
+      case 'FAVOURITE_PORKY_SUCCESS': {
+        return {
+          loading: false,
+          id: action.data.id,
+          name: action.data.name,
+          childName: action.data.childName,
+          gramme: action.data.gramme,
         };
       }
       default:

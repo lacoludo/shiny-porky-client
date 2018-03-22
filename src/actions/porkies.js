@@ -29,12 +29,10 @@ export function createPorky(formData) {
 /**
   * Set a favorite porky to authenticate user
   */
-export function favoritePorky(id) {
-  return dispatch => new Promise(async (resolve, reject) => {
+export function favoritePorky(id, dispatch) {
     const UID = Firebase.auth().currentUser.uid;
-    FirebaseRef.child(`users/${UID}`).update({ favoritePorky: id })
-    resolve();
-  }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+    FirebaseRef.child(`users/${UID}`).update({ favoritePorky: id });
+    getFavouritePorky(id, dispatch);
 }
 
 /**
@@ -51,7 +49,6 @@ export function call(dispatch) {
 
   if (!UID) return false;
   const ref = FirebaseRef.child(`porkies/${UID}`);
-
   return ref.on('value', (snapshot) => {
     const porkies = snapshot.val() || [];
 
@@ -62,18 +59,10 @@ export function call(dispatch) {
   });
 }
 
-export function getUserPorkies() {
+export function getUserPorkies(dispatch) {
   if (Firebase === null) return () => new Promise(resolve => resolve());
-
-  // Ensure token is up to date
-  return dispatch => new Promise((resolve) => {
-    Firebase.auth().onAuthStateChanged((loggedIn) => {
-      if (loggedIn) {
-        return resolve(call(dispatch));
-      }
-
-      return () => new Promise(() => resolve());
-    });
+  Firebase.auth().onAuthStateChanged((loggedIn) => {
+    return call(dispatch);
   });
 }
 
@@ -90,20 +79,19 @@ export function setError(message) {
 /**
   * Get this User's Favourite Porky
   */
-export function getFavouritePorky(porkyId) {
-  return dispatch => new Promise(async (resolve, reject) => {
-    Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
-        
-        return ref.on('value', (snapshot) => {
-          const porky = snapshot.val() || [];
-          return dispatch({
-            type: 'FAVOURITE_PORKY_REPLACE',
-            data: porky,
-          });
+export function getFavouritePorky(porkyId, dispatch) {
+  dispatch({ type: 'FAVOURITE_PORKY', data: null });
+  Firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
+      return ref.on('value', (snapshot) => {
+        const porky = snapshot.val() || [];
+        console.log('a',porky);
+        return dispatch({
+          type: 'FAVOURITE_PORKY_SUCCESS',
+          data: porky,
         });
-      }
-    });
+      });
+    }
   });
 }

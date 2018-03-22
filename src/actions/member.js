@@ -2,6 +2,7 @@ import ErrorMessages from '../constants/errors';
 import statusMessage from './status';
 import { Firebase, FirebaseRef } from '../lib/firebase';
 
+import { getFavouritePorky } from './porkies';
 /**
   * Sign Up to Firebase
   */
@@ -57,7 +58,6 @@ export function signUp(formData) {
 }
 
 export function addStripeCustomer(email) {   
-  console.log('d'); 
   return fetch(`https://api.stripe.com/v1/customers?email=${email}`, {
     method: 'post',
     headers: {
@@ -83,9 +83,9 @@ function getUserData(dispatch) {
   if (!UID) return false;
 
   const ref = FirebaseRef.child(`users/${UID}`);
-
   return ref.on('value', (snapshot) => {
     const userData = snapshot.val() || [];
+    getFavouritePorky(userData.favoritePorky, dispatch);
     return dispatch({
       type: 'USER_DETAILS_UPDATE',
       data: userData,
@@ -143,18 +143,14 @@ export function login(formData) {
                   .sendEmailVerification()
                   .catch(() => console.log('Verification email failed to send'));
               }
-
+              return resolve(dispatch({
+                type: 'USER_LOGIN',
+                data: res,
+              }));
               // Get User Data
               getUserData(dispatch);
             }
-
             await statusMessage(dispatch, 'loading', false);
-
-            // Send Login data to Redux
-            return resolve(dispatch({
-              type: 'USER_LOGIN',
-              data: res,
-            }));
           }).catch(reject));
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
 }

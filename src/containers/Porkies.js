@@ -16,7 +16,6 @@ class PorkieListing extends Component {
       params: PropTypes.shape({}),
     }),
     getUserPorkies: PropTypes.func.isRequired,
-    setError: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -25,23 +24,17 @@ class PorkieListing extends Component {
 
   componentDidMount = () => this.fetchPorkies();
 
-  /**
-    * Fetch Data from API, saving to Redux
-    */
   fetchPorkies = () => {
-    return this.props.getUserPorkies()
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-        return this.props.setError(err);
-      });
+    return this.props.getUserPorkies();
   }
 
   onFavoritePorky = (id) => {
-    this.props.favoritePorky(id);
+    const { dispatch } = this.props;
+    this.props.setFavouritePorky(id, dispatch);
   }
 
   render = () => {
-    const { Layout, porkies, match } = this.props;
+    const { Layout, porkies, match, favouritePorkyId } = this.props;
     const id = (match && match.params && match.params.id) ? match.params.id : null;
 
     return (
@@ -51,6 +44,7 @@ class PorkieListing extends Component {
         loading={porkies.loading}
         porkies={porkies.porkies}
         onFavoritePorky={this.onFavoritePorky}
+        favouritePorkyId={favouritePorkyId}
         reFetch={() => this.fetchPorkies()}
       />
     );
@@ -59,12 +53,14 @@ class PorkieListing extends Component {
 
 const mapStateToProps = state => ({
   porkies: state.porkies || {},
+  favouritePorkyId: state.member.favoritePorky || null,
 });
 
-const mapDispatchToProps = {
-  getUserPorkies,
-  favoritePorky,
-  setError,
+function mapDispatchToProps(dispatch) {
+  return {
+    getUserPorkies: () => getUserPorkies(dispatch),
+    setFavouritePorky: (id, dispatch) => favoritePorky(id, dispatch),
+    dispatch,
+  };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(PorkieListing);

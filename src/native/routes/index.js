@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Scene, Tabs, Stack } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 
@@ -29,7 +29,6 @@ import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
 
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
-import CreditCardUserComponent from '../components/Profile/CreditCardUser';
 
 import PurchasePageComponent from '../../containers/PurchasePage';
 
@@ -49,27 +48,18 @@ const Index = (
         {...DefaultProps.tabProps}
       >
         <Stack
-          key="favouritePorky"
+          key="home"
           title={AppConfig.appName.toUpperCase()}
-          icon={() => <Icon name="planet" {...DefaultProps.icons} />}
+          icon={() => <Icon name="home" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="favouritePorky" component={HomeComponent} />
-        </Stack>
-
-        <Stack
-          key="recipes"
-          title="RECIPES"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+          <Scene key="home" component={HomeComponent} />
         </Stack>
 
         <Stack
           key="porkies"
           title="PORKIES"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          icon={() => <Icon name="apps" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
           <Scene
@@ -105,14 +95,6 @@ const Index = (
           />
           <Scene
             back
-            key="login"
-            title="LOGIN"
-            {...DefaultProps.navbarProps}
-            component={LoginContainer}
-            Layout={LoginComponent}
-          />
-          <Scene
-            back
             key="forgotPassword"
             title="FORGOT PASSWORD"
             {...DefaultProps.navbarProps}
@@ -133,7 +115,6 @@ const Index = (
             title="CREDIT CARD INFORMATIONS"
             {...DefaultProps.navbarProps}
             component={CreditCardUserContainer}
-            Layout={CreditCardUserComponent}
           />
         </Stack>
       </Tabs>

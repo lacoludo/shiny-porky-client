@@ -4,7 +4,7 @@ import ErrorMessages from '../constants/errors';
 import statusMessage from './status';
 
 /**
-  * Update Profile
+  * Update CreditCard
   */
 export function createToken(customerId, formData, dispatch) {
   const {
@@ -39,29 +39,23 @@ export function createToken(customerId, formData, dispatch) {
 }
 
 
-export function getUserCreditCard() {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
-
-  // Ensure token is up to date
-  return dispatch => new Promise((resolve) => {
+export function getUserCreditCard(dispatch) {
     Firebase.auth().onAuthStateChanged((loggedIn) => {
-      if (loggedIn) {
-        const UID = Firebase.auth().currentUser.uid;
-        if (!UID) return false;
-      
-        const ref = FirebaseRef.child(`users/${UID}/creditCard`);
-      
-        return ref.on('value', (snapshot) => {
-          const userData = snapshot.val() || [];
-          return dispatch({
-            type: 'CREDIT_CARD_SUCCESS',
-            data: userData,
-          });
+    if (loggedIn) {
+      const UID = Firebase.auth().currentUser.uid;
+      if (!UID) return false;
+      const ref = FirebaseRef.child(`users/${UID}/creditCard`);
+    
+      return ref.on('value', (snapshot) => {
+        const userData = snapshot.val() || [];
+        console.log(userData)
+        return dispatch({
+          type: 'CREDIT_CARD_SUCCESS',
+          data: userData,
         });
-      }
-
-      return () => new Promise(() => resolve());
-    });
+      });
+    }
+    return () => new Promise(() => resolve());
   });
 }
 
@@ -73,7 +67,6 @@ export function updateCreditCard(dispatch, creditCard) {
   if (!UID) return reject({ message: ErrorMessages.missingFirstName });
   FirebaseRef.child(`users/${UID}/creditCard`).set({
     token: creditCard.id,
-    full_name: creditCard.name,
     last4: creditCard.last4,
     exp_year: creditCard.exp_year,
     exp_month: creditCard.exp_month,
@@ -84,7 +77,6 @@ export function updateCreditCard(dispatch, creditCard) {
   * Update Profile
   */
 export function purchaseGold(token, customerStripe, gramme) {
-  console.log(gramme);
   const amount = gramme * 100;
   const description = `${gramme}g of golds`;
 
