@@ -1,9 +1,9 @@
 import React from "react";
-import Login from './../containers/Login';
+import Authentication from './../containers/Authentication';
 
 const withAuthentication = Component => props => {
   if (!props.isAuthenticate) {
-    return <Login {...props} />;
+    return <Authentication {...props} />;
   }
   return <Component {...props} />;
 };

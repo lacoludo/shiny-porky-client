@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Container, Content, Form, Item, Label, Input, Text, Button } from 'native-base';
+import { Content, Form, Item, Label, Input, Text, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { login } from '../../actions/member';
 import { TouchableOpacity } from 'react-native';
@@ -48,40 +48,38 @@ class Login extends Component {
   }
 
   render() {
-    const { loading, error } = this.props;
+    const { loading, error, toggleAuthentication } = this.props;
     if (loading) return <Loading />;
     return (
-      <Container>
-        <Content padder>
-          <HeaderView title="Bienvenue" content="Please use your email and password to login." />
-          {error && <MessageView message={error} />}
-          <Form>
-            <Item stackedLabel>
-              <Label>Email</Label>
-              <Input
-                autoCapitalize="none"
-                value={this.state.email}
-                keyboardType="email-address"
-                onChangeText={v => this.handleChange('email', v)}
-              />
-            </Item>
-            <Item stackedLabel>
-              <Label>Password</Label>
-              <Input
-                secureTextEntry
-                onChangeText={v => this.handleChange('password', v)}
-              />
-            </Item>
-            <SpacerView size={20} />
-            <Button block onPress={this.handleSubmit}>
-              <Text>Login</Text>
-            </Button>
-          </Form>
-          <TouchableOpacity onPress={Actions.signUp}>
-              <Text>S'inscrire</Text>
-          </TouchableOpacity>
-        </Content>
-      </Container>
+      <Content padder>
+        <HeaderView title="Bienvenue" content="Please use your email and password to login." />
+        {error && <MessageView message={error} />}
+        <Form>
+          <Item stackedLabel>
+            <Label>Email</Label>
+            <Input
+              autoCapitalize="none"
+              value={this.state.email}
+              keyboardType="email-address"
+              onChangeText={v => this.handleChange('email', v)}
+            />
+          </Item>
+          <Item stackedLabel>
+            <Label>Password</Label>
+            <Input
+              secureTextEntry
+              onChangeText={v => this.handleChange('password', v)}
+            />
+          </Item>
+          <SpacerView size={20} />
+          <Button block onPress={this.handleSubmit}>
+            <Text>Login</Text>
+          </Button>
+        </Form>
+        <TouchableOpacity onPress={toggleAuthentication}>
+            <Text>S'inscrire</Text>
+        </TouchableOpacity>
+      </Content>
     );
   }
 }

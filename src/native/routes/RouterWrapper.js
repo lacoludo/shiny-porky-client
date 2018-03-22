@@ -19,11 +19,6 @@ import PorkyViewComponent from '../components/Porky';
 import NewPorkyContainer from '../../containers/Porkies/NewPorky';
 import NewPorkyComponent from '../components/Porkies/NewPorky';
 
-import SignUpContainer from '../../containers/SignUp';
-import SignUpComponent from '../components/SignUp';
-
-import LoginContainer from '../../containers/Login';
-
 import ForgotPasswordContainer from '../../containers/ForgotPassword';
 import ForgotPasswordComponent from '../components/ForgotPassword';
 
