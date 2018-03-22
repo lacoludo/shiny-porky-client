@@ -38,25 +38,78 @@ export class About extends React.Component {
         </View>
       )
     }
-    const Tooltip = ({ x, y }) => (
+    const TooltipFirst = ({ x, y }) => (
       <G
-        x={ x(5) - (75 / 2) }
-        key={ 'tooltip' }
-        onPress={ () => console.log('tooltip clicked') }
+        x={x(2) - 75 / 2}
+        key="tooltip"
       >
-        <G y={ 50 }>
+        <G y={50}>
+          <Rect
+            height={40}
+            width={75}
+            stroke="grey"
+            fill="white"
+            ry={10}
+            rx={10}
+          />
           <Text
-            x={ 75 / 2 }
-            dy={ 20 }
-            alignmentBaseline={ 'middle' }
-            textAnchor={ 'middle' }
-            stroke={ 'rgb(211, 175, 55)' }
+            x={75 / 2}
+            dy={20}
+            alignmentBaseline="middle"
+            textAnchor="middle"
+            stroke="grey"
           >
-            { `${dataSource}€` }
+            {`${dataSource[2]}`}
           </Text>
         </G>
+        <G x={75 / 2}>
+          <Line y1={50 + 40} y2={y(dataSource[2])} stroke="grey" strokeWidth={2} />
+          <Circle
+            cy={y(dataSource[2])}
+            r={6}
+            stroke="rgb(211, 175, 55)"
+            strokeWidth={2}
+            fill="white"
+          />
+        </G>
       </G>
-    )
+    );
+    const TooltipLast = ({ x, y }) => (
+      <G
+        x={x(20) - 75 / 2}
+        key="tooltip"
+      >
+        <G y={50}>
+          <Rect
+            height={40}
+            width={75}
+            stroke="grey"
+            fill="white"
+            ry={10}
+            rx={10}
+          />
+          <Text
+            x={75 / 2}
+            dy={20}
+            alignmentBaseline="middle"
+            textAnchor="middle"
+            stroke="grey"
+          >
+            {`${dataSource[20]}`}
+          </Text>
+        </G>
+        <G x={75 / 2}>
+          <Line y1={50 + 40} y2={y(dataSource[20])} stroke="grey" strokeWidth={2} />
+          <Circle
+            cy={y(dataSource[20])}
+            r={6}
+            stroke="rgb(211, 175, 55)"
+            strokeWidth={2}
+            fill="white"
+          />
+        </G>
+      </G>
+    );
     return (
       <View>
         <LineChart
@@ -65,7 +118,7 @@ export class About extends React.Component {
           svg={{ stroke: 'rgb(211, 175, 55)', strokeWidth: 2 }}
           contentInset={{ top: 20, bottom: 20 }}
           curve={ shape.curveLinear }
-          extras={ [ Tooltip ] }
+          extras={ [ TooltipFirst, TooltipLast ] }
           showGrid={ false }
         />
       </View>
