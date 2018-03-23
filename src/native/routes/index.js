@@ -35,8 +35,7 @@ import PurchasePageComponent from '../../containers/PurchasePage';
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
-// import HomeComponent from '../../containers/Home';
-import AboutComponent from '../components/About';
+import HomeComponent from '../../containers/Home';
 
 const Index = (
   <Stack>
