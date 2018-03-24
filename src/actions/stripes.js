@@ -48,7 +48,6 @@ export function getUserCreditCard(dispatch) {
     
       return ref.on('value', (snapshot) => {
         const userData = snapshot.val() || [];
-        console.log(userData)
         return dispatch({
           type: 'CREDIT_CARD_SUCCESS',
           data: userData,
@@ -89,7 +88,6 @@ export function purchaseGold(token, customerStripe, gramme) {
           'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
         }
       }).then(function(response) {
-        console.log(response);
       })
   });
 }

@@ -20,11 +20,6 @@ class Home extends Component {
     this.state = { loading: true };
   }
 
-  componentDidMount() {
-      const { dispatch } = this.props;
-      this.props.getFavouritePorky(this.props.member.favoritePorky, dispatch);
-  };
-
   onPress = item => Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } });
   onPressPurchase = item => Actions.purchase({ match: { params: { id: this.props.member.favoritePorky  } } });
 

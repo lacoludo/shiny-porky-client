@@ -1,5 +1,6 @@
 export default {
-  loading: false,
+  isLoading: false,
   error: null,
   creditCard: null,
+  favoritePorky: null,
 };
