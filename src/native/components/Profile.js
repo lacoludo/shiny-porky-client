@@ -34,6 +34,14 @@ const Profile = ({ member, logout }) => (
                 <Text>Credit Card Informations</Text>
               </Body>
             </ListItem>
+            <ListItem onPress={Actions.shippingAddress} icon>
+              <Left>
+                <Icon name="plane" />
+              </Left>
+              <Body>
+                <Text>Adresse de livraison</Text>
+              </Body>
+            </ListItem>
             <ListItem onPress={logout} icon>
               <Left>
                 <Icon name="power" />
