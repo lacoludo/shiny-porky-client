@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import MessageView from './../../components/MessageView';
 import HeaderView from './../../components/HeaderView';
 import SpacerView from './../../components/Spacer';
-
+import ButtonView from './../../components/ButtonView';
 import { signUp } from '../../actions/member';
 
 class Login extends Component {
@@ -15,16 +15,8 @@ class Login extends Component {
     member: PropTypes.shape({}).isRequired,
     onFormSubmit: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    infoMessage: PropTypes.string,
-    errorMessage: PropTypes.string,
-    successMessage: PropTypes.string,
+    error: PropTypes.string,
   };
-
-  static defaultProps = {
-    infoMessage: null,
-    errorMessage: null,
-    successMessage: null,
-  }
 
   constructor(props) {
     super(props);
@@ -35,9 +27,6 @@ class Login extends Component {
       password: '',
       password2: '',
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = (name, val) => {
@@ -48,31 +37,28 @@ class Login extends Component {
   }
 
   handleSubmit = () => {
-    this.props.onFormSubmit(this.state)
-      .then(() => { this.props.toggleAuthentication() })
-      .catch(e => console.log(`Error: ${e}`));
+    this.props.onFormSubmit(this.state);
   }
 
 
   render() {
-    const { loading, error, toggleAuthentication } = this.props;
-    // Loading
-    if (loading) return <Loading />;
+    const { isLoading, error, toggleAuthentication } = this.props;
+
     return (
       <Content padder>
         <HeaderView
-          title="Inscrition"
+          title="InscriPtion"
           content="Tu veux devenir riche??? Allez rejoins nous et tente d'avoir un maximum de gold !!!"
         />
         {error && <MessageView message={error} />}
         <Form>
           <Item stackedLabel>
-            <Label>First Name</Label>
+            <Label>Prénom</Label>
             <Input onChangeText={v => this.handleChange('firstName', v)} />
           </Item>
 
           <Item stackedLabel>
-            <Label>Last Name</Label>
+            <Label>Nom</Label>
             <Input onChangeText={v => this.handleChange('lastName', v)} />
           </Item>
 
@@ -86,23 +72,20 @@ class Login extends Component {
           </Item>
 
           <Item stackedLabel>
-            <Label>Password</Label>
+            <Label>Mots de passe</Label>
             <Input secureTextEntry onChangeText={v => this.handleChange('password', v)} />
           </Item>
 
           <Item stackedLabel>
-            <Label>Confirm Password</Label>
+            <Label>Répéter mots de passe</Label>
             <Input secureTextEntry onChangeText={v => this.handleChange('password2', v)} />
           </Item>
 
           <SpacerView size={20} />
-
-          <Button block onPress={this.handleSubmit}>
-            <Text>Sign Up</Text>
-          </Button>
+          <ButtonView onPress={this.handleSubmit} label={'S\'inscrire'} isLoading={isLoading} />
         </Form>
         <TouchableOpacity onPress={toggleAuthentication}>
-            <Text>Revenir au login</Text>
+            <Text>Revenir à l'authentification</Text>
         </TouchableOpacity>
       </Content>
     );
@@ -111,15 +94,15 @@ class Login extends Component {
 
 
 const mapStateToProps = state => ({
-  member: state.member || {},
-  isLoading: state.status.loading || false,
-  infoMessage: state.status.info || null,
-  errorMessage: state.status.error || null,
-  successMessage: state.status.success || null,
+  member: state.member,
+  isLoading: state.member.isLoading,
+  error: state.member.error,
 });
 
-const mapDispatchToProps = {
-  onFormSubmit: signUp,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFormSubmit: (formData) => signUp(formData, dispatch),
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

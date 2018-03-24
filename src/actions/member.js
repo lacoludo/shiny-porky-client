@@ -6,7 +6,7 @@ import { getFavouritePorky } from './porkies';
 /**
   * Sign Up to Firebase
   */
-export function signUp(formData) {
+export function signUp(formData, dispatch) {
   const {
     email,
     password,
@@ -15,46 +15,42 @@ export function signUp(formData) {
     lastName,
   } = formData;
 
-  return dispatch => new Promise(async (resolve, reject) => {
-    // Validation checks
-    if (!firstName) return reject({ message: ErrorMessages.missingFirstName });
-    if (!lastName) return reject({ message: ErrorMessages.missingLastName });
-    if (!email) return reject({ message: ErrorMessages.missingEmail });
-    if (!password) return reject({ message: ErrorMessages.missingPassword });
-    if (!password2) return reject({ message: ErrorMessages.missingPassword });
-    if (password !== password2) return reject({ message: ErrorMessages.passwordsDontMatch });
+  console.log('dra');
+  dispatch({ type: 'USER_SIGN_UP' });
+  if(!email) return dispatch({type: 'USER_ERROR', data: 'Le champ Email doit être rempli.'});
+  if(!password) return dispatch({type: 'USER_ERROR', data: 'Le champ Mots de passe doit être rempli.'});
+  if(!password2) return dispatch({type: 'USER_ERROR', data: 'Le champ Répéter mots de passe doit être rempli.'});
+  if(!firstName) return dispatch({type: 'USER_ERROR', data: 'Le champ Prénom doit être rempli.'});
+  if(!lastName) return dispatch({type: 'USER_ERROR', data: 'Le champ Nom doit être rempli.'});
+  if(password !== password2) return dispatch({type: 'USER_ERROR', data: 'Les mots de passe ne sont pas identiques.'});
 
-    await statusMessage(dispatch, 'loading', true);
+  return Firebase.auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((res) => {
+      const creditCard = {
+        last4: null,
+        fullName: null,
+        exp_month: null,
+        exp_year: null,
+        token: null,
+      }
 
-    // Go to Firebase
-    return Firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        const creditCard = {
-          last4: null,
-          fullName: null,
-          exp_month: null,
-          exp_year: null,
-          token: null,
-        }
-
-        addStripeCustomer(email)
-          .then((resp) => resp.json())
-          .then((customer) => {
-            const customerStripe = customer.id
-            if (res && res.uid) {
-              FirebaseRef.child(`users/${res.uid}`).set({
-                customerStripe,
-                creditCard,
-                firstName,
-                lastName,
-                signedUp: Firebase.database.ServerValue.TIMESTAMP,
-                lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
-              }).then(() => statusMessage(dispatch, 'loading', false).then(resolve));
-            }          
-        });
-      }).catch(reject);
-  }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+      addStripeCustomer(email)
+        .then((resp) => resp.json())
+        .then((customer) => {
+          const customerStripe = customer.id
+          if (res && res.uid) {
+            FirebaseRef.child(`users/${res.uid}`).set({
+              customerStripe,
+              creditCard,
+              firstName,
+              lastName,
+              signedUp: Firebase.database.ServerValue.TIMESTAMP,
+              lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+            }).then(() => dispatch({ type: 'USER_SIGN_UP_SUCCESS' }));
+          }          
+      });
+    }).catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
 }
 
 export function addStripeCustomer(email) {   
@@ -85,11 +81,7 @@ function getUserData(dispatch) {
   const ref = FirebaseRef.child(`users/${UID}`);
   return ref.on('value', (snapshot) => {
     const userData = snapshot.val() || [];
-    getFavouritePorky(userData.favoritePorky, dispatch);
-    return dispatch({
-      type: 'USER_DETAILS_UPDATE',
-      data: userData,
-    });
+    return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
   });
 }
 
@@ -111,48 +103,37 @@ export function getMemberData() {
 /**
   * Login to Firebase with Email/Password
   */
-export function login(formData) {
+export function login(formData, dispatch) {
   const {
     email,
     password,
   } = formData;
-
-  return dispatch => new Promise(async (resolve, reject) => {
-    await statusMessage(dispatch, 'loading', true);
-
-    // Validation checks
-    if (!email) return reject({ message: ErrorMessages.missingEmail });
-    if (!password) return reject({ message: ErrorMessages.missingPassword });
-
     // Go to Firebase
-    return Firebase.auth()
-      .setPersistence(Firebase.auth.Auth.Persistence.LOCAL)
-      .then(() =>
-        Firebase.auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(async (res) => {
-            if (res && res.uid) {
-              // Update last logged in data
-              FirebaseRef.child(`users/${res.uid}`).update({
-                lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
-              });
+  
+  if(!email) return dispatch({type: 'USER_ERROR', data: 'Le champ Email doit être rempli.'});
+  if(!password) return dispatch({type: 'USER_ERROR', data: 'Le champ mots de passe doit être rempli.'});
 
-              // Send verification Email when email hasn't been verified
-              if (res.emailVerified === false) {
-                Firebase.auth().currentUser
-                  .sendEmailVerification()
-                  .catch(() => console.log('Verification email failed to send'));
-              }
-              return resolve(dispatch({
-                type: 'USER_LOGIN',
-                data: res,
-              }));
-              // Get User Data
-              getUserData(dispatch);
+  dispatch({type: 'USER_LOGIN'});
+  return Firebase.auth()
+    .setPersistence(Firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+      Firebase.auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((res) => {
+          if (res && res.uid) {
+            FirebaseRef.child(`users/${res.uid}`).update({
+              lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+            });
+            if (res.emailVerified === false) {
+              Firebase.auth().currentUser
+                .sendEmailVerification()
+                .catch(() => console.log('Verification email failed to send'));
             }
-            await statusMessage(dispatch, 'loading', false);
-          }).catch(reject));
-  }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+            dispatch({ type: 'USER_LOGIN_SUCCESS', data: res });
+            getUserData(dispatch);
+          }
+        }).catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
+    });
 }
 
 /**

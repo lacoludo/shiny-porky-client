@@ -6,6 +6,7 @@ import { Content, Form, Item, Label, Input, Text, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { login } from '../../actions/member';
 import { TouchableOpacity } from 'react-native';
+import ButtonView from './../../components/ButtonView';
 import MessageView from './../../components/MessageView';
 import HeaderView from './../../components/HeaderView';
 import SpacerView from './../../components/Spacer';
@@ -13,17 +14,10 @@ import SpacerView from './../../components/Spacer';
 class Login extends Component {
   static propTypes = {
     member: PropTypes.shape({}).isRequired,
-    onFormSubmit: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    infoMessage: PropTypes.string,
-    errorMessage: PropTypes.string,
-    successMessage: PropTypes.string,
+    error: PropTypes.string,
   };
-
-  static defaultProps = {
-    error: null,
-    member: {},
-  }
 
   constructor(props) {
     super(props);
@@ -31,13 +25,10 @@ class Login extends Component {
       email: (props.member && props.member.email) ? props.member.email : '',
       password: '',
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = () => {
-    this.props.onFormSubmit(this.state);
+    this.props.login(this.state);
   }
 
   handleChange = (name, val) => {
@@ -48,8 +39,8 @@ class Login extends Component {
   }
 
   render() {
-    const { loading, error, toggleAuthentication } = this.props;
-    if (loading) return <Loading />;
+    const { isLoading, error, toggleAuthentication } = this.props;
+
     return (
       <Content padder>
         <HeaderView title="Bienvenue" content="Please use your email and password to login." />
@@ -72,9 +63,7 @@ class Login extends Component {
             />
           </Item>
           <SpacerView size={20} />
-          <Button block onPress={this.handleSubmit}>
-            <Text>Login</Text>
-          </Button>
+          <ButtonView onPress={this.handleSubmit} label={'Se connection'} isLoading={isLoading} />
         </Form>
         <TouchableOpacity onPress={toggleAuthentication}>
             <Text>S'inscrire</Text>
@@ -87,14 +76,14 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   member: state.member || {},
-  isLoading: state.status.loading || false,
-  infoMessage: state.status.info || null,
-  errorMessage: state.status.error || null,
-  successMessage: state.status.success || null,
+  isLoading: state.member.isLoading,
+  error: state.member.error,
 });
 
-const mapDispatchToProps = {
-  onFormSubmit: login,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (formData) => login(formData, dispatch),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
