@@ -93,4 +93,56 @@ export function purchaseGold(token, customerStripe, gramme) {
       })
   });
 }
-    
+
+/**
+  * Get stripe customer
+  */
+export function getCustomerStripe(customerStripe, dispatch) {
+  dispatch({ type: 'LOAD_SHIPPING_ADDRESS'});
+  return fetch(`https://api.stripe.com/v1/customers/${customerStripe}`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
+    }
+  })
+  .then((resp) => resp.json())
+  .then((data) => {
+    dispatch({ type: 'SHIPPING_ADDRESS_SUCCESS', data});
+  });
+}
+
+/**
+  * Get stripe customer
+  */
+  export function postShippingAddressToCustomer(customerStripe, formData, dispatch) {
+    const {
+      line1,
+      line2,
+      postalCode,
+      city,
+      country,
+      phone,
+    } = formData;
+
+    return fetch(`https://api.stripe.com/v1/customers/${customerStripe}?shipping[name]=Principal&shipping[address][line1]=${line1}`
+      + `&shipping[address][line2]=${line2}`
+      + `&shipping[address][city]=${city}`
+      + `&shipping[address][postal_code]=${postalCode}`
+      + `&shipping[address][country]=${country}`
+      + `&shipping[phone]=${phone}`,
+      {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      getCustomerStripe(customerStripe, dispatch);
+    });
+  }
+      
