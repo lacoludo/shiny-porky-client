@@ -11,7 +11,7 @@ class TooltipChart extends PureComponent {
 		data: PropTypes.number.isRequired,
 	}
 
-  render = () => {
+  render() {
 		const { x, y, index, data} = this.props;
     return (
       <G x={x(index) - 75 / 2} key={index}>

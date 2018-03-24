@@ -22,8 +22,8 @@ export class GoldChart extends React.Component {
   render() {
     const { dataGold, isLoading } = this.props;
     const lastIndexToDisplay = dataGold.length - 3;
-    const TooltipFirst = ({ x, y }) => (<TooltipChart x={x} y={y} index={2} data={dataGold[2]} key={2} />)
-    const TooltipLast = ({ x, y }) => (<TooltipChart x={x} y={y} index={lastIndexToDisplay} key={lastIndexToDisplay} data={dataGold[lastIndexToDisplay]} />);
+    const TooltipFirst = ({ x, y }) => <TooltipChart x={x} y={y} index={2} data={dataGold[2]} key={2} />;
+    const TooltipLast = ({ x, y }) => <TooltipChart x={x} y={y} index={lastIndexToDisplay} key={lastIndexToDisplay} data={dataGold[lastIndexToDisplay]} />;
   
     return (
       <Card style={{ paddingHorizontal: 6 }}>
