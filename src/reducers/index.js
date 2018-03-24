@@ -4,6 +4,7 @@ import recipes from './recipes';
 import porkies from './porkies';
 import creditCard from './CreditCard';
 import favouritePorky from './FavouritePorky';
+import goldChart from './GoldChart';
 import shippingAddress from './shippingAddress';
 
 const rehydrated = (state = false, action) => {
@@ -23,5 +24,6 @@ export default {
   porkies,
   creditCard,
   favouritePorky,
+  goldChart,
   shippingAddress,
 };

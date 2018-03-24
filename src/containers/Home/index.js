@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { getFavouritePorky } from '../../actions/porkies';
 import { Container, Content, Text, H1, H2, H3, Button } from 'native-base';
+import GoldChart from './GoldChart';
 
 import ButtonView from './../../components/ButtonView';
 import PorkyCard from './../../native/components/Porkies/PorkyCard';
@@ -21,7 +22,6 @@ class Home extends Component {
 
   componentDidMount() {
       const { dispatch } = this.props;
-      console.log(Actions);
       this.props.getFavouritePorky(this.props.member.favoritePorky, dispatch);
   };
 
@@ -36,6 +36,7 @@ class Home extends Component {
           <H3>Mon Porky favoris</H3>
           {<PorkyCard onFavoritePorky={null} isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
           <ButtonView onPress={this.onPressPurchase} label={'APPROVISIONNER'} />
+          <GoldChart />
         </Content>
       </Container>
     )
