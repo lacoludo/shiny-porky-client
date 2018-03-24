@@ -22,7 +22,6 @@ class Home extends Component {
 
   componentDidMount() {
       const { dispatch } = this.props;
-      console.log(Actions);
       this.props.getFavouritePorky(this.props.member.favoritePorky, dispatch);
   };
 
