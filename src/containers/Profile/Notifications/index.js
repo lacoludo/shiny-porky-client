@@ -7,28 +7,42 @@ import { Actions } from 'react-native-router-flux';
 import { Notifications, Permissions, Constants } from 'expo';
 import { NOTIFICATIONS_GOLD_REMINDER } from './constants';
 
+import { setReminderNotif, getReminderNotif } from '../../../actions/member';
 import HeaderView from './../../../components/HeaderView';
+import ButtonView from './../../../components/ButtonView';
+import MessageView from './../../../components/MessageView';
 
 class MyNotifications extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { reminderValue : 'never' };
+    this.state = { reminderValue: this.props.notifications };
   }
+
   async componentDidMount() {
-    let result = await   
-    Permissions.askAsync(Permissions.NOTIFICATIONS);
+    let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     if (Constants.lisDevice && resut.status === 'granted') {
      console.log('Notification permissions granted.')
     }
+    this.setState({ reminderValue: this.props.notifications });
   }
 
   onPress = (value) => {
     this.setState({ reminderValue: value });
   }
+
+  onSubmitForm = () => {
+    this.props.setReminderNotif(this.state.reminderValue);
+  }
+
+  componentWillUnmount() {
+    console.log('je passe');
+    this.props.dispatch({ type: 'RESET_NOTIFICATIONS' });
+  }
+
   render() {
     const { reminderValue } = this.state;
+    const { isLoading, success } = this.props;
     /*let t = new Date();
     t.setSeconds(t.getSeconds() + 10);
     const schedulingOptions = {
@@ -41,6 +55,7 @@ class MyNotifications extends Component {
       <Container>
         <Content padder>
           <HeaderView title="Gestion des notifications" />
+          {success && <MessageView message={'Demande enregistrée.'} type={'success'}/>}
           <Form>
             <Label>Etre rappelé tous les</Label>
             <View style={{ width: '100%', justifyContent: 'center', flex: 1, flexDirection: 'row'}}>
@@ -63,6 +78,7 @@ class MyNotifications extends Component {
                 <Text style={reminderValue === 'month' ? textActive : textInactive}>Mois</Text>
               </TouchableOpacity>
             </View>
+            <ButtonView onPress={this.onSubmitForm} label={'Mettre à jour'} isLoading={isLoading} />
           </Form>
         </Content>
       </Container>
@@ -87,4 +103,17 @@ const buttonActive = {
 const textInactive = { width: '100%', textAlign: 'center', color: '#D4AF37' };
 const textActive = { width: '100%', textAlign: 'center', color: '#FFF' };
 
-export default MyNotifications;
+const mapStateToProps = state => ({
+  isLoading: state.notifications.isLoading,
+  notifications: state.member.reminderNotif,
+  success: state.notifications.success,
+});
+  
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setReminderNotif: (reminder) => setReminderNotif(reminder, dispatch),
+    dispatch,
+  };
+};
+  
+export default connect(mapStateToProps, mapDispatchToProps)(MyNotifications);

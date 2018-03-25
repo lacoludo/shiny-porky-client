@@ -33,7 +33,7 @@ export function signUp(formData, dispatch) {
         exp_year: null,
         token: null,
       }
-
+      const reminderNotif = 'never';
       addStripeCustomer(email)
         .then((resp) => resp.json())
         .then((customer) => {
@@ -42,6 +42,7 @@ export function signUp(formData, dispatch) {
             FirebaseRef.child(`users/${res.uid}`).set({
               customerStripe,
               creditCard,
+              reminderNotif,
               firstName,
               lastName,
               signedUp: Firebase.database.ServerValue.TIMESTAMP,
@@ -221,4 +222,15 @@ export function logout() {
         setTimeout(resolve, 1000); // Resolve after 1s so that user sees a message
       }).catch(reject);
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+}
+
+/**
+  * Set a reminder notifications
+  */
+  export function setReminderNotif(reminder, dispatch) {
+    const UID = Firebase.auth().currentUser.uid;
+    dispatch({ type: 'SET_REMINDER_NOTIF' });
+    FirebaseRef.child(`users/${UID}`).update({ reminderNotif: reminder });
+    dispatch({type: 'SET_REMINDER_NOTIF_SUCCESS'});
+    getUserData(dispatch);
 }

@@ -47,6 +47,7 @@ export default function userReducer(state = initialState, action) {
           signedUp: action.data.signedUp,
           role: action.data.role,
           customerStripe: action.data.customerStripe,
+          reminderNotif: action.data.reminderNotif || 'never',
           creditCard: action.data.creditCard,
           favoritePorky: action.data.favoritePorky,
         };
