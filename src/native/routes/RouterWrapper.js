@@ -22,8 +22,7 @@ import NewPorkyComponent from '../components/Porkies/NewPorky';
 import ForgotPasswordContainer from '../../containers/ForgotPassword';
 import ForgotPasswordComponent from '../components/ForgotPassword';
 
-import UpdateProfileContainer from '../../containers/UpdateProfile';
-import UpdateProfileComponent from '../components/UpdateProfile';
+import UpdateProfileContainer from '../../containers/Profile/UpdateProfile';
 
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
 import ShippingAddressContainer from '../../containers/Profile/ShippingAddress';
@@ -109,7 +108,6 @@ class RouterWrapper extends Component {
                   title="UPDATE PROFILE"
                   {...DefaultProps.navbarProps}
                   component={UpdateProfileContainer}
-                  Layout={UpdateProfileComponent}
                 />
                 <Scene
                   back
