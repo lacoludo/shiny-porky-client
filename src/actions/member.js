@@ -15,7 +15,6 @@ export function signUp(formData, dispatch) {
     lastName,
   } = formData;
 
-  console.log('dra');
   dispatch({ type: 'USER_SIGN_UP' });
   if(!email) return dispatch({type: 'USER_ERROR', data: 'Le champ Email doit être rempli.'});
   if(!password) return dispatch({type: 'USER_ERROR', data: 'Le champ Mots de passe doit être rempli.'});
@@ -34,7 +33,7 @@ export function signUp(formData, dispatch) {
         exp_year: null,
         token: null,
       }
-
+      const reminderNotif = 'never';
       addStripeCustomer(email)
         .then((resp) => resp.json())
         .then((customer) => {
@@ -43,6 +42,7 @@ export function signUp(formData, dispatch) {
             FirebaseRef.child(`users/${res.uid}`).set({
               customerStripe,
               creditCard,
+              reminderNotif,
               firstName,
               lastName,
               signedUp: Firebase.database.ServerValue.TIMESTAMP,
@@ -81,6 +81,7 @@ function getUserData(dispatch) {
   const ref = FirebaseRef.child(`users/${UID}`);
   return ref.on('value', (snapshot) => {
     const userData = snapshot.val() || [];
+    getFavouritePorky(userData.favoritePorky, dispatch);
     return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
   });
 }
@@ -221,4 +222,15 @@ export function logout() {
         setTimeout(resolve, 1000); // Resolve after 1s so that user sees a message
       }).catch(reject);
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+}
+
+/**
+  * Set a reminder notifications
+  */
+  export function setReminderNotif(reminder, dispatch) {
+    const UID = Firebase.auth().currentUser.uid;
+    dispatch({ type: 'SET_REMINDER_NOTIF' });
+    FirebaseRef.child(`users/${UID}`).update({ reminderNotif: reminder });
+    dispatch({type: 'SET_REMINDER_NOTIF_SUCCESS'});
+    getUserData(dispatch);
 }

@@ -3,4 +3,5 @@ export default {
   error: null,
   creditCard: null,
   favoritePorky: null,
+  reminderNotif: 'never',
 };

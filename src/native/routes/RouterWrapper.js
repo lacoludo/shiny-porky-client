@@ -26,6 +26,8 @@ import UpdateProfileContainer from '../../containers/Profile/UpdateProfile';
 
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
 import ShippingAddressContainer from '../../containers/Profile/ShippingAddress';
+import NotificationsContainer from '../../containers/Profile/Notifications';
+
 import PurchasePageComponent from '../../containers/PurchasePage';
 
 import MemberContainer from '../../containers/Member';
@@ -112,7 +114,7 @@ class RouterWrapper extends Component {
                 <Scene
                   back
                   key="creditCardUser"
-                  title="CREDIT CARD INFORMATIONS"
+                  title="Informations bancaires"
                   {...DefaultProps.navbarProps}
                   component={CreditCardUserContainer}
                 />
@@ -122,6 +124,13 @@ class RouterWrapper extends Component {
                   title="ADRESSE DE LIVRAISON"
                   {...DefaultProps.navbarProps}
                   component={ShippingAddressContainer}
+                />
+                <Scene
+                  back
+                  key="notifications"
+                  title="GESTION DES NOTIFICATIONS"
+                  {...DefaultProps.navbarProps}
+                  component={NotificationsContainer}
                 />
               </Stack>
             </Tabs>

@@ -14,7 +14,7 @@ const Profile = ({ member, logout }) => (
             <Content padder>
               <Header
                 title={`Hi ${member.firstName},`}
-                content={`You are currently logged in as ${member.email}`}
+                content={`Vous êtes actuellement connecté avec l'adresse email: ${member.email}`}
               />
             </Content>
 
@@ -23,7 +23,7 @@ const Profile = ({ member, logout }) => (
                 <Icon name="person-add" />
               </Left>
               <Body>
-                <Text>Update My Profile</Text>
+                <Text>Modifier mon profil</Text>
               </Body>
             </ListItem>
             <ListItem onPress={Actions.creditCardUser} icon>
@@ -31,7 +31,7 @@ const Profile = ({ member, logout }) => (
                 <Icon name="card" />
               </Left>
               <Body>
-                <Text>Credit Card Informations</Text>
+                <Text>Informations bancaires</Text>
               </Body>
             </ListItem>
             <ListItem onPress={Actions.shippingAddress} icon>
@@ -40,6 +40,14 @@ const Profile = ({ member, logout }) => (
               </Left>
               <Body>
                 <Text>Adresse de livraison</Text>
+              </Body>
+            </ListItem>
+            <ListItem onPress={Actions.notifications} icon>
+              <Left>
+                <Icon name="letter" />
+              </Left>
+              <Body>
+                <Text>Gestion des notifications</Text>
               </Body>
             </ListItem>
             <ListItem onPress={logout} icon>

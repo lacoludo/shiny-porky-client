@@ -79,19 +79,18 @@ export function setError(message) {
 /**
   * Get this User's Favourite Porky
   */
-  export function getFavouritePorky(porkyId, dispatch) {
-    dispatch({ type: 'FAVOURITE_PORKY', data: null });
-    Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
-        return ref.on('value', (snapshot) => {
-          const porky = snapshot.val();
-          console.log(`porkies/${user.uid}/${porkyId}`);
-          return dispatch({
-            type: 'FAVOURITE_PORKY_SUCCESS',
-            data: porky,
-          });
+export function getFavouritePorky(porkyId, dispatch) {
+  dispatch({ type: 'FAVOURITE_PORKY', data: null });
+  Firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
+      return ref.on('value', (snapshot) => {
+        const porky = snapshot.val();
+        return dispatch({
+          type: 'FAVOURITE_PORKY_SUCCESS',
+          data: porky,
         });
-      }
-    });
-  }
+      });
+    }
+  });
+}

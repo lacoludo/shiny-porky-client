@@ -6,6 +6,7 @@ import creditCard from './CreditCard';
 import favouritePorky from './FavouritePorky';
 import goldChart from './GoldChart';
 import shippingAddress from './shippingAddress';
+import notifications from './Notifications';
 
 const rehydrated = (state = false, action) => {
   switch (action.type) {
@@ -26,4 +27,5 @@ export default {
   favouritePorky,
   goldChart,
   shippingAddress,
+  notifications,
 };
