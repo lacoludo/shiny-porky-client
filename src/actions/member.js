@@ -15,7 +15,6 @@ export function signUp(formData, dispatch) {
     lastName,
   } = formData;
 
-  console.log('dra');
   dispatch({ type: 'USER_SIGN_UP' });
   if(!email) return dispatch({type: 'USER_ERROR', data: 'Le champ Email doit être rempli.'});
   if(!password) return dispatch({type: 'USER_ERROR', data: 'Le champ Mots de passe doit être rempli.'});
@@ -81,6 +80,7 @@ function getUserData(dispatch) {
   const ref = FirebaseRef.child(`users/${UID}`);
   return ref.on('value', (snapshot) => {
     const userData = snapshot.val() || [];
+    getFavouritePorky(userData.favoritePorky, dispatch);
     return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
   });
 }

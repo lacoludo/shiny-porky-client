@@ -86,7 +86,6 @@ export function setError(message) {
         const ref = FirebaseRef.child(`porkies/${user.uid}/${porkyId}`);
         return ref.on('value', (snapshot) => {
           const porky = snapshot.val();
-          console.log(`porkies/${user.uid}/${porkyId}`);
           return dispatch({
             type: 'FAVOURITE_PORKY_SUCCESS',
             data: porky,
