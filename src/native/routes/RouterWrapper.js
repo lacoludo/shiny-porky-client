@@ -34,7 +34,6 @@ import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
 import HomeComponent from '../../containers/Home';
-import Tabbar from '../../components/Tabbar';
 
 import TITLE_SHINY_PORKY from '../../images/title-shiny-porky.png';
 
