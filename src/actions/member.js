@@ -130,8 +130,8 @@ export function login(formData, dispatch) {
                 .sendEmailVerification()
                 .catch(() => console.log('Verification email failed to send'));
             }
-            dispatch({ type: 'USER_LOGIN_SUCCESS', data: res });
             getUserData(dispatch);
+            dispatch({ type: 'USER_LOGIN_SUCCESS', data: res });
           }
         }).catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
     });
@@ -233,4 +233,5 @@ export function logout() {
     FirebaseRef.child(`users/${UID}`).update({ reminderNotif: reminder });
     dispatch({type: 'SET_REMINDER_NOTIF_SUCCESS'});
     getUserData(dispatch);
+    setTimeout(() => dispatch({type: 'RESET_NOTIFICATIONS'}), 4000);
 }

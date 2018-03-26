@@ -34,126 +34,115 @@ import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
 import HomeComponent from '../../containers/Home';
+import Tabbar from '../../components/Tabbar';
+
+import TITLE_SHINY_PORKY from '../../images/title-shiny-porky.png';
 
 class RouterWrapper extends Component {
   render() {
     return (
       <Router>
         <Stack key="root">
-            <Tabs
-              wrap
-              hideNavBar
-              key="root"
-              swipeEnabled
-              type="replace"
-              showLabel={false}
-              {...DefaultProps.tabProps}
+          <Tabs
+            wrap
+            hideNavBar
+            tabBarPosition="bottom"
+            key="root"
+            type="replace"
+            showLabel={false}
+            {...DefaultProps.tabProps}
+          >
+            <Stack
+              key="home"
+              navigationBarTitleImage={TITLE_SHINY_PORKY}
+              navigationBarTitleImageStyle={{ width:220, height: 35, alignSelf: 'center'  }}
+              icon={() => <Icon name="home" {...DefaultProps.icons} />}
+              {...DefaultProps.navbarProps}
             >
-              <Stack
-                key="home"
-                title={AppConfig.appName.toUpperCase()}
-                icon={() => <Icon name="home" {...DefaultProps.icons} />}
+              <Scene key="home" component={HomeComponent} />
+              <Scene
+                back
+                clone
+                key="purchase"
                 {...DefaultProps.navbarProps}
-              >
-                <Scene key="home" component={HomeComponent} />
-              </Stack>
+                component={PurchasePageComponent}
+              />
+            </Stack>
 
-              <Stack
+            <Stack
+              key="porkies"
+              navigationBarTitleImage={TITLE_SHINY_PORKY}
+              navigationBarTitleImageStyle={{ width:220, height: 35, alignSelf: 'center'  }}
+              icon={() => <Icon name="apps" {...DefaultProps.icons} />}
+              {...DefaultProps.navbarProps}
+            >
+              <Scene
                 key="porkies"
-                title="PORKIES"
-                icon={() => <Icon name="apps" {...DefaultProps.icons} />}
                 {...DefaultProps.navbarProps}
-              >
-                <Scene
-                  key="porkies"
-                  {...DefaultProps.navbarProps}
-                  component={PorkiesContainer}
-                  Layout={PorkiesComponent} 
-                />
-                <Scene
-                  back
-                  key="newPorky"
-                  title="New porky"
-                  {...DefaultProps.navbarProps}
-                  component={NewPorkyContainer}
-                  Layout={NewPorkyComponent}
-                />
-                <Scene
-                  back
-                  clone
-                  key="porky"
-                  title="PORKY"
-                  {...DefaultProps.navbarProps}
-                  component={PorkiesContainer}
-                  Layout={PorkyViewComponent}
-                />
-              </Stack>
-
-              <Stack
-                key="profile"
-                title="PROFILE"
-                icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+                component={PorkiesContainer}
+                Layout={PorkiesComponent} 
+              />
+              <Scene
+                back
+                key="newPorky"
                 {...DefaultProps.navbarProps}
-              >
-                <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
-                <Scene
-                  back
-                  key="forgotPassword"
-                  title="FORGOT PASSWORD"
-                  {...DefaultProps.navbarProps}
-                  component={ForgotPasswordContainer}
-                  Layout={ForgotPasswordComponent}
-                />
-                <Scene
-                  back
-                  key="updateProfile"
-                  title="UPDATE PROFILE"
-                  {...DefaultProps.navbarProps}
-                  component={UpdateProfileContainer}
-                />
-                <Scene
-                  back
-                  key="creditCardUser"
-                  title="Informations bancaires"
-                  {...DefaultProps.navbarProps}
-                  component={CreditCardUserContainer}
-                />
-                <Scene
-                  back
-                  key="shippingAddress"
-                  title="ADRESSE DE LIVRAISON"
-                  {...DefaultProps.navbarProps}
-                  component={ShippingAddressContainer}
-                />
-                <Scene
-                  back
-                  key="notifications"
-                  title="GESTION DES NOTIFICATIONS"
-                  {...DefaultProps.navbarProps}
-                  component={NotificationsContainer}
-                />
-              </Stack>
-            </Tabs>
-            <Scene
-              back
-              clone
-              key="purchase"
-              title="PURCHASE"
-              {...DefaultProps.navbarProps}
-              component={PurchasePageComponent}
-            />
+                component={NewPorkyContainer}
+                Layout={NewPorkyComponent}
+              />
+              <Scene
+                back
+                clone
+                key="porky"
+                {...DefaultProps.navbarProps}
+                component={PorkiesContainer}
+                Layout={PorkyViewComponent}
+              />
+            </Stack>
 
-            <Scene
-              back
-              clone
-              key="recipe"
-              title="RECIPE"
+            <Stack
+              key="profile"
+              navigationBarTitleImage={TITLE_SHINY_PORKY}
+              navigationBarTitleImageStyle={{ width:220, height: 35, alignSelf: 'center'  }}
+              icon={() => <Icon name="contact" {...DefaultProps.icons} />}
               {...DefaultProps.navbarProps}
-              component={RecipesContainer}
-              Layout={RecipeViewComponent}
-            />
-      </Stack>
-    </Router>)
+            >
+              <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+              <Scene
+                back
+                key="forgotPassword"
+                {...DefaultProps.navbarProps}
+                component={ForgotPasswordContainer}
+                Layout={ForgotPasswordComponent}
+              />
+              <Scene
+                back
+                key="updateProfile"
+                {...DefaultProps.navbarProps}
+                component={UpdateProfileContainer}
+              />
+              <Scene
+                back
+                key="creditCardUser"
+                {...DefaultProps.navbarProps}
+                component={CreditCardUserContainer}
+              />
+              <Scene
+                back
+                key="shippingAddress"
+                {...DefaultProps.navbarProps}
+                component={ShippingAddressContainer}
+              />
+              <Scene
+                back
+                key="notifications"
+                {...DefaultProps.navbarProps}
+                component={NotificationsContainer}
+              />
+            </Stack>
+          </Tabs>
+        </Stack>
+      </Router>
+    )
   }
 }
 
