@@ -18,26 +18,30 @@ class PorkyCard extends Component {
 
   render = () => {
     const { porky, onPress, onFavoritePorky, isLoading, favouritePorkyId } = this.props;
-    return (
-      <Card style={{ paddingHorizontal: 6 }}>
-        {isLoading ? (
-          <ActivityIndicator size="large" color="#000" style={{ height: 329}} />
-        ) : (
-          <View>
-            {porky.id !== 0 ? (
-              <PorkyCardItem
-                favouritePorkyId={favouritePorkyId}
-                onFavoritePorky={onFavoritePorky}
-                porky={porky}
-                onPress={onPress}
-              />
-            ) : (
-              <NewPorkyCardItem />
-            )}
-          </View>
-        )}
-      </Card>
-    );
+    return <Content padder>
+        <Card style={{ paddingHorizontal: 6 }}>
+          {isLoading ? (
+            <ActivityIndicator
+              size="large"
+              color="#000"
+              style={{ height: 329 }}
+            />
+          ) : (
+            <View>
+              {porky.id !== 0 ? (
+                <PorkyCardItem
+                  favouritePorkyId={favouritePorkyId}
+                  onFavoritePorky={onFavoritePorky}
+                  porky={porky}
+                  onPress={onPress}
+                />
+              ) : (
+                <NewPorkyCardItem />
+              )}
+            </View>
+          )}
+        </Card>
+      </Content>;
   }
 }
 
