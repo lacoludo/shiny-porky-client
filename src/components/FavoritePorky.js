@@ -10,29 +10,38 @@ const ICON_ANIM = "https://rawgit.com/airbnb/lottie-react-native/master/example/
 class FavoritePorky extends Component {
   static propTypes = {
     isFavorite: PropTypes.bool.isRequired,
+    favoritePorky: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
-    this.state = { animation: null, progress: props.isFavorite ? 1 : 0 };
+    this.state = { animation: null };
   }
 
   componentDidMount() {
-    this.loadAnimationAsync();
+    this.loadAnimationAsync().then(() => {
+      if(this.props.isFavorite) {
+        this.animation.play();
+      }
+    });
   }
 
   playAnimation = () => {
-    if (!this.state.animation) {
-      this._loadAnimationAsync();
-    } else {
-      this.animation.reset();
+    const { isFavorite, favoritePorky } = this.props;
+    if (!isFavorite) {
+      favoritePorky();
       this.animation.play();
     }
   };
 
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.isFavorite) {
+      this.animation.reset();
+    }
+  }
+
   loadAnimationAsync = async () => {
     let result = await fetch(ICON_ANIM);
-      
     this.setState(
       { animation: JSON.parse(result._bodyText) },
       this._playAnimation
@@ -40,14 +49,13 @@ class FavoritePorky extends Component {
   };
 
   render () {
-    const { animation, progress } = this.state;
-
+    const { animation } = this.state;
     return (
       <View>
         {animation &&
           <TouchableOpacity onPress={ this.playAnimation }>
             <Lottie
-              progress={progress}
+              speed={1.5}
               ref={ animation => {
                 this.animation = animation;
               }}
@@ -58,7 +66,6 @@ class FavoritePorky extends Component {
               }}
               resizeMode='cover'
               source={animation}
-              onPress={ () => this.playAnimation }
             />
           </TouchableOpacity>
         }

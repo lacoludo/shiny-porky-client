@@ -32,7 +32,7 @@ import ProfileComponent from '../components/Profile';
 
 import HomeComponent from '../../containers/Home';
 
-import TITLE_SHINY_PORKY from '../../images/title-shiny-porky.png';
+import TITLE_SHINY_PORKY from '../../images/app-name.png';
 
 class RouterWrapper extends Component {
   render() {
@@ -51,7 +51,7 @@ class RouterWrapper extends Component {
             <Stack
               key="home"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:220, height: 35, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
               icon={() => <Icon name="home" {...DefaultProps.icons} />}
               {...DefaultProps.navbarProps}
             >
@@ -68,7 +68,7 @@ class RouterWrapper extends Component {
             <Stack
               key="porkies"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:220, height: 35, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
               icon={() => <Icon name="apps" {...DefaultProps.icons} />}
               {...DefaultProps.navbarProps}
             >
@@ -98,7 +98,7 @@ class RouterWrapper extends Component {
             <Stack
               key="profile"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:220, height: 35, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
               icon={() => <Icon name="contact" {...DefaultProps.icons} />}
               {...DefaultProps.navbarProps}
             >

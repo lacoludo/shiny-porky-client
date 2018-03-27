@@ -13,13 +13,13 @@ class PorkyCardItem extends Component {
     favouritePorkyId: PropTypes.string,
   };
 
-  favoritePorky = (id) => {
-    this.props.onFavoritePorky(id);
+  favoritePorky = () => {
+    const { porky } = this.props;
+    this.props.onFavoritePorky(porky.id);
   }
 
   render() {
     const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
-    console.log(porky.id);
     return (
       <TouchableOpacity onPress={() => onPress(porky)}>
         <CardItem >
@@ -42,7 +42,7 @@ class PorkyCardItem extends Component {
           </Left>
           {onFavoritePorky &&
             <Right>
-              <FavoritePorky isfavorite={porky.id === favouritePorkyId} />
+              <FavoritePorky isFavorite={porky.id === favouritePorkyId} favoritePorky={this.favoritePorky} />
             </Right>
           }
         </CardItem>
