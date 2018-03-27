@@ -66,15 +66,7 @@ class PorkyListing extends Component {
     if (loading) return <Loading />;
     if (error) return <Error content={ error } />;
     const keyExtractor = item => item.id;
-    const onPress = item => {(
-      Actions.porky({
-        match: {
-          params: {
-            id: String(item.id)
-          }
-        }
-      });
-    )};
+    const onPress = item => {( Actions.porky({ match: { params: { id: String(item.id) } } })); };
     return (
       <View style={ styles.animationContainer }>
         { this.state.animation && (
