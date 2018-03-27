@@ -8,7 +8,7 @@ import Spacer from './../Spacer';
 
 class PorkyCard extends Component {
   static propTypes = {
-    porky: PropTypes.shape().isRequired,
+    porky: PropTypes.shape({}).isRequired,
     reFetch: PropTypes.func,
     onPress: PropTypes.func.isRequired,
     onFavoritePorky: PropTypes.func,
@@ -28,7 +28,7 @@ class PorkyCard extends Component {
             />
           ) : (
             <View>
-              {porky.id !== 0 ? (
+              {porky.id ? (
                 <PorkyCardItem
                   favouritePorkyId={favouritePorkyId}
                   onFavoritePorky={onFavoritePorky}

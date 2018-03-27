@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CardItem, Body, Text, Left, Right, Thumbnail, Icon } from 'native-base';
 import { Image, TouchableOpacity } from 'react-native';
-
+import FavoritePorky from '../../../components/FavoritePorky';
 import PorkyIcon from './../../../images/porky-icon.png';
 
 class PorkyCardItem extends Component {
@@ -19,7 +19,7 @@ class PorkyCardItem extends Component {
 
   render() {
     const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
-
+    console.log(porky.id);
     return (
       <TouchableOpacity onPress={() => onPress(porky)}>
         <CardItem >
@@ -42,9 +42,7 @@ class PorkyCardItem extends Component {
           </Left>
           {onFavoritePorky &&
             <Right>
-              <TouchableOpacity onPress={() => this.favoritePorky(porky.id)}>
-                <Icon style={{color: '#000'}} active={favouritePorkyId === porky.id} name="heart" />
-              </TouchableOpacity>
+              <FavoritePorky isfavorite={porky.id === favouritePorkyId} />
             </Right>
           }
         </CardItem>
