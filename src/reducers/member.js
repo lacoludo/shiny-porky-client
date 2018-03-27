@@ -4,26 +4,27 @@ export const initialState = Store;
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case 'USER_SIGN_UP':  
+    case 'USER_FORGOT_PASSWORD':
+    case 'USER_SIGN_UP':
     case 'USER_LOGIN': {
       return {
         ...state,
         isLoading: true,
         error: null,
+        success: false,
       };
     }
+    case 'USER_FORGOT_PASSWORD_SUCCESS': 
     case 'USER_SIGN_UP_SUCCESS': {
-      if (action.data) {
-        return {
-          ...state,
-          isLoading: false,
-          error: null,
-        };
-      }
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        success: true,
+      };
       return initialState;
     }
     case 'USER_LOGIN_SUCCESS': {
-      console.log(action.data);
       if (action.data) {
         return {
           ...state,
@@ -62,6 +63,15 @@ export default function userReducer(state = initialState, action) {
           error: action.data,
         };
       }
+      return initialState;
+    }
+    case 'USER_RESET_MESSAGE': {
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        success: false,
+      };
       return initialState;
     }
     case 'USER_RESET': {

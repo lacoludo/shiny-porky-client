@@ -9,27 +9,27 @@ import { View, TouchableOpacity } from 'react-native';
 
 import  Login from './Login';
 import SignUp from './SignUp';
+import ForgotPassword from './ForgotPassword';
 
 class Authentification extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { signUp: false };
+    this.state = { page: 'login' };
   }
 
-  toggleAuthentication = () => {
-    this.setState({ signUp: !this.state.signUp });
+  toggleAuthentication = (page) => {
+    this.setState({ page });
   }
 
   render() {
-    const { signUp } = this.state;
+    const { page } = this.state;
+    console.log(page)
     return (
       <Container>
-        {!signUp ? (
-          <Login toggleAuthentication={this.toggleAuthentication} />
-        ) : (
-          <SignUp toggleAuthentication={this.toggleAuthentication} />
-        )}
+        {page === 'login' && <Login toggleAuthentication={this.toggleAuthentication} />}
+        {page === 'signUp' && <SignUp toggleAuthentication={this.toggleAuthentication} />}
+        {page === 'forgotPassword' && <ForgotPassword toggleAuthentication={this.toggleAuthentication} />}
       </Container>
     );
   }

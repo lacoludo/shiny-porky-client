@@ -140,21 +140,18 @@ export function login(formData, dispatch) {
 /**
   * Reset Password
   */
-export function resetPassword(formData) {
+export function resetPassword(formData, dispatch) {
   const { email } = formData;
+  dispatch({ type: 'USER_FORGOT_PASSWORD' });
+  if (!email) return dispatch({ type: 'USER_ERROR', data: 'Vous devez spécifier une adresse e-mail valide.' });
 
-  return dispatch => new Promise(async (resolve, reject) => {
-    // Validation checks
-    if (!email) return reject({ message: ErrorMessages.missingEmail });
-
-    await statusMessage(dispatch, 'loading', true);
-
-    // Go to Firebase
-    return Firebase.auth()
-      .sendPasswordResetEmail(email)
-      .then(() => statusMessage(dispatch, 'loading', false).then(resolve(dispatch({ type: 'USER_RESET' }))))
-      .catch(reject);
-  }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
+  return Firebase.auth()
+    .sendPasswordResetEmail(email)
+    .then(() => dispatch({ type: 'USER_FORGOT_PASSWORD_SUCCESS' }))
+    .catch((resp) => {
+      dispatch({ type: 'USER_ERROR',  data: 'Vous avez dépassé la limite de demande de réinitialisation de mots de passe.' });
+      setTimeout(() => dispatch({ type: 'USER_RESET_MESSAGE' }), 4000);
+    });
 }
 
 /**

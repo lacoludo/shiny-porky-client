@@ -84,7 +84,7 @@ class Login extends Component {
           <SpacerView size={20} />
           <ButtonView onPress={this.handleSubmit} label={'S\'inscrire'} isLoading={isLoading} />
         </Form>
-        <TouchableOpacity onPress={toggleAuthentication}>
+        <TouchableOpacity onPress={() => toggleAuthentication('login')}>
             <Text>Revenir à l'authentification</Text>
         </TouchableOpacity>
       </Content>
