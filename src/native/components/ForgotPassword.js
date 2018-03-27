@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Form, Item, Label, Input, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -47,37 +47,27 @@ class ForgotPassword extends React.Component {
 
   render() {
     const { loading, error } = this.props;
-
-    // Loading
-    if (loading) return <Loading />;
-
     return (
-      <Container>
-        <Content padder>
-          <Header
-            title="Reset your Password"
-            content="No stress, no stress. We'll get you back into your account."
-          />
-
-          {error && <Messages message={error} />}
-
-          <Form>
-            <Item stackedLabel>
-              <Label>Email</Label>
-              <Input
-                autoCapitalize="none"
-                value={this.state.email}
-                keyboardType="email-address"
-                onChangeText={v => this.handleChange('email', v)}
-              />
-            </Item>
-
-            <Spacer size={20} />
-
-            <Button block onPress={this.handleSubmit}><Text>Reset Password</Text></Button>
-          </Form>
-        </Content>
-      </Container>
+      <Content padder>
+        <Header
+          title="Reset your Password"
+          content="No stress, no stress. We'll get you back into your account."
+        />
+        {error && <Messages message={error} />}
+        <Form>
+          <Item stackedLabel>
+            <Label>Email</Label>
+            <Input
+              autoCapitalize="none"
+              value={this.state.email}
+              keyboardType="email-address"
+              onChangeText={v => this.handleChange('email', v)}
+            />
+          </Item>
+          <Spacer size={20} />
+          <Button block onPress={this.handleSubmit}><Text>Reset Password</Text></Button>
+        </Form>
+      </Content>
     );
   }
 }

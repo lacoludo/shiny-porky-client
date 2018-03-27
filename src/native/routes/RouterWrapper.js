@@ -19,9 +19,6 @@ import PorkyViewComponent from '../components/Porky';
 import NewPorkyContainer from '../../containers/Porkies/NewPorky';
 import NewPorkyComponent from '../components/Porkies/NewPorky';
 
-import ForgotPasswordContainer from '../../containers/ForgotPassword';
-import ForgotPasswordComponent from '../components/ForgotPassword';
-
 import UpdateProfileContainer from '../../containers/Profile/UpdateProfile';
 
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
@@ -106,13 +103,6 @@ class RouterWrapper extends Component {
               {...DefaultProps.navbarProps}
             >
               <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
-              <Scene
-                back
-                key="forgotPassword"
-                {...DefaultProps.navbarProps}
-                component={ForgotPasswordContainer}
-                Layout={ForgotPasswordComponent}
-              />
               <Scene
                 back
                 key="updateProfile"
