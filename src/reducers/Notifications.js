@@ -1,3 +1,5 @@
+import { Notifications } from 'expo';
+
 export const initialState = {
   isLoading: false,
   reminder: 'never',
@@ -8,6 +10,7 @@ export const initialState = {
   export default function appReducer(state = initialState, action) {
     switch (action.type) {
       case 'SET_REMINDER_NOTIF': {
+        Notifications.cancelAllScheduledNotificationsAsync();
         return {
           ...state,
           isLoading: true,

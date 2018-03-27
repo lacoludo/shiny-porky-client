@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { Container, Content, Text, Form, Item, Label } from 'native-base';
 import { TouchableOpacity, ActivityIndicator, Button, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Notifications, Permissions, Constants } from 'expo';
+import { Permissions } from 'expo';
 import { NOTIFICATIONS_GOLD_REMINDER } from './constants';
 
 import { setReminderNotif, getReminderNotif } from '../../../actions/member';
 import HeaderView from './../../../components/HeaderView';
 import ButtonView from './../../../components/ButtonView';
 import MessageView from './../../../components/MessageView';
+import { scheduledNotification } from './scheduledNotifications';
 
 class MyNotifications extends Component {
 
@@ -21,9 +22,6 @@ class MyNotifications extends Component {
 
   async componentDidMount() {
     let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    if (Constants.lisDevice && resut.status === 'granted') {
-     console.log('Notification permissions granted.')
-    }
     this.setState({ reminderValue: this.props.notifications });
   }
 
@@ -33,24 +31,12 @@ class MyNotifications extends Component {
 
   onSubmitForm = () => {
     this.props.setReminderNotif(this.state.reminderValue);
-  }
-
-  componentWillUnmount() {
-    console.log('je passe');
-    this.props.dispatch({ type: 'RESET_NOTIFICATIONS' });
+    scheduledNotification(this.state.reminderValue);
   }
 
   render() {
     const { reminderValue } = this.state;
     const { isLoading, success } = this.props;
-    /*let t = new Date();
-    t.setSeconds(t.getSeconds() + 10);
-    const schedulingOptions = {
-      time: t,
-      repeat: 'minute',
-    };
-    Notifications.scheduleLocalNotificationAsync(NOTIFICATIONS_GOLD_REMINDER, schedulingOptions);
-    */
     return (
       <Container>
         <Content padder>
