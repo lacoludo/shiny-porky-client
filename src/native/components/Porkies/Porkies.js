@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, TouchableOpacity, RefreshControl, Image, View } from 'react-native';
-import { Container, Content, Card, CardItem, Body, Text } from 'native-base';
-import PorkyCard from './PorkyCard';
+import { Container, Content } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import PorkyCard from './PorkyCard';
 import Loading from './../Loading';
 import Error from './../Error';
-import Header from './../Header';
 import Spacer from './../Spacer';
-import ButtonView from '../../../components/ButtonView';
 
 class PorkyListing extends Component {
   static propTypes = {
@@ -38,32 +35,37 @@ class PorkyListing extends Component {
       loading,
       reFetch,
       onFavoritePorky,
-      favouritePorkyId
+      favouritePorkyId,
     } = this.props;
     const { porkies } = this.state;
     if (loading) return <Loading />;
     if (error) return <Error content={ error } />;
     const keyExtractor = item => item.id;
-    const onPress = item => {( Actions.porky({ match: { params: { id: String(item.id) } } })); };
+    const onPress = (item) => {(
+      Actions.porky({
+        match: {
+          params: {
+            id: String(item.id)
+          }
+        }
+      })
+    )};
 
     return (
       <Container>
         <Content padder>
-          {porkies.map((item) => {
-            return <PorkyCard
-              key={item.id}
-              favouritePorkyId={favouritePorkyId}
-              onFavoritePorky={onFavoritePorky}
-              porky={item}
-              onPress={onPress}
-              reFetch={reFetch}
-            />
-          })}
-          <ButtonView
-            onPress={this.onPress}
-            label={"AJOUTER"}
-          />
-          <Spacer size={20} />
+          { porkies.map((item) => {
+            return (
+              <PorkyCard
+                key={ item.id }
+                favouritePorkyId={ favouritePorkyId }
+                onFavoritePorky={ onFavoritePorky }
+                porky={ item }
+                onPress={ onPress }
+                reFetch={ reFetch }
+              />
+            )})}
+          <Spacer size={ 20 } />
         </Content>
       </Container>
     );

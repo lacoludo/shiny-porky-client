@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Content, Card, CardItem, Body, Text, Button, Left, Right, Thumbnail, Icon } from 'native-base';
+import { Content, Card } from 'native-base';
 import { ActivityIndicator, View } from 'react-native';
 import NewPorkyCardItem from './NewPorkyCardItem';
 import PorkyCardItem from './PorkyCardItem';
-import Spacer from './../Spacer';
 
 class PorkyCard extends Component {
   static propTypes = {
@@ -20,8 +19,10 @@ class PorkyCard extends Component {
     const { porky, onPress, onFavoritePorky, isLoading, favouritePorkyId } = this.props;
     return (
       <Content padder>
-        <Card style={{ paddingHorizontal: 6 }}>
-          {isLoading ? (
+        <Card
+          style={{ paddingHorizontal: 6 }}
+        >
+          { isLoading ? (
             <ActivityIndicator
               size="large"
               color="#000"
@@ -29,12 +30,12 @@ class PorkyCard extends Component {
             />
           ) : (
             <View>
-              {porky.id !== 0 ? (
+              { porky.id !== 0 ? (
                 <PorkyCardItem
-                  favouritePorkyId={favouritePorkyId}
-                  onFavoritePorky={onFavoritePorky}
-                  porky={porky}
-                  onPress={onPress}
+                  favouritePorkyId={ favouritePorkyId }
+                  onFavoritePorky={ onFavoritePorky }
+                  porky={ porky }
+                  onPress={ onPress }
                 />
               ) : (
                 <NewPorkyCardItem />

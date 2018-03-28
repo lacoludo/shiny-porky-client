@@ -21,28 +21,49 @@ class PorkyCardItem extends Component {
   render() {
     const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
     return (
-      <TouchableOpacity onPress={() => onPress(porky)}>
+      <TouchableOpacity
+        onPress={ () => onPress(porky) }
+      >
         <CardItem >
           <Left>
-            <Thumbnail square size={200} source={PorkyIcon} />
+            <Thumbnail
+              square
+              size={ 200 }
+              source={ PorkyIcon }
+            />
             <Body>
-              <Text>{porky.name}</Text>
-              <Text note>Last update</Text>
+              <Text>
+                { porky.name }
+              </Text>
+              <Text note>
+                Last update
+              </Text>
             </Body>
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Text style={{fontSize: 128, textAlign: 'center', width: '100%'}}>{porky.gramme}</Text>
-          <Image source={{uri: 'Image URL'}} style={{height: 200, width: null, flex: 1}}/>
+          <Text
+            style={{ fontSize: 128, textAlign: 'center', width: '100%' }}>
+            { porky.gramme }
+          </Text>
+          <Image
+            source={{ uri: 'Image URL' }}
+            style={{ height: 200, width: null, flex: 1 }}
+          />
         </CardItem>
         <CardItem>
           <Left>
             <Icon name="ios-person" />
-            <Text>{`Appartient à ${porky.childName}`}</Text>
+            <Text>
+              { `Appartient à ${ porky.childName }` }
+            </Text>
           </Left>
-          {onFavoritePorky &&
+          { onFavoritePorky &&
             <Right>
-              <FavoritePorky isFavorite={porky.id === favouritePorkyId} favoritePorky={this.favoritePorky} />
+              <FavoritePorky
+                isFavorite={ porky.id === favouritePorkyId }
+                favoritePorky={ this.favoritePorky }
+              />
             </Right>
           }
         </CardItem>
