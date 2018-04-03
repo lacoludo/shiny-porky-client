@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Container, Content, List, ListItem, Body, Left, Text, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Header from './Header';
+import RajdhaniText from './../../components/RajdhaniText';
 
 const Profile = ({ member, logout }) => (
   <Container>

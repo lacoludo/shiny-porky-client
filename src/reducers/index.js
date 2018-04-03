@@ -1,4 +1,5 @@
 import status from './status';
+import fontLoaded from './FontLoaded';
 import member from './member';
 import recipes from './recipes';
 import porkies from './porkies';
@@ -19,6 +20,7 @@ const rehydrated = (state = false, action) => {
 
 export default {
   rehydrated,
+  fontLoaded,
   status,
   member,
   recipes,
