@@ -4,8 +4,9 @@ import { DangerZone } from 'expo';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { database } from 'firebase';
 
+import favorite from '../images/favorite-star.json';
+
 const { Lottie } = DangerZone;
-const ICON_ANIM = "https://rawgit.com/airbnb/lottie-react-native/master/example/js/animations/TwitterHeart.json";
 
 class FavoritePorky extends Component {
   static propTypes = {
@@ -41,9 +42,8 @@ class FavoritePorky extends Component {
   }
 
   loadAnimationAsync = async () => {
-    let result = await fetch(ICON_ANIM);
     this.setState(
-      { animation: JSON.parse(result._bodyText) },
+      { animation: JSON.parse(JSON.stringify(favorite)) },
       this._playAnimation
     );
   };
@@ -62,7 +62,6 @@ class FavoritePorky extends Component {
               style={{
                 width: 50,
                 height: 50,
-                transform: [{ scale: 4 }],
               }}
               resizeMode='cover'
               source={animation}
