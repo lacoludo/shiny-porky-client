@@ -28,7 +28,7 @@ class PorkyCardItem extends Component {
           <Left>
             <Thumbnail
               square
-              size={ 200 }
+              style={{ height: 40, width: 50 }}
               source={ PorkyIcon }
             />
             <Body>
@@ -36,7 +36,7 @@ class PorkyCardItem extends Component {
                 { porky.name }
               </Text>
               <Text note>
-                Last update
+                { 'Last update'.toUpperCase() }
               </Text>
             </Body>
           </Left>
@@ -53,9 +53,8 @@ class PorkyCardItem extends Component {
         </CardItem>
         <CardItem>
           <Left>
-            <Icon name="ios-person" />
             <Text>
-              { `Appartient à ${ porky.childName }` }
+              { `Appartient à ${ porky.childName }`.toUpperCase() }
             </Text>
           </Left>
           { onFavoritePorky &&

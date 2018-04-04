@@ -9,7 +9,7 @@ class NewPorkyCardItem extends Component {
   render = () => {
     return (
       <View
-        style={{ height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center' }}
+        style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}
       >
         <TouchableOpacity
           onPress={ Actions.newPorky }

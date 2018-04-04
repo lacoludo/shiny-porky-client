@@ -6,6 +6,7 @@ import PorkyCard from './PorkyCard';
 import Loading from './../Loading';
 import Error from './../Error';
 import Spacer from './../Spacer';
+import NewPorkyCardItem from './NewPorkyCardItem';
 
 class PorkyListing extends Component {
   static propTypes = {
@@ -65,6 +66,8 @@ class PorkyListing extends Component {
                 reFetch={ reFetch }
               />
             )})}
+          <Spacer size={ 20 } />
+          <NewPorkyCardItem />
           <Spacer size={ 20 } />
         </Content>
       </Container>
