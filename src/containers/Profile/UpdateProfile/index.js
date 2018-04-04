@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
+import { Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
 import { updateProfile } from '../../../actions/member';
 import { ActivityIndicator } from 'react-native';
 import FormUpdateProfile from './formUpdateProfile';
 import MessageView from './../../../components/MessageView';
 import HeaderView from './../../../components/HeaderView';
+import { Background, Container } from './../../../components/styles/StyledContainer';
 
 class UpdateProfile extends Component {
   PropTypes = {
@@ -33,14 +34,14 @@ class UpdateProfile extends Component {
   render() {
     const { member, isLoading, error, success } = this.props;
     return (
-      <Container>
-        <Content padder>
-          <HeaderView title="Mettre à jour mon profil" />
-          {error && <MessageView message={error} />}
-          {success && <MessageView message={success} type="success" />}
+      <Background>
+        <HeaderView title="Mettre à jour mon profil" />
+        {error && <MessageView message={error} />}
+        {success && <MessageView message={success} type="success" />}
+        <Container>
           <FormUpdateProfile member={member} onSubmitForm={this.onSubmitForm} isLoading={isLoading} />
-        </Content>
-      </Container>
+        </Container>
+      </Background>
     );
   }
 }

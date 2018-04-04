@@ -10,12 +10,13 @@ class RajdhaniText extends PureComponent {
     }
   }
 
-render(){
+  render(){
     return (
       this.Loadtext()
     );
   }
 }
+
 const mapStateToProps = state => ({
   fontLoaded: state.fontLoaded.fontLoaded,
 });

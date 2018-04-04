@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, Button } from 'native-base';
-import { View, ActivityIndicator } from 'react-native';
-
-const GOLD_COLOR = '#D4AF37';
+import { View, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { StyledTextButton } from './styles/StyledTextForm';
+import { StyledButtonView } from './styles/StyledButton';
 
 class ButtonView extends Component {
   static propTypes = {
@@ -17,17 +17,17 @@ class ButtonView extends Component {
   render () {
     const { label, onPress, isLoading } = this.props;
     return (      
-      <View style={{ flex: 1, alignItems: 'center', width: '100%', marginTop:10 }}>
+      <TouchableOpacity onPress={onPress}>
         {!isLoading ? (
-          <Button style={{ width: '100%', backgroundColor: GOLD_COLOR, borderRadius: 25 }} onPress={onPress}>
-            <Text style={{ width: '100%', fontSize: 20, textAlign: 'center' }}>{label}</Text>
-          </Button>
+          <StyledButtonView>
+            <StyledTextButton>{label.toUpperCase()}</StyledTextButton>
+          </StyledButtonView>
         ) : (
-          <Button block style={{ width: '100%', backgroundColor: GOLD_COLOR, borderRadius: 25 }}>
+          <StyledButtonView>
             <ActivityIndicator size="large" color="#fff" />
-          </Button>
+          </StyledButtonView>
         )}
-      </View>
+      </TouchableOpacity>
     );
   }
 }

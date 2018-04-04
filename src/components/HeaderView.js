@@ -4,12 +4,12 @@ import { View } from 'react-native';
 import { Text, H1 } from 'native-base';
 import Spacer from './Spacer';
 import RajdhaniText from './RajdhaniText';
-import RajdhaniBoldText from './RajdhaniBoldText';
+import { StyledTitleView } from './styles/StyledTitleView';
 
 const HeaderView = ({ title, content }) => (
   <View>
     <Spacer size={25} />
-    <RajdhaniBoldText style={{ fontSize: 30}}>{title.toUpperCase()}</RajdhaniBoldText>
+    <StyledTitleView>{title.toUpperCase()}</StyledTitleView>
     {!!content &&
       <View>
         <Spacer size={10} />
