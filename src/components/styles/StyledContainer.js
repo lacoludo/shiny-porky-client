@@ -8,7 +8,6 @@ export const Background = styled.View`
 `;
 
 export const Container = styled.View`
-    color: #777777;
     flex: 1;
     flex-direction: column;
     justify-content: space-between;

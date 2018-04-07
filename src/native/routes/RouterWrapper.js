@@ -8,10 +8,6 @@ import withAuthentication from './../withAuthentication';
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
 
-import RecipesContainer from '../../containers/Recipes';
-import RecipesComponent from '../components/Recipes';
-import RecipeViewComponent from '../components/Recipe';
-
 import PorkiesContainer from '../../containers/Porkies';
 import PorkiesComponent from '../components/Porkies/Porkies';
 import PorkyViewComponent from '../components/Porky';
