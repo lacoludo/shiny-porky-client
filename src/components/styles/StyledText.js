@@ -11,3 +11,9 @@ export const TextNumberProfile = styled.Text`
     color: #262626;
     font-family: montserrat-semibold;
 `;
+
+export const TextTitleCard = styled.Text`
+    font-size: 16;
+    color: #262626;
+    font-family: montserrat-semibold;
+`
