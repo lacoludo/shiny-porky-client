@@ -9,9 +9,8 @@ import ProfileResume from './ProfileResume';
 
 import { logout, getMemberData } from '../../actions/member';
 
-class Member extends Component {
+class ProfilePage extends Component {
   static propTypes = {
-    Layout: PropTypes.func.isRequired,
     memberLogout: PropTypes.func.isRequired,
     getMemberData: PropTypes.func.isRequired,
     member: PropTypes.shape({
@@ -99,4 +98,4 @@ const mapDispatchToProps = {
   getMemberData,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Member);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
