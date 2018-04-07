@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Text, H1 } from 'native-base';
 import Spacer from './Spacer';
+import RajdhaniText from './RajdhaniText';
+import { StyledTitleView } from './styles/StyledTitleView';
 
 const HeaderView = ({ title, content }) => (
   <View>
     <Spacer size={25} />
-    <H1>{title}</H1>
+    <StyledTitleView>{title.toUpperCase()}</StyledTitleView>
     {!!content &&
       <View>
         <Spacer size={10} />
-        <Text>{content}</Text>
+        <RajdhaniText>{content}</RajdhaniText>
       </View>
     }
     <Spacer size={25} />

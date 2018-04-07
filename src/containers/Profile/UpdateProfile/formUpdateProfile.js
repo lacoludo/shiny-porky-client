@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { TextInput, TouchableOpacity } from 'react-native';
 import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
 import ButtonView from './../../../components/ButtonView';
 import SpacerView from './../../../components/Spacer';
+import { StyledLabelForm, StyledLabelCheckbox, StyledTextInput } from './../../../components/styles/StyledTextForm';
 
 class UpdateProfileForm extends Component {
   static propTypes = {
@@ -38,72 +40,66 @@ class UpdateProfileForm extends Component {
 
   render () {
     const { member, isLoading } = this.props;
-    return ( 
-      <Form>
-        <Item stackedLabel>
-          <Label>Prénom</Label>
-          <Input
+    return (
+      <View>
+        <View style={{padding: 10}}>
+          <StyledLabelForm>Prénom</StyledLabelForm>
+          <StyledTextInput
+            placeholder="Votre prénom..."
             value={this.state.firstName}
             onChangeText={v => this.handleChange('firstName', v)}
           />
-        </Item>
-
-        <Item stackedLabel>
-          <Label>Nom</Label>
-          <Input
+        </View>
+        <View style={{padding: 10}}>
+          <StyledLabelForm>Nom</StyledLabelForm>
+          <StyledTextInput
+            placeholder="Votre nom..."
             value={this.state.lastName}
-            onChangeText={v => this.handleChange('lastName', v)}
+            onChangeText={v => this.handleChange('firstName', v)}
           />
-        </Item>
-
-        <ListItem>
-          <CheckBox
-            checked={this.state.changeEmail}
-            onPress={() => this.handleChange('changeEmail', !this.state.changeEmail)}
-          />
-          <Body>
-            <Text>Changer mon email</Text>
-          </Body>
-        </ListItem>
-
+        </View>
+        <TouchableOpacity style={{padding: 10}} onPress={() => this.handleChange('changeEmail', !this.state.changeEmail)}>
+          <StyledLabelCheckbox>Modifier mon email</StyledLabelCheckbox>
+        </TouchableOpacity>
         {this.state.changeEmail &&
-          <Item stackedLabel>
-            <Label>Email</Label>
-            <Input
+          <View style={{padding: 10}}>
+            <StyledLabelForm>Email</StyledLabelForm>
+            <StyledTextInput
               autoCapitalize="none"
-              value={this.state.email}
+              placeholder="Mon email..."
               keyboardType="email-address"
+              value={this.state.email}
               onChangeText={v => this.handleChange('email', v)}
             />
-          </Item>
-        }
-
-        <ListItem>
-          <CheckBox
-            checked={this.state.changePassword}
-            onPress={() => this.handleChange('changePassword', !this.state.changePassword)}
-          />
-          <Body>
-            <Text>Modifier mots de passe</Text>
-          </Body>
-        </ListItem>
-
-        {this.state.changePassword &&
-          <View padder>
-            <Item stackedLabel>
-              <Label>Mots de passe</Label>
-              <Input secureTextEntry onChangeText={v => this.handleChange('password', v)} />
-            </Item>
-
-            <Item stackedLabel last>
-              <Label>Répéter mots de passe</Label>
-              <Input secureTextEntry onChangeText={v => this.handleChange('password2', v)} />
-            </Item>
           </View>
         }
-        <SpacerView size={20} />
-        <ButtonView onPress={this.submitForm} label={'Mettre à jour'} isLoading={isLoading} />
-      </Form>
+        <TouchableOpacity style={{padding: 10}} onPress={() => this.handleChange('changePassword', !this.state.changePassword)}>
+          <StyledLabelCheckbox>Modifier mots de passe</StyledLabelCheckbox>
+        </TouchableOpacity>
+        {this.state.changePassword &&
+          <View>
+            <View style={{padding: 10}}>
+              <StyledLabelForm>Mots de passe</StyledLabelForm>
+              <StyledTextInput
+                secureTextEntry
+                placeholder="Votre mots de passe..."
+                value={this.state.password}
+                onChangeText={v => this.handleChange('password', v)}
+              />
+            </View>
+            <View style={{padding: 10}}>
+              <StyledLabelForm>Mots de passe</StyledLabelForm>
+              <StyledTextInput
+                secureTextEntry
+                placeholder="Répéter mots de passe..."
+                value={this.state.password2}
+                onChangeText={v => this.handleChange('password2', v)}
+              />
+            </View>
+          </View>
+        }
+        <ButtonView onPress={this.submitForm} label={'Enregistrer'} isLoading={isLoading} />
+      </View>
     )
   }
 }
