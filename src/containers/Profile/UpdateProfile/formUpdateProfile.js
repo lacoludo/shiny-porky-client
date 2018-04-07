@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TextInput } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
 import ButtonView from './../../../components/ButtonView';
 import SpacerView from './../../../components/Spacer';
@@ -58,13 +58,9 @@ class UpdateProfileForm extends Component {
             onChangeText={v => this.handleChange('firstName', v)}
           />
         </View>
-        <View style={{ flex: 1, flexDirection: 'row', padding: 10 }}>
-          <CheckBox
-            checked={this.state.changeEmail}
-            onPress={() => this.handleChange('changeEmail', !this.state.changeEmail)}
-          />
+        <TouchableOpacity style={{padding: 10}} onPress={() => this.handleChange('changeEmail', !this.state.changeEmail)}>
           <StyledLabelCheckbox>Modifier mon email</StyledLabelCheckbox>
-        </View>
+        </TouchableOpacity>
         {this.state.changeEmail &&
           <View style={{padding: 10}}>
             <StyledLabelForm>Email</StyledLabelForm>
@@ -77,13 +73,9 @@ class UpdateProfileForm extends Component {
             />
           </View>
         }
-        <View style={{ flex: 1, flexDirection: 'row', padding: 10 }}>
-          <CheckBox
-            checked={this.state.changePassword}
-            onPress={() => this.handleChange('changePassword', !this.state.changePassword)}
-          />
+        <TouchableOpacity style={{padding: 10}} onPress={() => this.handleChange('changePassword', !this.state.changePassword)}>
           <StyledLabelCheckbox>Modifier mots de passe</StyledLabelCheckbox>
-        </View>
+        </TouchableOpacity>
         {this.state.changePassword &&
           <View>
             <View style={{padding: 10}}>
@@ -106,7 +98,6 @@ class UpdateProfileForm extends Component {
             </View>
           </View>
         }
-        <SpacerView size={20} />
         <ButtonView onPress={this.submitForm} label={'Enregistrer'} isLoading={isLoading} />
       </View>
     )
