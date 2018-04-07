@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Text, Button } from 'native-base';
+import { Col, Row, Grid } from 'native-base';
 import { View, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
-import PorkyLogo from '../images/porky-icon.png';
-import { StyledTitleProfile } from '../components/styles/StyledTitleView';
-import { StyledText } from '../components/styles/StyledTextForm';
+import PorkyLogo from '../../images/porky-icon.png';
+import { StyledTitleProfile } from '../../components/styles/StyledTitleView';
+import { StyledText } from '../../components/styles/StyledTextForm';
 
 class ProfileHeader extends PureComponent {
   static propTypes = {
@@ -16,7 +16,7 @@ class ProfileHeader extends PureComponent {
     return (      
       <View style={{ width: '100%', height: 250, backgroundColor: '#D4AF37', alignItems: 'center', paddingTop: 20 }}>
         <Image
-          style={{ marginTop: 10, borderRadius: 25 }}
+          style={{ marginTop: 10 }}
           source={PorkyLogo}
         />
         <StyledTitleProfile>Bonjour, {member.firstName} {member.lastName}</StyledTitleProfile>
