@@ -21,7 +21,7 @@ export class GoldChart extends React.Component {
 
   render() {
     const { dataGold, isLoading } = this.props;
-    const lastIndex = dataGold.length - 1;
+    const currentGoldValue = Math.round(dataGold[dataGold.length - 1]);
    
     return (
       <Card style={{ paddingHorizontal: 6 }}>
@@ -30,16 +30,17 @@ export class GoldChart extends React.Component {
         ) : (
           <View>
             <CardItem style={{ justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#DDD' }}>
-              <TextTitleCard>{`Valeur de l'or actuelle: ${Math.round(dataGold[lastIndex])}€ / Kg`}</TextTitleCard>
+              <TextTitleCard>{`Valeur de l'or actuelle: ${currentGoldValue}€ / Kg`}</TextTitleCard>
             </CardItem>
             <CardItem style={{ flex: 1, flexDirection: 'row'}} cardBody>
               <AreaChart
-                style={{ height: 200, width: '100%', paddingHorizontal: 5, paddingVertical: 20 }}
+                style={{ height: 200, width: '100%', paddingHorizontal: 5, paddingBottom: 10 }}
                 data={dataGold}
-                svg={{ fill: "rgba(211, 175, 55, 0.8)" }}
+                svg={{ fill: "rgba(211, 175, 55, 0.5)", stroke: "rgba(211, 175, 55, 0.9)", strokeWidth: 3, strokeOpacity: 0.8 }}
                 curve={shape.curveNatural}
                 showGrid={false}
-                gridMin={Math.round(dataGold[lastIndex]) - 20}
+                gridMin={currentGoldValue - 20}
+                gridMax={currentGoldValue + 20}
               />
             </CardItem>
           </View>
