@@ -11,7 +11,7 @@ import { logout, getMemberData } from '../../actions/member';
 
 class ProfilePage extends Component {
   static propTypes = {
-    memberLogout: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
     getMemberData: PropTypes.func.isRequired,
     member: PropTypes.shape({
       isLoading: PropTypes.bool.isRequired,
@@ -22,7 +22,7 @@ class ProfilePage extends Component {
   componentDidMount = () => this.props.getMemberData();
 
   render = () => {
-    const { Layout, member, memberLogout } = this.props;
+    const { Layout, member, logout } = this.props;
     return (
       <Container>
         <Content>
@@ -75,14 +75,16 @@ class ProfilePage extends Component {
               </Right>
             </ListItem>
           </List>
-          <ListItem style={{ marginTop: 20 }} onPress={logout} icon>
-              <Left>
-                <Icon name="power" />
-              </Left>
-              <Body>
-                <Text>Se déconnecter</Text>
-              </Body>
-          </ListItem>
+          <List>
+            <ListItem style={{ marginTop: 20 }} onPress={logout} icon>
+                <Left>
+                  <Icon name="power" />
+                </Left>
+                <Body>
+                  <Text>Se déconnecter</Text>
+                </Body>
+            </ListItem>
+          </List>
         </Content>
       </Container>
     );
@@ -94,7 +96,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  memberLogout: logout,
+  logout: logout,
   getMemberData,
 };
 

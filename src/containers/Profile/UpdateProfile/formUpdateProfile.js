@@ -17,9 +17,9 @@ class UpdateProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: props.member.firstName || '',
-      lastName: props.member.lastName || '',
-      email: props.member.email || '',
+      firstName: props.member.firstName,
+      lastName: props.member.lastName,
+      email: props.member.email,
       password: '',
       password2: '',
       changeEmail: false,

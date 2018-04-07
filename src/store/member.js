@@ -5,4 +5,8 @@ export default {
   creditCard: null,
   favoritePorky: null,
   reminderNotif: 'never',
+  uid: null,
+  firstName: '',
+  lastName: '',
+  email: '',
 };

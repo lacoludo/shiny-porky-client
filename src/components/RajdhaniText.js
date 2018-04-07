@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react' ;
 class RajdhaniText extends PureComponent {
 
   Loadtext(){
-      return (<Text style={{ fontFamily: 'rajdhani', fontWeight: 800, fontSize: 30 }}>{this.props.children}</Text>) ;
+      return (<Text style={{ fontFamily: 'rajdhani', fontWeight: 'bold', fontSize: 30 }}>{this.props.children}</Text>) ;
   }
 
   render(){
