@@ -27,8 +27,7 @@ import NotificationsContainer from '../../containers/Profile/Notifications';
 
 import PurchasePageComponent from '../../containers/PurchasePage';
 
-import MemberContainer from '../../containers/Member';
-import ProfileComponent from '../components/Profile';
+import ProfileContainer from '../../containers/Profile';
 
 import HomeComponent from '../../containers/Home';
 
@@ -102,7 +101,7 @@ class RouterWrapper extends Component {
               icon={() => <Icon name="contact" {...DefaultProps.icons} />}
               {...DefaultProps.navbarProps}
             >
-              <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+              <Scene key="profileHome" component={ProfileContainer} />
               <Scene
                 back
                 key="updateProfile"

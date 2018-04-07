@@ -26,3 +26,9 @@ export const StyledTextButton = styled.Text`
   align-items: center;
   font-family: montserrat-semibold;
 `;
+
+export const StyledText = styled.Text`
+font-size: 16;
+color: #ffffff;
+font-family: montserrat-semibold;
+`;
