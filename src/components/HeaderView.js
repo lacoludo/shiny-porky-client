@@ -8,15 +8,10 @@ import { StyledTitleView } from './styles/StyledTitleView';
 
 const HeaderView = ({ title, content }) => (
   <View>
-    <Spacer size={25} />
     <StyledTitleView>{title.toUpperCase()}</StyledTitleView>
     {!!content &&
-      <View>
-        <Spacer size={10} />
         <RajdhaniText>{content}</RajdhaniText>
-      </View>
     }
-    <Spacer size={25} />
   </View>
 );
 

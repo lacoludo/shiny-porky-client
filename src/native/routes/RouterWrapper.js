@@ -10,7 +10,7 @@ import AppConfig from '../../constants/config';
 
 import PorkiesContainer from '../../containers/Porkies';
 import PorkiesComponent from '../components/Porkies/Porkies';
-import PorkyViewComponent from '../components/Porky';
+import PorkyContainer from '../../containers/Porkies/Porky';
 
 import NewPorkyContainer from '../../containers/Porkies/NewPorky';
 import NewPorkyComponent from '../components/Porkies/NewPorky';
@@ -87,7 +87,7 @@ class RouterWrapper extends Component {
                 key="porky"
                 {...DefaultProps.navbarProps}
                 component={PorkiesContainer}
-                Layout={PorkyViewComponent}
+                Layout={PorkyContainer}
               />
             </Stack>
             <Stack
