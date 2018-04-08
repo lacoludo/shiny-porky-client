@@ -39,7 +39,6 @@ class ForgotPassword extends Component {
   render() {
     const { error, success, toggleAuthentication, isLoading } = this.props;
 
-    console.log(success);
     return (
       <Content padder>
         <HeaderView title="Réinitialiser votre mots de passe" />

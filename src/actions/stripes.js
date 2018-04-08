@@ -2,6 +2,7 @@ var stripe = require('stripe-client')('pk_test_7lMCWcAX9YQNeP5uEuGTFGsv');
 import { Firebase, FirebaseRef } from '../lib/firebase';
 import ErrorMessages from '../constants/errors';
 import statusMessage from './status';
+import { addTransactionToPorky } from './porkies';
 
 /**
   * Update CreditCard
@@ -75,20 +76,21 @@ export function updateCreditCard(dispatch, creditCard) {
 /**
   * Update Profile
   */
-export function purchaseGold(token, customerStripe, gramme) {
+export function purchaseGold(token, porkyId, customerStripe, gramme, dispatch) {
   const amount = gramme * 100;
   const description = `${gramme}g of golds`;
 
-  return dispatch => new Promise((resolve) => {
-      return fetch(`https://api.stripe.com/v1/charges?source=${token}&customer=${customerStripe}&currency=eur&amount=${amount}&description=${description}`, {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
-        }
-      }).then(function(response) {
-      })
+  return fetch(`https://api.stripe.com/v1/charges?source=${token}&customer=${customerStripe}&currency=eur&amount=${amount}&description=${description}`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + 'rk_test_n9qMIQA8aHU83gJ22NDxR1RS'
+      }
+  })
+  .then((resp) => resp.json())
+  .then((data) => {
+    addTransactionToPorky(porkyId, data.id, gramme, dispatch);
   });
 }
 
@@ -139,7 +141,6 @@ export function getCustomerStripe(customerStripe, dispatch) {
       }
     })
     .then((response) => {
-      console.log(response);
       getCustomerStripe(customerStripe, dispatch);
     });
   }

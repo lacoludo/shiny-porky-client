@@ -29,7 +29,7 @@ class PurchasePage extends Component {
     const { token } = this.props.creditCard;
     const { customerStripe } = this.props.member;
     const { grammeAdded } = this.state;
-    this.props.purchaseGold(token, customerStripe, grammeAdded);
+    this.props.purchaseGold(token, this.props.favouritePorky, customerStripe, grammeAdded);
   }
 
   addGold = () => {
@@ -101,8 +101,10 @@ const mapStateToProps = state => ({
   favouritePorky: state.favouritePorky || null,
 });
 
-const mapDispatchToProps = {
-  purchaseGold: purchaseGold
+function mapDispatchToProps(dispatch) {
+  return {
+    purchaseGold: (token, porkyId, customerStripe, grammeAdded) => purchaseGold(token, porkyId, customerStripe, grammeAdded, dispatch),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PurchasePage);

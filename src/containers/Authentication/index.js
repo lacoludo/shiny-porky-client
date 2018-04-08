@@ -24,7 +24,7 @@ class Authentification extends Component {
 
   render() {
     const { page } = this.state;
-    console.log(page)
+
     return (
       <Container>
         {page === 'login' && <Login toggleAuthentication={this.toggleAuthentication} />}

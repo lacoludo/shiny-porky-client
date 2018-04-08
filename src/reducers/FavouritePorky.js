@@ -17,7 +17,7 @@ export const initialState = {
       case 'FAVOURITE_PORKY_SUCCESS': {
         return {
           loading: false,
-          id: action.data.id,
+          id: action.id,
           name: action.data.name,
           childName: action.data.childName,
           gramme: action.data.gramme,
