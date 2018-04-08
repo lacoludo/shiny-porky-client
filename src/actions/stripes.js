@@ -90,7 +90,7 @@ export function purchaseGold(token, porkyId, customerStripe, gramme, dispatch) {
   })
   .then((resp) => resp.json())
   .then((data) => {
-    addTransactionToPorky(porkyId, data.id, dispatch);
+    addTransactionToPorky(porkyId, data.id, gramme, dispatch);
   });
 }
 

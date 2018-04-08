@@ -99,10 +99,15 @@ export function getFavouritePorky(porkyId, dispatch) {
 /**
   * Get this User's Favourite Porky
   */
-export function addTransactionToPorky(porky, transactionId, dispatch) {
+export function addTransactionToPorky(porky, transactionId, gramme, dispatch) {
   Firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      FirebaseRef.child(`porkies/${user.uid}/${porky.id}/transactions`).push({ transactionId, datetime: Firebase.database.ServerValue.TIMESTAMP });
+      FirebaseRef.child(`porkies/${user.uid}/${porky.id}/transactions`).push({
+        transactionId,
+        datetime: Firebase.database.ServerValue.TIMESTAMP,
+        status: 'In progress',
+        gramme,
+      });
     }
   });
 }
