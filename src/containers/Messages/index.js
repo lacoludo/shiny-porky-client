@@ -4,17 +4,13 @@ import { connect } from 'react-redux';
 import { Container, Content, H3, Card, CardItem, Body, Text, List, Right } from 'native-base';
 import { ActivityIndicator, View, TouchableOpacity } from 'react-native';
 import { updateMessage } from '../../actions/member';
+import MessageCard from './MessageCard';
 
 class Messages extends Component {
   static propType = {
     messages: PropTypes.array.isRequired,
     isLoading: PropTypes.bool.isRequired,
     updateMessage: PropTypes.func.isRequired,
-  }
-
-  dateFormat = (timestamp) => {
-    const date = new Date(timestamp);
-    return `Le ${date.toLocaleString('fr-FR')}`;
   }
 
   onPress = (notificationId) => {
@@ -34,15 +30,8 @@ class Messages extends Component {
             <List>
               {messages.map((message) => {
                 return (
-                  <TouchableOpacity onPress={() => this.onPress(message.id)}>  
-                    <Card>
-                      <CardItem>
-                        <Body>
-                          <Text>{message.content}</Text>
-                          <Text note>{this.dateFormat(message.date)}</Text>
-                        </Body>
-                      </CardItem>
-                    </Card>
+                  <TouchableOpacity key={message.id} onPress={() => this.onPress(message.id)}>  
+                    <MessageCard message={message} />
                   </TouchableOpacity>
                 )
               })}
