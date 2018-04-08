@@ -8,6 +8,7 @@ import ProfileHeader from './ProfileHeader';
 import ProfileResume from './ProfileResume';
 
 import { logout, getMemberData } from '../../actions/member';
+import { FontAwesomeList } from '../../components/styles/StyledText';
 
 class ProfilePage extends Component {
   static propTypes = {
@@ -33,53 +34,53 @@ class ProfilePage extends Component {
           <List>
             <ListItem onPress={Actions.updateProfile} icon>
               <Left>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
                 <Text>Modifier mon profil</Text>
               </Body>
               <Right>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Right>
             </ListItem>
             <ListItem onPress={Actions.creditCardUser} icon>
               <Left>
-                <Text style={{ fontFamily: 'fa', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
                 <Text>Informations bancaires</Text>
               </Body>
               <Right>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Right>
             </ListItem>
             <ListItem onPress={Actions.shippingAddress} icon>
               <Left>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
                 <Text>Adresse de livraison</Text>
               </Body>
               <Right>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Right>
             </ListItem>
             <ListItem onPress={Actions.notifications} icon>
               <Left>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
                 <Text>Gestion des notifications</Text>
               </Body>
               <Right>
-                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                <FontAwesomeList></FontAwesomeList>
               </Right>
             </ListItem>
           </List>
           <List>
             <ListItem style={{ marginTop: 20 }} onPress={logout} icon>
                 <Left>
-                  <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
+                  <FontAwesomeList></FontAwesomeList>
                 </Left>
                 <Body>
                   <Text>Se déconnecter</Text>

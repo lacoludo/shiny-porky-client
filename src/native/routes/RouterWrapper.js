@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Scene, Tabs, Router, Stack } from 'react-native-router-flux';
-import { Icon, Text } from 'native-base';
 import withAuthentication from './../withAuthentication';
 
 import DefaultProps from '../constants/navigation';
@@ -28,6 +27,7 @@ import ProfileContainer from '../../containers/Profile';
 import HomeComponent from '../../containers/Home';
 
 import TITLE_SHINY_PORKY from '../../images/app-name.png';
+import { FontAwesome } from '../../components/styles/StyledText';
 
 class RouterWrapper extends Component {
   render() {
@@ -46,8 +46,8 @@ class RouterWrapper extends Component {
             <Stack
               key="home"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="home" component={HomeComponent} />
@@ -63,8 +63,8 @@ class RouterWrapper extends Component {
             <Stack
               key="porkies"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene
@@ -92,8 +92,8 @@ class RouterWrapper extends Component {
             <Stack
               key="messages"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="md-mail" component={MessagesContainer} />
@@ -101,8 +101,8 @@ class RouterWrapper extends Component {
             <Stack
               key="profile"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="profileHome" component={ProfileContainer} />
