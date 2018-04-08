@@ -82,6 +82,7 @@ function getUserData(dispatch) {
   return ref.on('value', (snapshot) => {
     const userData = snapshot.val() || [];
     getFavouritePorky(userData.favoritePorky, dispatch);
+    getUserMessages(dispatch);
     return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
   });
 }
@@ -231,4 +232,45 @@ export function logout() {
     dispatch({type: 'SET_REMINDER_NOTIF_SUCCESS'});
     getUserData(dispatch);
     setTimeout(() => dispatch({type: 'RESET_NOTIFICATIONS'}), 4000);
+}
+
+/**
+  * Get this User's Messages
+  */
+function getUserMessages(dispatch) {
+  const UID = (
+    FirebaseRef
+    && Firebase
+    && Firebase.auth()
+    && Firebase.auth().currentUser
+    && Firebase.auth().currentUser.uid
+  ) ? Firebase.auth().currentUser.uid : null;
+  
+  if (!UID) return false;
+
+  dispatch({ type: 'LOAD_MESSAGES' })
+  const ref = FirebaseRef.child(`users/${UID}/notifications`);
+  return ref.orderByChild("hasSeen").equalTo(false).on('value', (snapshot) => {
+    const messages = snapshot.val() || [];
+    return dispatch({ type: 'LOAD_MESSAGES_SUCCESS', data: messages });
+  });
+}
+
+/**
+  * Update a user message
+  */
+export function updateMessage(notificationId, dispatch) {
+  const UID = (
+    FirebaseRef
+    && Firebase
+    && Firebase.auth()
+    && Firebase.auth().currentUser
+    && Firebase.auth().currentUser.uid
+  ) ? Firebase.auth().currentUser.uid : null;
+  
+  if (!UID) return false;
+
+  FirebaseRef.child(`users/${UID}/notifications/${notificationId}`).update({
+    hasSeen: true,
+  });
 }
