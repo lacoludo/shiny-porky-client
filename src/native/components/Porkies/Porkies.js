@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Content } from 'native-base';
+import { View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import PorkyCard from './PorkyCard';
 import Loading from './../Loading';
 import Error from './../Error';
 import Spacer from './../Spacer';
-import NewPorkyCardItem from './NewPorkyCardItem';
 import HeaderView from '../../../components/HeaderView';
+import ButtonView from '../../../components/ButtonView';
 
 class PorkyListing extends Component {
   static propTypes = {
@@ -54,9 +55,8 @@ class PorkyListing extends Component {
               />
             )
           })}
-          <Spacer size={20} />
-          <NewPorkyCardItem />
-          <Spacer size={20} />
+          <ButtonView onPress={Actions.newPorky} label={'Nouveau Porky'}/>
+          <View style={{ height: 30 }} />
         </Content>
       </Container>
     );

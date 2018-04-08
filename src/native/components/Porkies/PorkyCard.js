@@ -33,7 +33,7 @@ class PorkyCard extends Component {
               porky={porky}
               onPress={onPress}
             />
-            </View>
+          </View>
         )}
       </Card>
     );
