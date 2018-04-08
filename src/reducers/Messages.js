@@ -1,6 +1,7 @@
 export const initialState = {
     isLoading: false,
     messages: [],
+    count: 0,
   };
     
 export default function appReducer(state = initialState, action) {
@@ -28,6 +29,7 @@ export default function appReducer(state = initialState, action) {
     return {
       isLoading: false,
       messages: messages,
+      count: messages.length,
     };
   }
   default:

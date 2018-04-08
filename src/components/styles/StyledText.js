@@ -13,7 +13,7 @@ export const TextNumberProfile = styled.Text`
 `;
 
 export const TextTitleCard = styled.Text`
-    font-size: 16;
+    font-size: 14;
     color: #262626;
     font-family: montserrat-semibold;
 `

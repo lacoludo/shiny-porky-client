@@ -13,6 +13,7 @@ export class GoldChart extends React.Component {
     getDataGold: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     dataGold: PropTypes.array.isRequired,
+    currentGoldValue: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
@@ -20,9 +21,8 @@ export class GoldChart extends React.Component {
   }
 
   render() {
-    const { dataGold, isLoading } = this.props;
-    const currentGoldValue = Math.round(dataGold[dataGold.length - 1]);
-   
+    const { dataGold, isLoading, currentGoldValue } = this.props;
+    const currentOzDataGold = dataGold[dataGold.length - 1];
     return (
       <Card style={{ paddingHorizontal: 6 }}>
         {isLoading ? (
@@ -30,7 +30,7 @@ export class GoldChart extends React.Component {
         ) : (
           <View>
             <CardItem style={{ justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#DDD' }}>
-              <TextTitleCard>{`Valeur de l'or actuelle: ${currentGoldValue}€ / Kg`}</TextTitleCard>
+              <TextTitleCard>{`Valeur de l'or : ${currentGoldValue}€ pour 5 Grammes`}</TextTitleCard>
             </CardItem>
             <CardItem style={{ flex: 1, flexDirection: 'row'}} cardBody>
               <AreaChart
@@ -39,8 +39,8 @@ export class GoldChart extends React.Component {
                 svg={{ fill: "rgba(211, 175, 55, 0.5)", stroke: "rgba(211, 175, 55, 0.9)", strokeWidth: 3, strokeOpacity: 0.8 }}
                 curve={shape.curveNatural}
                 showGrid={false}
-                gridMin={currentGoldValue - 20}
-                gridMax={currentGoldValue + 20}
+                gridMin={currentOzDataGold - 20}
+                gridMax={currentOzDataGold + 20}
               />
             </CardItem>
           </View>
@@ -53,6 +53,7 @@ export class GoldChart extends React.Component {
 const mapStateToProps = state => ({
   dataGold: state.goldChart.dataGold,
   isLoading: state.goldChart.isLoading,
+  currentGoldValue: state.goldChart.currentGoldValue,
 });
 
 const mapDispatchToProps = (dispatch) => {
