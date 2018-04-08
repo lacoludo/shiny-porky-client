@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CardItem, Body, Text, Left, Right, Thumbnail, Icon } from 'native-base';
-import { Image, TouchableOpacity } from 'react-native';
+import { CardItem, Body, Text, Left, Right, Thumbnail } from 'native-base';
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { TextCard } from '../../../components/styles/StyledText';
 import FavoritePorky from '../../../components/FavoritePorky';
 import PorkyIcon from './../../../images/porky-icon.png';
+
+const styles = StyleSheet.create({
+  Shadow: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#ebebeb",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  }
+});
 
 class PorkyCardItem extends Component {
   static propTypes = {
@@ -22,23 +34,22 @@ class PorkyCardItem extends Component {
     const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
     return (
       <TouchableOpacity onPress={() => onPress(porky)}>
-        <CardItem >
+        <CardItem style={styles.Shadow}>
           <Left>
             <Thumbnail square size={200} source={PorkyIcon} />
             <Body>
-              <Text>{porky.name}</Text>
-              <Text note>Last update</Text>
+              <TextCard style={{ fontSize: 20 }}>{porky.name.toUpperCase()}</TextCard>
+              <TextCard style={{ fontSize: 10 }} note>{'Last update'.toUpperCase()}</TextCard>
             </Body>
           </Left>
         </CardItem>
-        <CardItem cardBody>
-          <Text style={{fontSize: 128, textAlign: 'center', width: '100%'}}>{porky.gramme}</Text>
-          <Image source={{uri: 'Image URL'}} style={{height: 200, width: null, flex: 1}}/>
+        <CardItem cardBody style={styles.Shadow}>
+          <TextCard style={{ fontSize: 128, textAlign: 'center', width: '100%' }}>{porky.gramme}</TextCard>
+          <Image source={{ uri: 'Image URL' }} style={{ height: 200, width: null, flex: 1 }}/>
         </CardItem>
-        <CardItem>
+        <CardItem style={styles.Shadow}>
           <Left>
-            <Icon name="ios-person" />
-            <Text>{`Appartient à ${porky.childName}`}</Text>
+            <TextCard style={{ fontSize: 15 }}>{`Appartient à ${porky.childName}`.toUpperCase()}</TextCard>
           </Left>
           {onFavoritePorky &&
             <Right>

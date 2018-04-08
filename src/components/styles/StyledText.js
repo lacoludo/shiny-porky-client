@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const TextResumeProfile = styled.Text`
     font-size: 12;
@@ -16,4 +16,10 @@ export const TextTitleCard = styled.Text`
     font-size: 14;
     color: #262626;
     font-family: montserrat-semibold;
-`
+`;
+
+export const TextCard = styled.Text`
+    font-family: rajdhani-semibold;
+    font-weight: bold;
+    color: #969998;
+`;

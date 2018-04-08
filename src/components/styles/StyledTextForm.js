@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledLabelForm = styled.Text`
   font-family: montserrat-semibold;
@@ -28,7 +28,7 @@ export const StyledTextButton = styled.Text`
 `;
 
 export const StyledText = styled.Text`
-font-size: 16;
-color: #ffffff;
-font-family: montserrat-semibold;
+  font-size: 16;
+  color: #ffffff;
+  font-family: montserrat-semibold;
 `;
