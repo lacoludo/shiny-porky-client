@@ -6,17 +6,6 @@ import { TextCard } from '../../../components/styles/StyledText';
 import FavoritePorky from '../../../components/FavoritePorky';
 import PorkyIcon from './../../../images/porky-icon.png';
 
-const styles = StyleSheet.create({
-  Shadow: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#ebebeb",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-  }
-});
-
 class PorkyCardItem extends Component {
   static propTypes = {
     porky: PropTypes.shape().isRequired,
@@ -36,16 +25,15 @@ class PorkyCardItem extends Component {
       <TouchableOpacity onPress={() => onPress(porky)}>
         <CardItem style={styles.Shadow}>
           <Left>
-            <Thumbnail square size={200} source={PorkyIcon} />
+            <Thumbnail square size={150} source={PorkyIcon} />
             <Body>
-              <TextCard style={{ fontSize: 20 }}>{porky.name.toUpperCase()}</TextCard>
-              <TextCard style={{ fontSize: 10 }} note>{'Last update'.toUpperCase()}</TextCard>
+              <TextCard style={{ fontSize: 30 }}>{porky.name.toUpperCase()}</TextCard>
+              <TextCard style={{ fontSize: 15 }} note>{'Last update'.toUpperCase()}</TextCard>
             </Body>
           </Left>
         </CardItem>
         <CardItem cardBody style={styles.Shadow}>
           <TextCard style={{ fontSize: 128, textAlign: 'center', width: '100%' }}>{porky.gramme}</TextCard>
-          <Image source={{ uri: 'Image URL' }} style={{ height: 200, width: null, flex: 1 }}/>
         </CardItem>
         <CardItem style={styles.Shadow}>
           <Left>
@@ -61,5 +49,14 @@ class PorkyCardItem extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  Shadow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  }
+});
 
 export default PorkyCardItem;

@@ -56,7 +56,7 @@ class FavoritePorky extends Component {
             <Lottie
               speed={1.5}
               ref={(animation) => { this.animation = animation; }}
-              style={{ width: 50, height: 50 }}
+              style={{ width: 40, height: 40 }}
               resizeMode="cover"
               source={animation}
             />

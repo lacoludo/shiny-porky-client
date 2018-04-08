@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { TouchableOpacity, Image } from 'react-native';
-
 import AddIcon from './add-square-button.png';
 
-class NewPorkyCardItem extends Component {
+class NewPorkyCardItem extends PureComponent {
+
   render() {
     return (
       <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>

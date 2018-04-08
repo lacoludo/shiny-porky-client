@@ -7,6 +7,7 @@ import Loading from './../Loading';
 import Error from './../Error';
 import Spacer from './../Spacer';
 import NewPorkyCardItem from './NewPorkyCardItem';
+import HeaderView from '../../../components/HeaderView';
 
 class PorkyListing extends Component {
   static propTypes = {
@@ -40,6 +41,7 @@ class PorkyListing extends Component {
     return (
       <Container>
         <Content padder>
+          <HeaderView title="Mes porkies" />
           {porkies.map((item) => {
             return (
               <PorkyCard
