@@ -7,6 +7,7 @@ import favouritePorky from './FavouritePorky';
 import goldChart from './GoldChart';
 import shippingAddress from './shippingAddress';
 import notifications from './Notifications';
+import messages from './Messages';
 
 const rehydrated = (state = false, action) => {
   switch (action.type) {
@@ -28,4 +29,5 @@ export default {
   goldChart,
   shippingAddress,
   notifications,
+  messages,
 };

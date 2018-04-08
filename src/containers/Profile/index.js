@@ -23,6 +23,7 @@ class ProfilePage extends Component {
 
   render = () => {
     const { Layout, member, logout } = this.props;
+
     return (
       <Container>
         <Content>

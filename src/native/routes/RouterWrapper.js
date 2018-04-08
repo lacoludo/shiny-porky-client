@@ -20,6 +20,7 @@ import UpdateProfileContainer from '../../containers/Profile/UpdateProfile';
 import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
 import ShippingAddressContainer from '../../containers/Profile/ShippingAddress';
 import NotificationsContainer from '../../containers/Profile/Notifications';
+import MessagesContainer from '../../containers/Messages';
 
 import PurchasePageComponent from '../../containers/PurchasePage';
 
@@ -89,7 +90,15 @@ class RouterWrapper extends Component {
                 Layout={PorkyViewComponent}
               />
             </Stack>
-
+            <Stack
+              key="messages"
+              navigationBarTitleImage={TITLE_SHINY_PORKY}
+              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
+              icon={() => <Icon name="message" {...DefaultProps.icons} />}
+              {...DefaultProps.navbarProps}
+            >
+              <Scene key="md-mail" component={MessagesContainer} />
+            </Stack>
             <Stack
               key="profile"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
