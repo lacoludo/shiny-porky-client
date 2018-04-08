@@ -18,7 +18,6 @@ class PorkyCard extends Component {
 
   render = () => {
     const { porky, onPress, onFavoritePorky, isLoading, favouritePorkyId } = this.props;
-    console.log(porky);
     return (
       <Content padder>
         <Card style={{ paddingHorizontal: 6 }}>

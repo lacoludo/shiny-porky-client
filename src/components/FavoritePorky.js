@@ -56,7 +56,7 @@ class FavoritePorky extends Component {
           <TouchableOpacity onPress={ this.playAnimation }>
             <Lottie
               speed={1.5}
-              ref={ animation => {
+              ref={animation => {
                 this.animation = animation;
               }}
               style={{

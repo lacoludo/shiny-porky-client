@@ -14,7 +14,7 @@ class NewPorkyCardItem extends Component {
       <CardItem cardBody style={{height: 200}}>
         <TouchableOpacity onPress={Actions.newPorky} style={{flex: 1}}>
           <Image
-            style={{ width: '100%', height: '100%'}}
+            style={{width: '100%', height: '100%'}}
             source={AddIcon}
           />
         </TouchableOpacity>
