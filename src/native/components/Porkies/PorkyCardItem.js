@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CardItem, Body, Text, Left, Right, Thumbnail, Icon } from 'native-base';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+// import { BoxShadow } from '../../../components/styles/StyledBoxShadow';
+import { TextCard } from '../../../components/styles/StyledText';
 import FavoritePorky from '../../../components/FavoritePorky';
 import PorkyIcon from './../../../images/porky-icon.png';
+
+const styles = StyleSheet.create({
+  Gray: {
+    color: '#969998',
+  },
+  Shadow: {
+    shadowOpacity: 0.5,
+    shadowRadius: 20,
+    shadowColor: 'gray',
+    shadowOffset: {width: 100, height: 1}
+  }
+});
 
 class PorkyCardItem extends Component {
   static propTypes = {
@@ -21,48 +35,27 @@ class PorkyCardItem extends Component {
   render() {
     const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
     return (
-      <TouchableOpacity
-        onPress={ () => onPress(porky) }
-      >
-        <CardItem >
+      <TouchableOpacity onPress={() => onPress(porky)}>
+        <CardItem>
           <Left>
-            <Thumbnail
-              square
-              style={{ height: 40, width: 50 }}
-              source={ PorkyIcon }
-            />
+            <Thumbnail square size={200} source={PorkyIcon} />
             <Body>
-              <Text>
-                { porky.name }
-              </Text>
-              <Text note>
-                { 'Last update'.toUpperCase() }
-              </Text>
+              <TextCard style={{fontSize: 20}}>{porky.name.toUpperCase()}</TextCard>
+              <Text style={{fontSize: 10, fontWeight: 'bold'}} note>{'Last update'.toUpperCase()}</Text>
             </Body>
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Text
-            style={{ fontSize: 128, textAlign: 'center', width: '100%' }}>
-            { porky.gramme }
-          </Text>
-          <Image
-            source={{ uri: 'Image URL' }}
-            style={{ height: 200, width: null, flex: 1 }}
-          />
+          <Text style={{fontSize: 128, fontWeight: 'bold', textAlign: 'center', width: '100%'}}>{porky.gramme}</Text>
+          <Image source={{uri: 'Image URL'}} style={{height: 200, width: null, flex: 1}}/>
         </CardItem>
         <CardItem>
           <Left>
-            <Text>
-              { `Appartient à ${ porky.childName }`.toUpperCase() }
-            </Text>
+            <Text style={{fontSize: 15, fontWeight: 'bold'}}>{`Appartient à ${porky.childName}`.toUpperCase()}</Text>
           </Left>
-          { onFavoritePorky &&
+          {onFavoritePorky &&
             <Right>
-              <FavoritePorky
-                isFavorite={ porky.id === favouritePorkyId }
-                favoritePorky={ this.favoritePorky }
-              />
+              <FavoritePorky isFavorite={porky.id === favouritePorkyId} favoritePorky={this.favoritePorky} />
             </Right>
           }
         </CardItem>

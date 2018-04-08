@@ -23,13 +23,6 @@ class PorkyListing extends Component {
     reFetch: null
   };
 
-  constructor(props) {
-    super(props);
-    const { porkies } = props;
-    porkies.push({ id:0 });
-    this.state = { porkies };
-  }
-
   render() {
     const {
       error,
@@ -37,20 +30,12 @@ class PorkyListing extends Component {
       reFetch,
       onFavoritePorky,
       favouritePorkyId,
+      porkies,
     } = this.props;
-    const { porkies } = this.state;
     if (loading) return <Loading />;
     if (error) return <Error content={ error } />;
     const keyExtractor = item => item.id;
-    const onPress = (item) => {(
-      Actions.porky({
-        match: {
-          params: {
-            id: String(item.id)
-          }
-        }
-      })
-    )};
+    const onPress = (item) => {( Actions.porky({ match: { params: { id: String(item.id) } } }) )};
 
     return (
       <Container>
