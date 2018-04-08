@@ -42,6 +42,7 @@ const mapStateToProps = state => ({
     favouritePorky: state.favouritePorky || null,
     member: state.member || {},
 });
+
 function mapDispatchToProps(dispatch) {
   return {
     getFavouritePorky: (porkyId, dispatch) => getFavouritePorky(porkyId, dispatch),

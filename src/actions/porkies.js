@@ -21,7 +21,7 @@ export function createPorky(formData) {
     if (!childName) return reject({ message: ErrorMessages.missingChildName });
     const gramme = 0;
     // Go to Firebase
-    FirebaseRef.child(`porkies/${UID}`).push({ name, childName, gramme })
+    FirebaseRef.child(`porkies/${UID}`).push({ name, childName, gramme });
     resolve();
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });
 }
@@ -89,8 +89,20 @@ export function getFavouritePorky(porkyId, dispatch) {
         return dispatch({
           type: 'FAVOURITE_PORKY_SUCCESS',
           data: porky,
+          id: porkyId,
         });
       });
+    }
+  });
+}
+
+/**
+  * Get this User's Favourite Porky
+  */
+export function addTransactionToPorky(porky, transactionId, dispatch) {
+  Firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      FirebaseRef.child(`porkies/${user.uid}/${porky.id}/transactions`).push({ transactionId, datetime: Firebase.database.ServerValue.TIMESTAMP });
     }
   });
 }
