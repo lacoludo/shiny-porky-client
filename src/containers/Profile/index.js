@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
-import { Container, Content, List, ListItem, Body, Left, Right, Text, Icon } from 'native-base';
+import { Container, Content, List, ListItem, Body, Left, Right, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import ProfileHeader from './ProfileHeader';
 import ProfileResume from './ProfileResume';
@@ -33,53 +33,53 @@ class ProfilePage extends Component {
           <List>
             <ListItem onPress={Actions.updateProfile} icon>
               <Left>
-                <Icon name="person-add" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Left>
               <Body>
                 <Text>Modifier mon profil</Text>
               </Body>
               <Right>
-                <Icon name="arrow-forward" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Right>
             </ListItem>
             <ListItem onPress={Actions.creditCardUser} icon>
               <Left>
-                <Icon name="card" />
+                <Text style={{ fontFamily: 'fa', fontSize: 20 }}></Text>
               </Left>
               <Body>
                 <Text>Informations bancaires</Text>
               </Body>
               <Right>
-                <Icon name="arrow-forward" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Right>
             </ListItem>
             <ListItem onPress={Actions.shippingAddress} icon>
               <Left>
-                <Icon name="plane" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Left>
               <Body>
                 <Text>Adresse de livraison</Text>
               </Body>
               <Right>
-                <Icon name="arrow-forward" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Right>
             </ListItem>
             <ListItem onPress={Actions.notifications} icon>
               <Left>
-                <Icon name="letter" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Left>
               <Body>
                 <Text>Gestion des notifications</Text>
               </Body>
               <Right>
-                <Icon name="arrow-forward" />
+                <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
               </Right>
             </ListItem>
           </List>
           <List>
             <ListItem style={{ marginTop: 20 }} onPress={logout} icon>
                 <Left>
-                  <Icon name="power" />
+                  <Text style={{ fontFamily: 'fa-solid', fontSize: 20 }}></Text>
                 </Left>
                 <Body>
                   <Text>Se déconnecter</Text>

@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
-import { compose } from "redux";
+import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Scene, Tabs, Router, Stack } from 'react-native-router-flux';
-import { Icon } from 'native-base';
+import { Icon, Text } from 'native-base';
 import withAuthentication from './../withAuthentication';
 
 import DefaultProps from '../constants/navigation';
-import AppConfig from '../../constants/config';
 
 import PorkiesContainer from '../../containers/Porkies';
 import PorkiesComponent from '../components/Porkies/Porkies';
@@ -48,7 +47,7 @@ class RouterWrapper extends Component {
               key="home"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
               navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="home" {...DefaultProps.icons} />}
+              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="home" component={HomeComponent} />
@@ -65,7 +64,7 @@ class RouterWrapper extends Component {
               key="porkies"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
               navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="apps" {...DefaultProps.icons} />}
+              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
               {...DefaultProps.navbarProps}
             >
               <Scene
@@ -94,7 +93,7 @@ class RouterWrapper extends Component {
               key="messages"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
               navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="message" {...DefaultProps.icons} />}
+              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="md-mail" component={MessagesContainer} />
@@ -103,7 +102,7 @@ class RouterWrapper extends Component {
               key="profile"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
               navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+              icon={() => <Text style={{ fontFamily: 'fa-solid', fontSize: 25, color: 'white' }}></Text>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="profileHome" component={ProfileContainer} />
