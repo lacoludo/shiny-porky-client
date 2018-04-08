@@ -33,7 +33,7 @@ class ProfilePage extends Component {
           <View style={{ height: 20 }} />
           <List>
             <ListItem onPress={Actions.updateProfile} icon>
-              <Left>
+              <Left style={{ width: 40 }}>
                 <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
@@ -44,7 +44,7 @@ class ProfilePage extends Component {
               </Right>
             </ListItem>
             <ListItem onPress={Actions.creditCardUser} icon>
-              <Left>
+              <Left style={{ width: 40 }}>
                 <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
@@ -55,7 +55,7 @@ class ProfilePage extends Component {
               </Right>
             </ListItem>
             <ListItem onPress={Actions.shippingAddress} icon>
-              <Left>
+              <Left style={{ width: 40 }}>
                 <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
@@ -66,7 +66,7 @@ class ProfilePage extends Component {
               </Right>
             </ListItem>
             <ListItem onPress={Actions.notifications} icon>
-              <Left>
+              <Left style={{ width: 40 }}>
                 <FontAwesomeList></FontAwesomeList>
               </Left>
               <Body>
@@ -79,7 +79,7 @@ class ProfilePage extends Component {
           </List>
           <List>
             <ListItem style={{ marginTop: 20 }} onPress={logout} icon>
-                <Left>
+                <Left style={{ width: 40 }}>
                   <FontAwesomeList></FontAwesomeList>
                 </Left>
                 <Body>
