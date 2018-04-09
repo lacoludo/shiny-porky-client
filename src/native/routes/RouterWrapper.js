@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
-import { compose } from "redux";
+import React, { Component } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Scene, Tabs, Router, Stack } from 'react-native-router-flux';
-import { Icon } from 'native-base';
 import withAuthentication from './../withAuthentication';
 
 import DefaultProps from '../constants/navigation';
-import AppConfig from '../../constants/config';
 
 import PorkiesContainer from '../../containers/Porkies';
 import PorkiesComponent from '../components/Porkies/Porkies';
@@ -29,6 +27,7 @@ import ProfileContainer from '../../containers/Profile';
 import HomeComponent from '../../containers/Home';
 
 import TITLE_SHINY_PORKY from '../../images/app-name.png';
+import { FontAwesome } from '../../components/styles/StyledText';
 
 class RouterWrapper extends Component {
   render() {
@@ -47,8 +46,8 @@ class RouterWrapper extends Component {
             <Stack
               key="home"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="home" {...DefaultProps.icons} />}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="home" component={HomeComponent} />
@@ -64,8 +63,8 @@ class RouterWrapper extends Component {
             <Stack
               key="porkies"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="apps" {...DefaultProps.icons} />}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene
@@ -93,8 +92,8 @@ class RouterWrapper extends Component {
             <Stack
               key="messages"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="message" {...DefaultProps.icons} />}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="md-mail" component={MessagesContainer} />
@@ -102,8 +101,8 @@ class RouterWrapper extends Component {
             <Stack
               key="profile"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width:260, height: 28, alignSelf: 'center'  }}
-              icon={() => <Icon name="contact" {...DefaultProps.icons} />}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
               <Scene key="profileHome" component={ProfileContainer} />

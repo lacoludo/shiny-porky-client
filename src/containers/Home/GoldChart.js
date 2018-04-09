@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Text, View  } from "react-native";
-import { Card, CardItem } from "native-base";
-import { AreaChart } from "react-native-svg-charts";
-import * as shape from "d3-shape";
+import { ActivityIndicator, Text, View  } from 'react-native';
+import { Card, CardItem } from 'native-base';
+import { AreaChart } from 'react-native-svg-charts';
+import * as shape from 'd3-shape';
 import { getDataGold } from '../../actions/goldChart';
 import { TextTitleCard } from '../../components/styles/StyledText';
 
@@ -26,7 +26,7 @@ export class GoldChart extends React.Component {
     return (
       <Card style={{ paddingHorizontal: 6 }}>
         {isLoading ? (
-          <ActivityIndicator size="large" color="#000" style={{ height: 329}} />
+          <ActivityIndicator size="large" color="#000" style={{ height: 329 }} />
         ) : (
           <View>
             <CardItem style={{ justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#DDD' }}>
