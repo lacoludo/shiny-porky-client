@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DangerZone } from 'expo';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import favorite from '../images/favorite-star.json';
 
@@ -55,7 +55,9 @@ class FavoritePorky extends Component {
           <TouchableOpacity onPress={this.playAnimation}>
             <Lottie
               speed={1.5}
-              ref={(animation) => { this.animation = animation; }}
+              ref={(animation) => {
+                this.animation = animation;
+              }}
               style={{ width: 40, height: 40 }}
               resizeMode="cover"
               source={animation}
