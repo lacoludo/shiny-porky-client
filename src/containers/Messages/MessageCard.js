@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardItem, Body, Text } from 'native-base';
 
+import { timestampToFormatFr } from '../../utils/dateFormatter';
+
 class MessageCard extends PureComponent {
   static propType = {
     message: PropTypes.shape({}).isRequired,
-  }
-
-  dateFormat = (timestamp) => {
-    const date = new Date(timestamp);
-    return `Le ${date.toLocaleString('fr-FR')}`;
   }
 
   render() {
@@ -20,7 +17,7 @@ class MessageCard extends PureComponent {
         <CardItem>
           <Body>
             <Text>{message.content}</Text>
-            <Text note>{this.dateFormat(message.date)}</Text>
+            <Text note>{timestampToFormatFr(message.date)}</Text>
           </Body>
         </CardItem>
       </Card>
