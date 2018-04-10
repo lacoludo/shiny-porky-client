@@ -111,3 +111,24 @@ export function addTransactionToPorky(porky, transactionId, gramme, dispatch) {
     }
   });
 }
+
+/**
+  * Get transactions by Porky
+  */
+export function getCurrentTransactionsByPorky(porkyId, dispatch) {
+  const UID = (
+    FirebaseRef
+    && Firebase
+    && Firebase.auth()
+    && Firebase.auth().currentUser
+    && Firebase.auth().currentUser.uid
+  ) ? Firebase.auth().currentUser.uid : null;
+  
+  if (!UID) return false;
+  dispatch({ type: 'LOAD_TRANSACTIONS' });
+  const ref = FirebaseRef.child(`porkies/${UID}/${porkyId}/transactions`);
+  return ref.on('value', (snapshot) => {
+    const transactions = snapshot.val() || [];
+    dispatch({ type: 'LOAD_TRANSACTIONS_SUCCESS', data: transactions });
+  });
+}

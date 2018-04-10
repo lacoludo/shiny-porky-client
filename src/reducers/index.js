@@ -8,6 +8,7 @@ import goldChart from './GoldChart';
 import shippingAddress from './shippingAddress';
 import notifications from './Notifications';
 import messages from './Messages';
+import transactions from './Transactions';
 
 const rehydrated = (state = false, action) => {
   switch (action.type) {
@@ -30,4 +31,5 @@ export default {
   shippingAddress,
   notifications,
   messages,
+  transactions,
 };
