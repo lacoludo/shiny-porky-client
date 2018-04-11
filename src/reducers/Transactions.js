@@ -28,8 +28,8 @@ export const initialState = {
 
         return {
           ...state,
-          currentTransactions,
-          historicalTransactions,
+          currentTransactions: currentTransactions.reverse(),
+          historicalTransactions: historicalTransactions.reverse(),
           isLoading: false,
         };
       }

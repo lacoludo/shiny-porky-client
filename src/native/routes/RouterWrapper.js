@@ -46,7 +46,7 @@ class RouterWrapper extends Component {
             <Stack
               key="home"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center' }}
               icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
@@ -63,7 +63,7 @@ class RouterWrapper extends Component {
             <Stack
               key="porkies"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center' }}
               icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
@@ -92,7 +92,7 @@ class RouterWrapper extends Component {
             <Stack
               key="messages"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center' }}
               icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
@@ -101,7 +101,7 @@ class RouterWrapper extends Component {
             <Stack
               key="profile"
               navigationBarTitleImage={TITLE_SHINY_PORKY}
-              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center'  }}
+              navigationBarTitleImageStyle={{ width: 260, height: 28, alignSelf: 'center' }}
               icon={() => <FontAwesome></FontAwesome>}
               {...DefaultProps.navbarProps}
             >
