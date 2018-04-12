@@ -36,43 +36,45 @@ class ShippingAddressForm extends Component {
   render () {
     const { shippingAddress } = this.props;
     return ( 
-      <Form>
-        <Item stackedLabel>
-          <Label>Line1</Label>
+      <Content padder>
+        <Item floatingLabel style={{ marginTop: 20 }}>
+          <Label>Adresse</Label>
           <Input
             value={`${this.state.line1}`}
             onChangeText={v => this.handleChange('line1', v)}
           />
         </Item>
-        <Item stackedLabel>
-          <Label>Line2</Label>
+        <Item floatingLabel style={{ marginTop: 20 }}>
+          <Label>Informations supplémentaires (optionnel)</Label>
           <Input
             value={`${this.state.line2}`}
             onChangeText={v => this.handleChange('line2', v)}
           />
         </Item>
-        <Item stackedLabel>
-          <Label>Ville</Label>
-          <Input
-            value={`${this.state.city}`}
-            onChangeText={v => this.handleChange('city', v)}
-          />
-        </Item>
-        <Item stackedLabel>
-          <Label>Code Postal</Label>
-          <Input
-            value={`${this.state.postalCode}`}
-            onChangeText={v => this.handleChange('postalCode', v)}
-          />
-        </Item>
-        <Item stackedLabel>
+        <View style={{ marginTop: 20, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Item floatingLabel style={{ width: '50%' }}>
+            <Label>Ville</Label>
+            <Input
+              value={`${this.state.city}`}
+              onChangeText={v => this.handleChange('city', v)}
+            />
+          </Item>
+          <Item floatingLabel style={{ width: '40%' }}>
+            <Label>Code Postal</Label>
+            <Input
+              value={`${this.state.postalCode}`}
+              onChangeText={v => this.handleChange('postalCode', v)}
+            />
+          </Item>
+        </View>
+        <Item floatingLabel style={{ marginTop: 20, width: '70%' }}>
           <Label>Pays</Label>
           <Input
             value={this.state.country}
             onChangeText={v => this.handleChange('country', v)}
           />
         </Item>
-        <Item stackedLabel>
+        <Item floatingLabel style={{ marginTop: 20, marginBottom: 20, width: '50%' }}>
           <Label>Téléphone</Label>
           <Input
             value={this.state.phone}
@@ -80,7 +82,7 @@ class ShippingAddressForm extends Component {
           />
         </Item>
         <ButtonView onPress={this.submitForm} label={'Mettre à jour'}/>
-      </Form>
+      </Content>
     )
   }
 }

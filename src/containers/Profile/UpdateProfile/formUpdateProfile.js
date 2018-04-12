@@ -42,7 +42,7 @@ class UpdateProfileForm extends Component {
     const { member, isLoading } = this.props;
     return (
       <View>
-        <View style={{padding: 10}}>
+        <View style={{ padding: 10 }}>
           <StyledLabelForm>Prénom</StyledLabelForm>
           <StyledTextInput
             placeholder="Votre prénom..."

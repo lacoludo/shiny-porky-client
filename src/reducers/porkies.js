@@ -18,9 +18,23 @@ export default function porkieReducer(state = initialState, action) {
           id: key,
           name: data[key].name,
           childName: data[key].childName,
-          gramme: data[key].gramme,
+          transactions: data[key].transactions,
         }));
       }
+      porkies.map((porky) => {
+        let gramme = 0;
+        if (porky.transactions) {
+          const array = Object.keys(porky.transactions).map((key, item) => ({
+            id: key,
+            gramme: porky.transactions[key].gramme,
+            status: porky.transactions[key].status,
+          }));
+          array.filter((transaction) => transaction.status !== 'In progress').map((transaction) => {
+            gramme += transaction.gramme;
+          });
+        }
+        porky.gramme = gramme;
+      });
 
       return {
         ...state,
