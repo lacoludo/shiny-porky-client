@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Card, CardItem, Body, Text } from 'native-base';
+import { Card, CardItem, Body, Text, Icon, Right } from 'native-base';
 
+import { FontAwesomeMessage } from '../../components/styles/StyledText';
 import { timestampToFormatFr } from '../../utils/dateFormatter';
 
 class MessageCard extends PureComponent {
@@ -15,7 +16,8 @@ class MessageCard extends PureComponent {
     return (
       <Card>
         <CardItem>
-          <Body>
+          <FontAwesomeMessage></FontAwesomeMessage>
+          <Body style={{ marginLeft: 10 }}>
             <Text>{message.content}</Text>
             <Text note>{timestampToFormatFr(message.date)}</Text>
           </Body>

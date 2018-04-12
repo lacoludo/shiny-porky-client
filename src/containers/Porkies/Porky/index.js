@@ -43,7 +43,7 @@ class Porky extends Component {
     if (!porky) return <Error content={ErrorMessages.recipe404} />;
     return (
       <Container>
-        <Content padder>
+        <Content style={{ marginRight: 15 }}>
           <HeaderView title={porky.name} />
           <SubTitleView>
             <SubTitleText>Transactions en cours</SubTitleText>

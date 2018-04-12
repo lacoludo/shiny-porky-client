@@ -8,7 +8,7 @@ import MessageView from './../../../components/MessageView';
 import HeaderView from './../../../components/HeaderView';
 import SpacerView from './../../../components/Spacer';
 import FormShippingAddress from './formShippingAddress';
-
+import { Background } from './../../../components/styles/StyledContainer';
 import { getCustomerStripe, postShippingAddressToCustomer } from '../../../actions/stripes';
 
 class ShippingAddress extends Component {
@@ -25,16 +25,16 @@ class ShippingAddress extends Component {
   render() {
     const { isLoading, postShippingAddress, shippingAddress } = this.props;
     return ( 
-      <Container>
-        <Content padder>
+      <Background>
+        <Container>
           <HeaderView title="Mettre à jour votre adresse de livraison" />
           {isLoading ? (
             <ActivityIndicator size="large" color="#000" style={{ height: 329}} />
           ) : (
             <FormShippingAddress shippingAddress={shippingAddress} onSubmitForm={this.onSubmitForm} />
           )}
-        </Content>
-      </Container>
+        </Container>
+      </Background>
     )
   }
 }

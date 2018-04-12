@@ -15,12 +15,25 @@ export const initialState = {
         };
       }
       case 'FAVOURITE_PORKY_SUCCESS': {
+        const porky = action.data;
+        const transactions = porky.transactions;
+        let gramme = 0;
+        if (transactions) {
+          const array = Object.keys(transactions).map((key, item) => ({
+            id: key,
+            gramme: transactions[key].gramme,
+            status: transactions[key].status,
+          }));
+          array.filter((transaction) => transaction.status !== 'In progress').map((transaction) => {
+            gramme += transaction.gramme;
+          });
+        }
         return {
           loading: false,
           id: action.id,
-          name: action.data.name,
-          childName: action.data.childName,
-          gramme: action.data.gramme,
+          name: porky.name,
+          childName: porky.childName,
+          gramme,
         };
       }
       default:
