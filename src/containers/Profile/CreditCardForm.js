@@ -9,18 +9,6 @@ const styles = StyleSheet.create({
   removeLeftSpace: {
     marginLeft: -15,
   },
-  labelStyle: {
-    marginTop: 25,
-    marginLeft: 15,
-    fontSize: 15,
-    color: '#666666',
-  },
-  inputStyle: {
-    width: '100%',
-    paddingLeft: 9,
-    borderWidth: 1,
-    borderColor: '#b2b2b2',
-  },
   addLeftSpace: {
     marginLeft: 30,
   },
@@ -84,16 +72,14 @@ class CreditCardForm extends Component {
     const { creditCard } = this.props;
     return ( 
       <Form>
-        <Text>Nous garantissons la confidentialité de vos données et nous ne stockons pas vos informations de paiement.</Text>
         <View style={styles.creditCardWrapper}>
           {this.renderElement()}
         </View>
         <View style={styles.removeLeftSpace}>
-          <Label style={styles.labelStyle}>Numéro de carte</Label>
           <View>
             <Item stackedLabel>
+              <Label>Numéro de carte</Label>
               <Input
-                style={styles.inputStyle}
                 placeholder={'1234 5678 9012 3456'}
                 placeholderTextColor={'#b2b2b2'}
                 value={`${this.state.number}`}
@@ -101,42 +87,41 @@ class CreditCardForm extends Component {
               />
             </Item>
           </View>
-          <Label style={styles.labelStyle}>Date d'expiration</Label>
-          <View style={{ flexDirection: 'row' }}>
-            <Item stackedLabel style={{ flexDirection: 'row', width: '10%' }}>
-              <Input
-                style={styles.inputStyle}
-                placeholder={'MM'}
-                placeholderTextColor={'#b2b2b2'}
-                value={`${this.state.exp_month}`}
-                onChangeText={v => this.handleChange('exp_month', v)}
-              />
-            </Item>
-            <Label style={{ marginTop: 14, marginLeft: 14 }}>/</Label>
-            <Item stackedLabel style={{ flexDirection: 'row', width: '14%' }}>
-              <Input
-                style={styles.inputStyle}
-                placeholder={'AAAA'}
-                placeholderTextColor={'#b2b2b2'}
-                value={`${this.state.exp_year}`}
-                onChangeText={v => this.handleChange('exp_year', v)}
-              />
-            </Item>
-            <Item stackedLabel style={{ flexDirection: 'row', width: '12%', marginLeft: 202 }}>
-              <Input
-                style={styles.inputStyle}
-                placeholder={'CVC'}
-                placeholderTextColor={'#b2b2b2'}
-                value={this.state.cvc}
-                onChangeText={v => this.handleChange('cvc', v)}
-              />
-            </Item>
+          <View style={{ marginTop: 10, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ width: '50%', flex: 1, flexDirection: 'row' }}>
+              <Item stackedLabel style={{ width: '20%'}}>
+                <Label style={{ width: 200 }}>Date d'expiration</Label>
+                <Input
+                  placeholder={'MM'}
+                  placeholderTextColor={'#b2b2b2'}
+                  value={`${this.state.exp_month}`}
+                  onChangeText={v => this.handleChange('exp_month', v)}
+                />
+              </Item>
+              <Item stackedLabel style={{ width: '30%'}}>
+                <Label> </Label>
+                <Input
+                  placeholder={'AAAA'}
+                  placeholderTextColor={'#b2b2b2'}
+                  value={`${this.state.exp_year}`}
+                  onChangeText={v => this.handleChange('exp_year', v)}
+                />
+              </Item>
+            </View>
+              <Item stackedLabel style={{ width: '20%' }}>
+                <Label style={{ width: 100 }}>CVC</Label>
+                <Input
+                  placeholder={'CVC'}
+                  placeholderTextColor={'#b2b2b2'}
+                  value={this.state.cvc}
+                  onChangeText={v => this.handleChange('cvc', v)}
+                />
+              </Item>
           </View>
-          <Label style={styles.labelStyle}>Nom sur la carte</Label>
-          <View style={{ marginBottom: 50 }}>
+          <View style={{ marginBottom: 30, marginTop: 10 }}>
             <Item stackedLabel>
+              <Label>Nom sur la carte</Label>
               <Input
-                style={styles.inputStyle}
                 placeholder={'MME PRIYANKA CHOPRA'}
                 placeholderTextColor={'#b2b2b2'}
                 value={this.state.name}
@@ -144,6 +129,11 @@ class CreditCardForm extends Component {
               />
             </Item>
           </View>
+        </View>
+        <View>
+          <Text style={{ color: '#C2C2C2C'}}>
+            Nous garantissons la confidentialité de vos données et nous ne stockons pas vos informations de paiement.
+          </Text>  
         </View>
         <ButtonView onPress={this.submitForm} label={'Mettre à jour'} isLoading={creditCard.isLoading} />
       </Form>
