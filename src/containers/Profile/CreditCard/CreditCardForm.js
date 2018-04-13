@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Form, Input, Item, Label, Text } from 'native-base';
-import ButtonView from './../../components/ButtonView';
-import { FontAwesomeSolid, FontAwesomeBrands } from "../../components/styles/StyledText";
+import ButtonView from './../../../components/ButtonView';
+import { FontAwesomeSolid, FontAwesomeBrands } from "../../../components/styles/StyledText";
+import { validator } from './validators';
 
 const styles = StyleSheet.create({
   removeLeftSpace: {
@@ -14,11 +15,9 @@ const styles = StyleSheet.create({
   },
   creditCardWrapper: {
     flex: 1,
-    alignItems: 'center',
-    marginTop: 25,
-  },
-  creditCard: {
-    fontSize: 75,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    marginTop: 10,
   },
   visa: {
     color: '#122d98',
@@ -47,63 +46,59 @@ class CreditCardForm extends Component {
   }
 
   handleChange = (name, val) => {
-    this.setState({
-      ...this.state,
-      [name]: val,
-    });
+    if(validator(name, val)) {
+      this.setState({
+        ...this.state,
+        [name]: val,
+      });
+    }
   }
 
   submitForm = () => {
     this.props.onSubmitForm(this.state);
   }
 
-  renderElement() {
-    const visaFirstNumber = 4;
-    const mastercardFirstNumber = 5;
-    if (this.state.number.startsWith(visaFirstNumber)) {
-      return <FontAwesomeBrands style={[styles.creditCard, styles.visa]}></FontAwesomeBrands>;
-    } else if (this.state.number.startsWith(mastercardFirstNumber)) {
-      return <FontAwesomeBrands style={[styles.creditCard, styles.mastercard]}></FontAwesomeBrands>;
-    }
-    return <FontAwesomeSolid style={[styles.creditCard]}></FontAwesomeSolid>;
-  }
-
   render() {
     const { creditCard } = this.props;
+    const {
+      number,
+      exp_month,
+      exp_year,
+      cvc,
+      name,
+    } = this.state;
+
     return ( 
       <Form>
-        <View style={styles.creditCardWrapper}>
-          {this.renderElement()}
-        </View>
         <View style={styles.removeLeftSpace}>
           <View>
             <Item stackedLabel>
               <Label>Numéro de carte</Label>
               <Input
-                placeholder={'1234 5678 9012 3456'}
-                placeholderTextColor={'#b2b2b2'}
-                value={`${this.state.number}`}
+                placeholder="1234 5678 9012 3456"
+                placeholderTextColor="#b2b2b2"
+                value={`${number}`}
                 onChangeText={v => this.handleChange('number', v)}
               />
             </Item>
           </View>
           <View style={{ marginTop: 10, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
             <View style={{ width: '50%', flex: 1, flexDirection: 'row' }}>
-              <Item stackedLabel style={{ width: '20%'}}>
+              <Item stackedLabel style={{ width: '20%' }}>
                 <Label style={{ width: 200 }}>Date d'expiration</Label>
                 <Input
-                  placeholder={'MM'}
-                  placeholderTextColor={'#b2b2b2'}
-                  value={`${this.state.exp_month}`}
+                  placeholder="MM"
+                  placeholderTextColor="#b2b2b2"
+                  value={`${exp_month}`}
                   onChangeText={v => this.handleChange('exp_month', v)}
                 />
               </Item>
               <Item stackedLabel style={{ width: '30%'}}>
                 <Label> </Label>
                 <Input
-                  placeholder={'AAAA'}
-                  placeholderTextColor={'#b2b2b2'}
-                  value={`${this.state.exp_year}`}
+                  placeholder="YYYY"
+                  placeholderTextColor="#b2b2b2"
+                  value={`${exp_year}`}
                   onChangeText={v => this.handleChange('exp_year', v)}
                 />
               </Item>
@@ -111,9 +106,9 @@ class CreditCardForm extends Component {
               <Item stackedLabel style={{ width: '20%' }}>
                 <Label style={{ width: 100 }}>CVC</Label>
                 <Input
-                  placeholder={'CVC'}
-                  placeholderTextColor={'#b2b2b2'}
-                  value={this.state.cvc}
+                  placeholder="999"
+                  placeholderTextColor="#b2b2b2"
+                  value={cvc}
                   onChangeText={v => this.handleChange('cvc', v)}
                 />
               </Item>
@@ -122,16 +117,25 @@ class CreditCardForm extends Component {
             <Item stackedLabel>
               <Label>Nom sur la carte</Label>
               <Input
-                placeholder={'MME PRIYANKA CHOPRA'}
-                placeholderTextColor={'#b2b2b2'}
-                value={this.state.name}
+                placeholder="MME PRIYANKA CHOPRA"
+                placeholderTextColor="#b2b2b2"
+                value={name}
                 onChangeText={v => this.handleChange('name', v)}
               />
             </Item>
           </View>
         </View>
-        <View>
-          <Text style={{ color: '#C2C2C2C'}}>
+        <View style={{ marginTop: 10 }}>
+          <Text style={{ color: '#999999', fontStyle: 'italic', fontSize: 13 }}>
+            Nous acceptons les cartes suivantes:
+          </Text>  
+        </View>
+        <View style={styles.creditCardWrapper}>
+          <FontAwesomeBrands style={styles.visa}></FontAwesomeBrands>
+          <FontAwesomeBrands style={styles.mastercard}></FontAwesomeBrands>
+        </View>
+        <View style={{ marginBottom: 10, marginTop: 10 }}>
+          <Text style={{ color: '#999999', fontStyle: 'italic', fontSize: 13 }}>
             Nous garantissons la confidentialité de vos données et nous ne stockons pas vos informations de paiement.
           </Text>  
         </View>

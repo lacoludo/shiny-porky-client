@@ -36,6 +36,7 @@ export const FontAwesomeSolid = styled.Text`
 
 export const FontAwesomeBrands = styled.Text`
   font-family: fa-brands;
+  font-size: 50;
 `;
 
 export const FontAwesomeList = styled.Text`

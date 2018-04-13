@@ -15,7 +15,7 @@ import NewPorkyComponent from '../components/Porkies/NewPorky';
 
 import UpdateProfileContainer from '../../containers/Profile/UpdateProfile';
 
-import CreditCardUserContainer from '../../containers/Profile/CreditCardUser';
+import CreditCardUserContainer from '../../containers/Profile/CreditCard';
 import ShippingAddressContainer from '../../containers/Profile/ShippingAddress';
 import NotificationsContainer from '../../containers/Profile/Notifications';
 import MessagesContainer from '../../containers/Messages';

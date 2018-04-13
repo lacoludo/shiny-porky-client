@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Content } from 'native-base';
-import MessageView from './../../components/MessageView';
-import HeaderView from './../../components/HeaderView';
+import MessageView from './../../../components/MessageView';
+import HeaderView from './../../../components/HeaderView';
 import CreditCardForm from './CreditCardForm';
 
-import { createToken, getUserCreditCard } from '../../actions/stripes';
+import { createToken, getUserCreditCard } from '../../../actions/stripes';
 
 class CreditCardUser extends Component {
   static propTypes = {
