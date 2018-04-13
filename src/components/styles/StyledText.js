@@ -27,7 +27,15 @@ export const TextCard = styled.Text`
 export const FontAwesome = styled.Text`
   font-family: fa-solid;
   font-size: 25;
-  color: #FFF;
+  color: #fff;
+`;
+
+export const FontAwesomeSolid = styled.Text`
+  font-family: fa-solid;
+`;
+
+export const FontAwesomeBrands = styled.Text`
+  font-family: fa-brands;
 `;
 
 export const FontAwesomeList = styled.Text`

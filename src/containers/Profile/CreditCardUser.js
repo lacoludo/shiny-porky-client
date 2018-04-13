@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Container, Content } from 'native-base';
 import MessageView from './../../components/MessageView';
 import HeaderView from './../../components/HeaderView';
-import SpacerView from './../../components/Spacer';
 import CreditCardForm from './CreditCardForm';
 
 import { createToken, getUserCreditCard } from '../../actions/stripes';
@@ -31,12 +29,12 @@ class CreditCardUser extends Component {
     this.props.createCard(member.customerStripe, formData, dispatch);
   }
 
-  render () {
-    const { creditCard, Layout } = this.props;
+  render() {
+    const { creditCard } = this.props;
     return ( 
       <Container>
         <Content padder>
-          <HeaderView title="Update credit card account" />
+          <HeaderView title="Informations bancaires" />
           {creditCard.error && <MessageView message={creditCard.error} />}
           {creditCard.success && <MessageView message={'Informations enregistrées !'} type={'success'}/>}
           <CreditCardForm creditCard={creditCard} onSubmitForm={this.createCard} />
