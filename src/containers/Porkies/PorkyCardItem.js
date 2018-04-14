@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { CardItem, Body, Text, Left, Right, Thumbnail } from 'native-base';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { TextCard } from '../../../components/styles/StyledText';
-import FavoritePorky from '../../../components/FavoritePorky';
-import PorkyIcon from './../../../images/porky-icon.png';
+import { TextCard } from '../../components/styles/StyledText';
+import FavoritePorky from '../../components/FavoritePorky';
+import PorkyIcon from './../../images/porky-icon.png';
 
 class PorkyCardItem extends Component {
   static propTypes = {

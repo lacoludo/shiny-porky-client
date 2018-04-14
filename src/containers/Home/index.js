@@ -7,7 +7,7 @@ import { Container, Content, Text, H1, H2, H3, Button } from 'native-base';
 import GoldChart from './GoldChart';
 
 import ButtonView from './../../components/ButtonView';
-import PorkyCard from './../../native/components/Porkies/PorkyCard';
+import PorkyCard from '../Porkies/PorkyCard';
 
 class Home extends Component {
   static propTypes = {
@@ -20,7 +20,7 @@ class Home extends Component {
     this.state = { loading: true };
   }
 
-  onPress = item => Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } });
+  onPress = item => Actions.porky({ porky: this.props.favouritePorky });
   onPressPurchase = item => Actions.purchase({ porky: this.props.favouritePorky  });
 
   render = () => {
