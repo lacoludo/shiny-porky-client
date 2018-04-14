@@ -18,6 +18,17 @@ export const TextTitleCard = styled.Text`
   font-family: montserrat-semibold;
 `;
 
+export const TextLevelLabelCard = styled.Text`
+  font-size: 20;
+  font-family: rajdhani-semibold;
+  color: #969998;
+`;
+
+export const TextLevelCard = styled.Text`
+  font-size: 40;
+  color: #969998;
+`;
+
 export const TextCard = styled.Text`
   font-family: rajdhani-semibold;
   font-weight: bold;
