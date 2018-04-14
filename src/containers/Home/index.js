@@ -21,7 +21,7 @@ class Home extends Component {
   }
 
   onPress = item => Actions.porky({ match: { params: { id: this.props.member.favoritePorky } } });
-  onPressPurchase = item => Actions.purchase({ match: { params: { id: this.props.member.favoritePorky  } } });
+  onPressPurchase = item => Actions.purchase({ porky: this.props.favouritePorky  });
 
   render = () => {
     const { favouritePorky } = this.props;

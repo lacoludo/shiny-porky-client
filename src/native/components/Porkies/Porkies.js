@@ -25,6 +25,14 @@ class PorkyListing extends Component {
     reFetch: null
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (this.props.loading !== nextProps.loading
+      || this.props.error !== nextProps.error
+      || this.props.porkies !== nextProps.porkies
+      || this.props.onFavoritePorky !== nextProps.onFavoritePorky
+      || this.props.favouritePorkyId !== nextProps.favouritePorkyId);
+  }
+
   render() {
     const {
       error,
@@ -34,7 +42,6 @@ class PorkyListing extends Component {
       favouritePorkyId,
       porkies,
     } = this.props;
-    if (loading) return <Loading />;
     if (error) return <Error content={ error } />;
     const keyExtractor = item => item.id;
     const onPress = (item) => {( Actions.porky({ match: { params: { id: String(item.id) } } }) )};
