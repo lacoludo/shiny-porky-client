@@ -1,9 +1,7 @@
 import React from 'react';
+import { AppLoading, Font } from 'expo';
 import Root from './src/native/index';
 import configureStore from './src/store/index';
-import { AppLoading, Font } from 'expo';
-const { persistor, store } = configureStore();
-
 import Rajdhani from './assets/fonts/Rajdhani-Regular.ttf';
 import RajdhaniSemiBold from './assets/fonts/Rajdhani-SemiBold.ttf';
 import Montserrat from './assets/fonts/Montserrat-Regular.ttf';
@@ -11,6 +9,8 @@ import MontserratSemiBold from './assets/fonts/Montserrat-SemiBold.ttf';
 import FontAwesome from './assets/fonts/fa-regular-400.ttf';
 import FontAwesomeSolid from './assets/fonts/fa-solid-900.ttf';
 import FontAwesomeBrands from './assets/fonts/fa-brands-400.ttf';
+
+const { persistor, store } = configureStore();
 
 export default class App extends React.Component {
 
