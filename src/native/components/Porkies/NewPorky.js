@@ -31,6 +31,14 @@ class NewPorky extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (this.props.loading !== nextProps.loading
+      || this.props.error !== nextProps.error
+      || this.props.success !== nextProps.success
+      || this.state.name !== nextState.name
+      || this.state.childName !== nextState.childName);
+  }
+
   handleChange = (name, val) => {
     this.setState({
       ...this.state,

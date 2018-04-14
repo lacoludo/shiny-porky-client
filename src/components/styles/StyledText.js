@@ -30,6 +30,12 @@ export const FontAwesome = styled.Text`
   color: #fff;
 `;
 
+export const FontAwesomeGrey = styled.Text`
+  font-family: fa-solid;
+  font-size: 25;
+  color: #969998;
+`;
+
 export const FontAwesomeSolid = styled.Text`
   font-family: fa-solid;
 `;

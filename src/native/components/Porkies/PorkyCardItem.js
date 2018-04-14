@@ -14,6 +14,13 @@ class PorkyCardItem extends Component {
     favouritePorkyId: PropTypes.string,
   };
 
+  shouldComponentUpdate(nextProps) {
+    return (this.props.porky !== nextProps.porky
+      || this.props.onPress !== nextProps.onPress
+      || this.props.onFavoritePorky !== nextProps.onFavoritePorky
+      || this.props.favouritePorkyId !== nextProps.favouritePorkyId);
+  }
+
   favoritePorky = () => {
     const { porky } = this.props;
     this.props.onFavoritePorky(porky.id);
