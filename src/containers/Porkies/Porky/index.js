@@ -14,33 +14,35 @@ import { SubTitleView } from '../../../components/styles/StyledContainer';
 class Porky extends Component {
   static propTypes = {
     error: PropTypes.string,
-    porkyId: PropTypes.string.isRequired,
-    porkies: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    porky: PropTypes.shape().isRequired,
     currentTransactions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     historicalTransactions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    isLoading: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
-    this.props.getCurrentTransactionsByPorky(this.props.porkyId);
+    this.props.getCurrentTransactionsByPorky(this.props.porky.id);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (this.props.error !== nextProps.error
+      || this.props.porky !== nextProps.porky
+      || this.props.currentTransactions !== nextProps.currentTransactions
+      || this.props.historicalTransactions !== nextProps.historicalTransactions
+      || this.props.isLoading !== nextProps.isLoading);
   }
 
   render() {
     const {
       error,
-      porkies,
-      porkyId,
+      porky,
+      isLoading,
       currentTransactions,
       historicalTransactions,
-      isLoading,
     } = this.props;
-
     if (error) return <Error content={error} />;
-    let porky = null;
-  
-    if (porkyId && porkies) {
-      porky = porkies.find(item => item.id === porkyId );
-    }
     if (!porky) return <Error content={ErrorMessages.recipe404} />;
+
     return (
       <Container>
         <Content style={{ marginRight: 15 }}>

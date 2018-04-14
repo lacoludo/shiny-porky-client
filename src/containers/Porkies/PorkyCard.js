@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Content, Card } from 'native-base';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
-import NewPorkyCardItem from './NewPorkyCardItem';
+import NewPorkyCardItem from './NewPorky/NewPorkyCardItem';
 import PorkyCardItem from './PorkyCardItem';
 
 class PorkyCard extends Component {

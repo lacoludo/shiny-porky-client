@@ -1,40 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import Messages from './../Messages';
-import Loading from './../Loading';
-import Header from './../Header';
-import Spacer from './../Spacer';
+import Messages from '../../../native/components/Messages';
+import Loading from '../../../native/components/Loading';
+import Header from '../../../native/components/Header';
+import Spacer from '../../../native/components/Spacer';
+
+import { createPorky } from '../../../actions/porkies';
 
 class NewPorky extends React.Component {
   static propTypes = {
     error: PropTypes.string,
     success: PropTypes.string,
-    loading: PropTypes.bool.isRequired,
-    onFormSubmit: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    error: null,
-    success: null,
+    isLoading: PropTypes.bool.isRequired,
+    createPorky: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
-    this.state = {
-      childName: '',
-      name: '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { childName: '', name: '' };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.props.loading !== nextProps.loading
+    return (this.props.isLoading !== nextProps.isLoading
       || this.props.error !== nextProps.error
       || this.props.success !== nextProps.success
+      || this.props.createPorky !== nextProps.createPorky
       || this.state.name !== nextState.name
       || this.state.childName !== nextState.childName);
   }
@@ -47,14 +40,14 @@ class NewPorky extends React.Component {
   }
 
   handleSubmit = () => {
-    this.props.onFormSubmit(this.state)
+    this.props.createPorky(this.state)
       .then(() => Actions.porkies())
       .catch(e => console.log(`Error: ${e}`));
   }
 
   render() {
-    const { loading, error, success } = this.props;
-    if (loading) return <Loading />;
+    const { isLoading, error, success } = this.props;
+    if (isLoading) return <Loading />;
 
     return (
       <Container>
@@ -95,4 +88,14 @@ class NewPorky extends React.Component {
   }
 }
 
-export default NewPorky;
+const mapStateToProps = state => ({
+  isLoading: state.status.loading || false,
+  error: state.status.error || null,
+  success: state.status.success || null,
+});
+
+const mapDispatchToProps = {
+  createPorky: createPorky,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPorky);

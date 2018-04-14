@@ -7,23 +7,15 @@ import withAuthentication from './../withAuthentication';
 import DefaultProps from '../constants/navigation';
 
 import PorkiesContainer from '../../containers/Porkies';
-import PorkiesComponent from '../components/Porkies/Porkies';
 import PorkyContainer from '../../containers/Porkies/Porky';
-
 import NewPorkyContainer from '../../containers/Porkies/NewPorky';
-import NewPorkyComponent from '../components/Porkies/NewPorky';
-
 import UpdateProfileContainer from '../../containers/Profile/UpdateProfile';
-
 import CreditCardUserContainer from '../../containers/Profile/CreditCard';
 import ShippingAddressContainer from '../../containers/Profile/ShippingAddress';
 import NotificationsContainer from '../../containers/Profile/Notifications';
 import MessagesContainer from '../../containers/Messages';
-
 import PurchasePageComponent from '../../containers/PurchasePage';
-
 import ProfileContainer from '../../containers/Profile';
-
 import HomeComponent from '../../containers/Home';
 
 import TITLE_SHINY_PORKY from '../../images/app-name.png';
@@ -71,22 +63,19 @@ class RouterWrapper extends Component {
                 key="porkies"
                 {...DefaultProps.navbarProps}
                 component={PorkiesContainer}
-                Layout={PorkiesComponent} 
               />
               <Scene
                 back
                 key="newPorky"
                 {...DefaultProps.navbarProps}
                 component={NewPorkyContainer}
-                Layout={NewPorkyComponent}
               />
               <Scene
                 back
                 clone
                 key="porky"
                 {...DefaultProps.navbarProps}
-                component={PorkiesContainer}
-                Layout={PorkyContainer}
+                component={PorkyContainer}
               />
             </Stack>
             <Stack
