@@ -1,4 +1,5 @@
 import Store from '../store/porkies';
+import { levelGetter } from '../utils/levelGetter';
 
 export const initialState = Store;
 
@@ -32,8 +33,9 @@ export default function porkieReducer(state = initialState, action) {
           array.filter((transaction) => transaction.status !== 'In progress').map((transaction) => {
             gramme += transaction.gramme;
           });
-        }
+        };
         porky.gramme = gramme;
+        porky.level = levelGetter(gramme);
       });
 
       return {

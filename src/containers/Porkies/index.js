@@ -85,7 +85,7 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return {
     getUserPorkies: () => getUserPorkies(dispatch),
-    setFavouritePorky: (id, dispatch) => favoritePorky(id, dispatch),
+    setFavouritePorky: (id) => favoritePorky(id, dispatch),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PorkieListing);

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CardItem, Body, Text, Left, Right, Thumbnail } from 'native-base';
-import { Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { TextCard } from '../../components/styles/StyledText';
+import { CardItem, Body, Left, Right, Thumbnail, ListItem } from 'native-base';
+import { Image, TouchableOpacity, StyleSheet, View, Text } from 'react-native';
+import { TextCard, TextLevelCard, TextLevelLabelCard } from '../../components/styles/StyledText';
 import FavoritePorky from '../../components/FavoritePorky';
 import PorkyIcon from './../../images/porky-icon.png';
 
@@ -30,15 +30,19 @@ class PorkyCardItem extends Component {
     const { porky, onPress, onFavoritePorky, favouritePorkyId } = this.props;
     return (
       <TouchableOpacity onPress={() => onPress(porky)}>
-        <CardItem style={styles.Shadow}>
+        <ListItem avatar style={[styles.Shadow]}>
           <Left>
             <Thumbnail square size={150} source={PorkyIcon} />
-            <Body>
-              <TextCard style={{ fontSize: 30 }}>{porky.name.toUpperCase()}</TextCard>
-              <TextCard style={{ fontSize: 15 }} note>{'Last update'.toUpperCase()}</TextCard>
-            </Body>
           </Left>
-        </CardItem>
+          <Body style={{ borderBottomWidth: 0 }}>
+            <TextCard style={{ fontSize: 30 }}>{porky.name.toUpperCase()}</TextCard>
+            <TextCard style={{ fontSize: 15 }} note>{'Last update'.toUpperCase()}</TextCard>
+          </Body>
+          <Right style={{ borderBottomWidth: 0, alignItems: 'center' }}>
+            <TextCard>N I V.</TextCard>
+            <TextCard style={{ fontSize: 40 }}>{porky.level}</TextCard>
+          </Right>
+        </ListItem>
         <CardItem cardBody style={styles.Shadow}>
           <TextCard style={{ fontSize: 128, textAlign: 'center', width: '100%' }}>{porky.gramme}</TextCard>
         </CardItem>

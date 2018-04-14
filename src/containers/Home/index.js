@@ -29,7 +29,7 @@ class Home extends Component {
       <Container>
         <Content padder>
           <H3>Mon Porky favoris</H3>
-          {<PorkyCard onFavoritePorky={null} isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
+          {<PorkyCard isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
           <ButtonView onPress={this.onPressPurchase} label={'APPROVISIONNER'} />
           <GoldChart />
         </Content>
