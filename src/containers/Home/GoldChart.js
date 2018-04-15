@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActivityIndicator, Text, View  } from 'react-native';
+import { ActivityIndicator, Text, View, StyleSheet } from 'react-native';
 import { Card, CardItem } from 'native-base';
 import { AreaChart } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
@@ -24,7 +24,7 @@ export class GoldChart extends React.Component {
     const { dataGold, isLoading, currentGoldValue } = this.props;
     const currentOzDataGold = dataGold[dataGold.length - 1];
     return (
-      <Card style={{ paddingHorizontal: 6 }}>
+      <Card style={styles.Shadow}>
         {isLoading ? (
           <ActivityIndicator size="large" color="#000" style={{ height: 329 }} />
         ) : (
@@ -62,5 +62,19 @@ const mapDispatchToProps = (dispatch) => {
     dispatch,
   };
 };
+
+const styles = StyleSheet.create({
+  Shadow: {
+    paddingHorizontal: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    elevation: 5,
+    borderRadius: 0,
+    marginTop: 15,
+    marginBottom: 15,
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoldChart);
