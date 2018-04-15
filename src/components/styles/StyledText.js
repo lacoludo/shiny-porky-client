@@ -1,10 +1,17 @@
 import styled from 'styled-components';
 
+export const TextPurchaseLevel = styled.Text`
+  font-size: 15;
+  color: #969998;
+  font-family: montserrat-semibold;
+`;
+
 export const TextNormal = styled.Text`
   font-size: 12;
   color: #d4af37;
   font-family: montserrat-semibold;
 `;
+
 export const TextLinkLogin = styled.Text`
   font-family: montserrat-semibold;
   color: #d4af37;

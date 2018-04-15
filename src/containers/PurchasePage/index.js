@@ -13,10 +13,10 @@ import AddButton from './AddButton';
 import RemoveButton from './RemoveButton';
 import AnimatedGramme from './AnimatedGramme';
 import { SubTitleText } from '../../components/styles/StyledTitleView';
-import { TextCard } from '../../components/styles/StyledText';
+import { TextPurchaseLevel } from '../../components/styles/StyledText';
+import { levelGetter } from '../../utils/levelGetter';
 
 const GOLD_COLOR = '#D4AF37';
-const GRAMME_BY_LEVEL = 50;
 
 class PurchasePage extends Component {
   static propTypes = {
@@ -28,14 +28,18 @@ class PurchasePage extends Component {
 
   constructor(props) {
     super(props);
-    const grammeBase = 10;
-    const currentLvlProgress = (grammeBase / GRAMME_BY_LEVEL) * 100;
+    const { level }= this.props.porky;
+    const grammeBase = this.props.porky.gramme - level.total;
+    const currentLvlProgress = (grammeBase / level.expRequired) * 100;
+
     this.state = {
       counterAnimation: new Animated.Value(0),
       shakeAnimation: new Animated.Value(0),
       grammeBase,
       currentLvlProgress,
       grammeAdded: 0,
+      currentLvl: level.level,
+      expRequired: level.expRequired,
     };
   }
 
@@ -73,25 +77,51 @@ class PurchasePage extends Component {
   };
 
   addGold = () => {
-    const { grammeAdded, grammeBase, currentLvlProgress } = this.state;
-    const calculGrammeAdded = grammeAdded + 5;
-    const calculCurrentLvlProgress = ((grammeBase + calculGrammeAdded) / GRAMME_BY_LEVEL) * 100;
-
-    this.setState({ grammeAdded: calculGrammeAdded, currentLvlProgress: calculCurrentLvlProgress });
-    this.animateCounterAnimation();
+    const calculGrammeAdded = this.state.grammeAdded + 5;
+    this.progression(calculGrammeAdded);
   }
 
   removeGold = () => {
-    const { grammeAdded, grammeBase, currentLvlProgress } = this.state;
-    if(grammeAdded > 0) {
+    const { grammeAdded } = this.state;
+    if (grammeAdded > 0) {
       const calculGrammeAdded = grammeAdded - 5;
-      const calculCurrentLvlProgress = ((grammeBase + calculGrammeAdded) / GRAMME_BY_LEVEL) * 100;
-  
-      this.setState({ grammeAdded: calculGrammeAdded, currentLvlProgress: calculCurrentLvlProgress });
-      this.animateCounterAnimation();
+      this.progression(calculGrammeAdded);
     }
 
     this.animateShakeAnimation();
+  }
+
+  progression = (grammeAdded) => {
+    const { grammeBase, currentLvlProgress, expRequired, currentLvl } = this.state;
+    let nextLevel = currentLvl;
+    let nextGrammeBase = grammeBase;
+    let nextExpRequired = expRequired;
+    let calculCurrentLvlProgress = ((nextGrammeBase + grammeAdded) / expRequired) * 100;
+
+    if (calculCurrentLvlProgress === 100) {
+      const currentNextLevel = levelGetter(this.props.porky.gramme + grammeAdded);
+      nextLevel = currentNextLevel.level;
+      nextGrammeBase = this.props.porky.gramme - currentNextLevel.total;
+      nextExpRequired = currentNextLevel.expRequired;
+      calculCurrentLvlProgress = 0.1;
+    }
+    if (calculCurrentLvlProgress < 0) {
+      const currentNextLevel = levelGetter(this.props.porky.gramme + grammeAdded);
+      console.log(nextLevel);
+      nextLevel = currentNextLevel.level;
+      nextGrammeBase = this.props.porky.gramme - currentNextLevel.total;
+      nextExpRequired = currentNextLevel.expRequired;
+      calculCurrentLvlProgress = 99.5;
+    }
+
+    this.setState({
+      grammeAdded,
+      currentLvlProgress: calculCurrentLvlProgress,
+      currentLvl: nextLevel,
+      grammeBase: nextGrammeBase,
+      expRequired: nextExpRequired,
+    });
+    this.animateCounterAnimation();
   }
 
   render () {
@@ -100,31 +130,36 @@ class PurchasePage extends Component {
     <Container>
       <Content padder>
         <HeaderView title={`${porky.name} a besoin d'or !`} />
+        <CardItem cardBody style={{ marginTop: 10, marginBottom: 10 }}>
+          <TextPurchaseLevel>
+            Ton porky est actuellement niveau {porky.level.level}, il te manque {porky.level.remainingExp}g d'or.
+          </TextPurchaseLevel>
+        </CardItem>
         <Card style={styles.Shadow}>
           <CardItem cardBody style={{ justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
-            <SubTitleText>Prochain Palier</SubTitleText>
+            <SubTitleText>Prochain Palier: {this.state.currentLvl}</SubTitleText>
           </CardItem>
           <CardItem cardBody>
-              <View style={{ flex: 1, alignItems: 'center', width: '100%', marginTop:10 }}>
-                <AnimatedCircularProgress
-                  size={300}
-                  width={15}
-                  fill={this.state.currentLvlProgress}
-                  tintColor={GOLD_COLOR}
-                  rotation={0}
-                  onAnimationComplete={() => console.log('onAnimationComplete')}
-                  backgroundColor={'transparent'}
-                >
-                  {(fill) => (
-                    <AnimatedGramme
-                      counterAnimation={this.state.counterAnimation}
-                      shakeAnimation={this.state.shakeAnimation}
-                      gramme={porky.gramme}
-                      grammeAdded={this.state.grammeAdded}
-                    />
-                  )}
-                </AnimatedCircularProgress>
-              </View>
+            <View style={{ flex: 1, alignItems: 'center', width: '100%', marginTop:10 }}>
+              <AnimatedCircularProgress
+                size={300}
+                width={15}
+                fill={this.state.currentLvlProgress}
+                tintColor={GOLD_COLOR}
+                rotation={0}
+                onAnimationComplete={() => console.log('onAnimationComplete')}
+                backgroundColor={'transparent'}
+              >
+                {(fill) => (
+                  <AnimatedGramme
+                    counterAnimation={this.state.counterAnimation}
+                    shakeAnimation={this.state.shakeAnimation}
+                    gramme={porky.gramme}
+                    grammeAdded={this.state.grammeAdded}
+                  />
+                )}
+              </AnimatedCircularProgress>
+            </View>
           </CardItem>
           <CardItem cardBody style={{ marginBottom: 15, marginTop: 15 }}>
             <Left style={{ marginLeft: 15 }}>

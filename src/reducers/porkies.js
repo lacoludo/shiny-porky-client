@@ -29,10 +29,14 @@ export default function porkieReducer(state = initialState, action) {
             id: key,
             gramme: porky.transactions[key].gramme,
             status: porky.transactions[key].status,
+            datetime: porky.transactions[key].datetime,
           }));
+
           array.filter((transaction) => transaction.status !== 'In progress').map((transaction) => {
             gramme += transaction.gramme;
           });
+
+          porky.lastUpdate = array[array.length - 1].datetime;
         };
         porky.gramme = gramme;
         porky.level = levelGetter(gramme);
