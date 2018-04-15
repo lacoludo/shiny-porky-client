@@ -83,7 +83,8 @@ function getUserData(dispatch) {
     const userData = snapshot.val() || [];
     getFavouritePorky(userData.favoritePorky, dispatch);
     getUserMessages(dispatch);
-    return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
+    
+    dispatch({ type: 'USER_DETAILS_UPDATE', data: userData, uid: UID });
   });
 }
 
@@ -134,7 +135,8 @@ export function login(formData, dispatch) {
             getUserData(dispatch);
             dispatch({ type: 'USER_LOGIN_SUCCESS', data: res });
           }
-        }).catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
+        })
+        .catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
     });
 }
 

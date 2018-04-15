@@ -16,7 +16,6 @@ class PorkieListing extends Component {
     loading: PropTypes.bool.isRequired,
     favouritePorkyId: PropTypes.string.isRequired,
     setFavouritePorky: PropTypes.func.isRequired,
-
   }
 
   componentDidMount = () => this.fetchPorkies();

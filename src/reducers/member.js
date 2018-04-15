@@ -28,9 +28,8 @@ export default function userReducer(state = initialState, action) {
       if (action.data) {
         return {
           ...state,
-          isLoading: false,
+          isLoading: true,
           error: null,
-          uid: action.data.uid,
           email: action.data.email,
           emailVerified: action.data.emailVerified,
         };
@@ -41,6 +40,7 @@ export default function userReducer(state = initialState, action) {
       if (action.data) {
         return {
           ...state,
+          uid: action.uid,
           isLoading: false,
           error: null,
           firstName: action.data.firstName,
