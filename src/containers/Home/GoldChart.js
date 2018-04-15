@@ -6,7 +6,7 @@ import { Card, CardItem } from 'native-base';
 import { AreaChart } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 import { getDataGold } from '../../actions/goldChart';
-import { TextTitleCard } from '../../components/styles/StyledText';
+import { TextTitleCard, TextCard } from '../../components/styles/StyledText';
 
 export class GoldChart extends React.Component {
   static propTypes = {
@@ -30,7 +30,7 @@ export class GoldChart extends React.Component {
         ) : (
           <View>
             <CardItem style={{ justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: '#DDD' }}>
-              <TextTitleCard>{`Valeur de l'or : ${currentGoldValue}€ pour 5 Grammes`}</TextTitleCard>
+              <TextCard style={{ fontSize: 16, color: '#282828' }}>{`Valeur de l'or : ${currentGoldValue}€ pour 5 Grammes`}</TextCard>
             </CardItem>
             <CardItem style={{ flex: 1, flexDirection: 'row'}} cardBody>
               <AreaChart
@@ -42,6 +42,9 @@ export class GoldChart extends React.Component {
                 gridMin={currentOzDataGold - 20}
                 gridMax={currentOzDataGold + 20}
               />
+            </CardItem>
+            <CardItem  style={{ borderTopWidth: 1, borderTopColor: '#DDD' }}>
+              <TextCard>Ce graphe représente le cours de l'or sur les 20 derniers jours. Le prix peut différer lors d'un achat réel.</TextCard>
             </CardItem>
           </View>
         )}

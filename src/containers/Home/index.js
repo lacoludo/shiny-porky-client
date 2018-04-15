@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { getFavouritePorky } from '../../actions/porkies';
-import { Container, Content, Text, H1, H2, H3, Button } from 'native-base';
+import { Container, Content } from 'native-base';
+import { View } from 'react-native';
 import GoldChart from './GoldChart';
-
+import HeaderView from '../../components/HeaderView';
 import ButtonView from './../../components/ButtonView';
 import PorkyCard from '../Porkies/PorkyCard';
 
@@ -28,10 +29,13 @@ class Home extends Component {
     return (
       <Container>
         <Content padder>
-          <H3>Mon Porky favoris</H3>
+          <HeaderView title="Mon Porky du moment !" />
           {<PorkyCard isLoading={favouritePorky.loading} porky={favouritePorky} onPress={this.onPress}/>}
           <ButtonView onPress={this.onPressPurchase} label={'APPROVISIONNER'} />
+          <View style={{ height: 20 }} />
+          <HeaderView title="Cours de l'or" />
           <GoldChart />
+          <View style={{ height: 40 }} />
         </Content>
       </Container>
     )

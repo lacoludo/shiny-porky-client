@@ -11,11 +11,9 @@ export const StyledTitleProfile = styled.Text`
   color: #FFF;
   font-family: rajdhani-semibold;
   font-size: 25;
-  font-weight: bold;
 `;
 
 export const SubTitleText = styled.Text`
   font-family: rajdhani-semibold;
   font-size: 20;
-  font-weight: bold;
 `;
