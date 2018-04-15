@@ -23,6 +23,12 @@ class MyNotifications extends Component {
     this.setState({ reminderValue: this.props.notifications });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (this.props.isLoading !== nextProps.isLoading
+      || this.props.success !== nextProps.success
+      || this.state.reminderValue !== nextState.reminderValue);
+  }
+
   onPress = (value) => {
     this.setState({ reminderValue: value });
   }
