@@ -7,8 +7,9 @@ export function levelGetter(gramme) {
     if (isLast) {
       porkyLevel = {
         level: LEVELS[index].level,
-        expRequired: LEVELS[index].required,
-        remainingExp: LEVELS[index].total - gramme,
+        total: LEVELS[index].total,
+        expRequired: LEVELS[index + 1].required,
+        remainingExp: LEVELS[index + 1].total - gramme,
       }
     }
 

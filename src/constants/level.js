@@ -46,5 +46,21 @@ export const LEVELS = [ {
 	"level" : 12,
 	"total": 500,
 	"required" : 125
+}, {
+	"level" : 13,
+	"total": 750,
+	"required" : 250,
+}, {
+	"level" : 14,
+	"total": 1000,
+	"required" : 250,
+}, {
+	"level" : 15,
+	"total": 1500,
+	"required" : 500,
+}, {
+	"level" : 15,
+	"total": 2500,
+	"required" : 1000,
 } ];
     
