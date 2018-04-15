@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Container, Content, ListItem, Radio, Separator, Text } from 'native-base';
+import { View } from 'react-native';
+import { Container, Content, ListItem, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { Permissions } from 'expo';
 import { setReminderNotif } from '../../../actions/member';
@@ -9,13 +9,31 @@ import ButtonView from './../../../components/ButtonView';
 import MessageView from './../../../components/MessageView';
 import { scheduledNotification } from './scheduledNotifications';
 
-const styles = StyleSheet.create({
-  radioRight: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-});
+const textActive = {
+  width: '100%',
+  textAlign: 'center',
+  color: '#fff'
+};
+
+const textInactive = {
+  width: '100%',
+  textAlign: 'center',
+  color: '#d4af37',
+};
+
+const buttonActive = {
+  flex: 1,
+  backgroundColor: '#d4af37',
+  borderColor: '#d4af37',
+  borderWidth: 1,
+}
+
+const buttonInactive = {
+  flex: 1,
+  backgroundColor: '#fff',
+  borderColor: '#d4af37',
+  borderWidth: 1,
+}
 
 class MyNotifications extends Component {
 
@@ -46,36 +64,29 @@ class MyNotifications extends Component {
         <HeaderView title="Gestion des notifications" />
         {success && <MessageView message={'Demande enregistrée.'} type={'success'}/>}
         <Content>
-          <Separator bordered style={{ marginBottom: 20 }}>
-            <Text style={{ textAlign: 'center', fontSize: 20 }}>{'Etre rappelé tous les :'.toUpperCase()}</Text>
-          </Separator>
-          <ListItem>
-            <Text>Jamais</Text>
-            <View style={styles.radioRight}>
-              <Radio
-                onPress={() => this.onPress('never')}
-                selected={reminderValue === 'never' ? true : false}
-              />
-            </View>
-          </ListItem>
-          <ListItem>
-            <Text>Semaines</Text>
-            <View style={styles.radioRight}>
-              <Radio
-                onPress={() => this.onPress('week')}
-                selected={reminderValue === 'week' ? true : false}
-              />
-            </View>
-          </ListItem>
-          <ListItem style={{ marginBottom: 20 }}>
-            <Text>Mois</Text>
-            <View style={styles.radioRight}>
-              <Radio
-                onPress={() => this.onPress('month')}
-                selected={reminderValue === 'month' ? true : false}
-              />
-            </View>
-          </ListItem>
+          <View style={{ marginTop: 20, marginBottom: 20 }}>
+            <Text style={{ textAlign: 'center', fontSize: 20 }}>{'Etre rappelé tous les :'}</Text>
+          </View>
+          <View padder style={{ marginRight: 15, marginBottom: 20 }}>
+            <ListItem
+              onPress={() => this.onPress('never')}
+              style={reminderValue === 'never' ? buttonActive : buttonInactive}
+            >
+              <Text style={reminderValue === 'never' ? textActive : textInactive}>Jamais</Text>
+            </ListItem>
+            <ListItem
+              onPress={() => this.onPress('week')}
+              style={reminderValue === 'week' ? buttonActive : buttonInactive}
+            >
+              <Text style={reminderValue === 'week' ? textActive : textInactive}>Semaines</Text>
+            </ListItem>
+            <ListItem
+              onPress={() => this.onPress('month')}
+              style={reminderValue === 'month' ? buttonActive : buttonInactive}
+            >
+              <Text style={reminderValue === 'month' ? textActive : textInactive}>Mois</Text>
+            </ListItem>
+          </View>
           <ButtonView onPress={this.onSubmitForm} label={'Mettre à jour'} isLoading={isLoading} />
         </Content>
       </Container>
