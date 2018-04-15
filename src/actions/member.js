@@ -83,7 +83,8 @@ function getUserData(dispatch) {
     const userData = snapshot.val() || [];
     getFavouritePorky(userData.favoritePorky, dispatch);
     getUserMessages(dispatch);
-    return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
+    
+    dispatch({ type: 'USER_DETAILS_UPDATE', data: userData, uid: UID });
   });
 }
 
