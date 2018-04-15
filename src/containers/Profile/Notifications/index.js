@@ -8,68 +8,8 @@ import HeaderView from './../../../components/HeaderView';
 import ButtonView from './../../../components/ButtonView';
 import MessageView from './../../../components/MessageView';
 import { scheduledNotification } from './scheduledNotifications';
-
-const textActive = {
-  width: '100%',
-  textAlign: 'center',
-  color: '#fff'
-};
-
-const textInactive = {
-  width: '100%',
-  textAlign: 'center',
-  color: '#d4af37',
-};
-
-const buttonActiveLeft = {
-  flex: 1,
-  backgroundColor: '#d4af37',
-  borderColor: '#d4af37',
-  borderWidth: 1,
-  borderTopLeftRadius: 10,
-  borderBottomLeftRadius: 10,
-}
-
-const buttonInactiveLeft = {
-  flex: 1,
-  backgroundColor: '#fff',
-  borderColor: '#d4af37',
-  borderWidth: 1,
-  borderTopLeftRadius: 10,
-  borderBottomLeftRadius: 10,
-}
-
-const buttonActiveMiddle = {
-  flex: 1,
-  backgroundColor: '#d4af37',
-  borderColor: '#d4af37',
-  borderWidth: 1,
-}
-
-const buttonInactiveMiddle = {
-  flex: 1,
-  backgroundColor: '#fff',
-  borderColor: '#d4af37',
-  borderWidth: 1,
-}
-
-const buttonActiveRight = {
-  flex: 1,
-  backgroundColor: '#d4af37',
-  borderColor: '#d4af37',
-  borderWidth: 1,
-  borderTopRightRadius: 10,
-  borderBottomRightRadius: 10,
-}
-
-const buttonInactiveRight = {
-  flex: 1,
-  backgroundColor: '#fff',
-  borderColor: '#d4af37',
-  borderWidth: 1,
-  borderTopRightRadius: 10,
-  borderBottomRightRadius: 10,
-}
+import { TextCard } from '../../../components/styles/StyledText';
+import { styles } from './styles';
 
 class MyNotifications extends Component {
 
@@ -97,43 +37,43 @@ class MyNotifications extends Component {
     const { isLoading, success } = this.props;
     return (
       <Container>
-        <View style={{ marginTop: 40 }}>
-          <HeaderView title="Gestion des notifications" />
-        </View>
-        {success && <MessageView message={'Demande enregistrée.'} type={'success'}/>}
         <Content padder>
-          <View style={{ marginTop: 20, marginBottom: 20 }}>
-            <Text style={{ fontSize: 18 }}>Etre rappelé tous les :</Text>
+          <HeaderView title="Gestion des notifications" />
+          {success && <MessageView message={'Demande enregistrée.'} type={'success'}/>}
+          <View style={{ marginVertical: 20, paddingBottom: 10, borderBottomWidth: 2, borderBottomColor: '#DDD' }}>
+            <TextCard>Pense à activer les notifications si tu ne veux pas oublier d'acheter de l'or régulièrement.</TextCard>
           </View>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+          <TextCard style={{ fontSize: 17, marginBottom: 5 }}>Je souhaite être rappelé tous les: </TextCard>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
             <TouchableOpacity
               onPress={() => this.onPress('never')}
-              style={reminderValue === 'never' ? buttonActiveLeft : buttonInactiveLeft}
+              style={reminderValue === 'never' ? [styles.buttonLeft, styles.buttonActive] : styles.buttonLeft}
             >
-              <Text style={reminderValue === 'never' ? textActive : textInactive}>Jamais</Text>
+              <Text style={reminderValue === 'never' ? [styles.textInactive, styles.textActive] : styles.textInactive}>Jamais</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.onPress('week')}
-              style={reminderValue === 'week' ? buttonActiveMiddle : buttonInactiveMiddle}
+              style={reminderValue === 'week' ? [styles.buttonMiddle, styles.buttonActive] : styles.buttonMiddle}
             >
-              <Text style={reminderValue === 'week' ? textActive : textInactive}>Semaines</Text>
+              <Text style={reminderValue === 'week' ? [styles.textInactive, styles.textActive] : styles.textInactive}>Semaines</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => this.onPress('month')}
-              style={reminderValue === 'month' ? buttonActiveRight : buttonInactiveRight}
+              style={reminderValue === 'month' ? [styles.buttonRight, styles.buttonActive] : styles.buttonRight}
             >
-              <Text style={reminderValue === 'month' ? textActive : textInactive}>Mois</Text>
+              <Text style={reminderValue === 'month' ? [styles.textInactive, styles.textActive] : styles.textInactive}>Mois</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ marginTop: 15, marginBottom: 20 }}>
-            <Text style={{ fontSize: 18 }}>Etre informé régulièrement de l'achat d'or :</Text>
+
+          <View style={{ marginVertical: 10 }}>
+            <TextCard>Tu peux aussi être notifié à chaque message que tu reçois. Utile pour se tenir informé très rapidement.</TextCard>
           </View>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 40 }}>
-            <TouchableOpacity style={buttonActiveLeft}>
-              <Text style={textActive}>Oui</Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
+            <TouchableOpacity style={[styles.buttonLeft, styles.buttonActive]}>
+              <Text style={[styles.textInactive, styles.textActive]}>Oui</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={buttonInactiveRight}>
-              <Text style={textInactive}>Non</Text>
+            <TouchableOpacity style={[styles.buttonRight]}>
+              <Text style={styles.textInactive}>Non</Text>
             </TouchableOpacity>
           </View>
           <ButtonView onPress={this.onSubmitForm} label={'Mettre à jour'} isLoading={isLoading} />
