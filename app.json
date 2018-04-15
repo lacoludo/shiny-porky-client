@@ -6,7 +6,7 @@
     "icon": "src/images/app-icon.png",
     "privacy": "public",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/images/splash2.png",
       "backgroundColor": "#d4af37"
     }
   }

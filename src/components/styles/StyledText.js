@@ -5,6 +5,11 @@ export const TextPurchaseLevel = styled.Text`
   color: #969998;
   font-family: montserrat-semibold;
 `;
+export const TextNoItems = styled.Text`
+  font-family: rajdhani-semibold;
+  font-size: 18;
+  color: #282828;
+`;
 
 export const TextNormal = styled.Text`
   font-size: 12;
@@ -49,8 +54,8 @@ export const TextLevelCard = styled.Text`
 
 export const TextCard = styled.Text`
   font-family: rajdhani-semibold;
-  font-weight: bold;
   color: #969998;
+  font-size: 15;
 `;
 
 export const FontAwesome = styled.Text`
@@ -81,9 +86,9 @@ export const FontAwesomeMessage = styled.Text`
 `;
 
 export const FontAwesomeMessageSuccess = styled.Text`
-font-family: fa-solid;
-font-size: 25;
-color: #e0c56c;
+  font-family: fa-solid;
+  font-size: 25;
+  color: #e0c56c;
 `;
 
 export const FontAwesomeList = styled.Text`
@@ -93,7 +98,7 @@ export const FontAwesomeList = styled.Text`
 `;
 
 export const FontAwesomeForm = styled.Text`
-font-family: fa-solid;
-font-size: 20;
-color: #969998;
+  font-family: fa-solid;
+  font-size: 20;
+  color: #969998;
 `;
