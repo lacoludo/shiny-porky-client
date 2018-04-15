@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { Text, Button } from 'native-base';
-import { View, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { StyledTextButton } from './styles/StyledTextForm';
 import { StyledButtonView } from './styles/StyledButton';
 
@@ -14,7 +13,7 @@ class ButtonView extends Component {
 
   static defaultProps = { isLoading: false };
 
-  render () {
+  render() {
     const { label, onPress, isLoading } = this.props;
     return (      
       <TouchableOpacity onPress={onPress}>

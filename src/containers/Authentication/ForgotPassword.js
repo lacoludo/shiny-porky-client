@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Content, Text, Form, Item, Label, Input, Button } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Content, Form, Icon, Input, Item, Text } from 'native-base';
 import MessageView from './../../components/MessageView';
-import HeaderView from './../../components/HeaderView';
-import SpacerView from './../../components/Spacer';
 import ButtonView from './../../components/ButtonView';
-
 import { resetPassword } from '../../actions/member';
+import { TextLinkLogin, FontAwesomeForm } from '../../components/styles/StyledText';
+import { SubTitleText } from '../../components/styles/StyledTitleView';
+import Header from './Header';
+
+const styles = StyleSheet.create({
+  margins: {
+    marginTop: 100,
+    marginBottom: 100,
+  },
+  layoutCenter: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+});
 
 class ForgotPassword extends Component {
   static propTypes = {
@@ -40,23 +54,29 @@ class ForgotPassword extends Component {
     const { error, success, toggleAuthentication, isLoading } = this.props;
 
     return (
-      <Content padder>
-        <HeaderView title="Réinitialiser votre mots de passe" />
+      <Content style={{ padding: 30 }}>
         {error && <MessageView message={error} />}
         {success && <MessageView message={'Un email a été envoyé afin de réinitialiser votre mots de passe.'} />}
-        <Form>
-          <Item stackedLabel>
-            <Label>Email</Label>
+        <Header />
+        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+          <SubTitleText>Réinitialisation de mots de passe</SubTitleText>
+        </View>
+        <Form style={{ marginBottom: 20 }}>
+          <Item style={{ marginLeft: 0 }}>
+            <FontAwesomeForm></FontAwesomeForm>
             <Input
-              autoCapitalize="none"
+              style={{ marginLeft: 10 }}
+              placeholder='Email'
+              placeholderTextColor="#b2b2b2"
               value={this.state.email}
-              keyboardType="email-address"
               onChangeText={v => this.handleChange('email', v)}
             />
           </Item>
-          <SpacerView size={20} />
-          <ButtonView onPress={this.handleSubmit} label={'Réinitialiser'} isLoading={isLoading} />
         </Form>
+        <ButtonView onPress={this.handleSubmit} label={'Réinitialiser'} isLoading={isLoading} />
+        <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('login')}>
+          <TextLinkLogin>Revenir à la page connexion</TextLinkLogin>
+        </TouchableOpacity>
       </Content>
     )
   }

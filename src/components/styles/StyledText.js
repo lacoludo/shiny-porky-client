@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+export const TextNormal = styled.Text`
+  font-size: 12;
+  color: #d4af37;
+  font-family: montserrat-semibold;
+`;
+export const TextLinkLogin = styled.Text`
+  font-family: montserrat-semibold;
+  color: #d4af37;
+  font-size: 15;
+`;
+
 export const TextResumeProfile = styled.Text`
   font-size: 12;
   color: #595959;
@@ -72,4 +83,10 @@ export const FontAwesomeList = styled.Text`
   font-family: fa-solid;
   font-size: 20;
   color: #262626;
+`;
+
+export const FontAwesomeForm = styled.Text`
+font-family: fa-solid;
+font-size: 20;
+color: #969998;
 `;

@@ -1,15 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import { Content, Form, Item, Label, Input, Text, Button } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Content, Form, Icon, Input, Item, Text } from 'native-base';
 import { login } from '../../actions/member';
-import { TouchableOpacity } from 'react-native';
 import ButtonView from './../../components/ButtonView';
 import MessageView from './../../components/MessageView';
-import HeaderView from './../../components/HeaderView';
-import SpacerView from './../../components/Spacer';
+import { TextLinkLogin } from '../../components/styles/StyledText';
+import { SubTitleText } from '../../components/styles/StyledTitleView';
+import Header from './Header';
+
+const styles = StyleSheet.create({
+  layoutCenter: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+});
 
 class Login extends Component {
   static propTypes = {
@@ -42,40 +51,44 @@ class Login extends Component {
     const { isLoading, error, toggleAuthentication } = this.props;
 
     return (
-      <Content padder>
-        <HeaderView title="Bienvenue" content="Please use your email and password to login." />
+      <Content style={{ padding: 30 }}>
         {error && <MessageView message={error} />}
-        <Form>
-          <Item stackedLabel>
-            <Label>Email</Label>
+        <Header />
+        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+          <SubTitleText>Se connecter sur Shiny Porky</SubTitleText>
+        </View>
+        <Form style={{ marginBottom: 20 }}>
+          <Item style={{ marginLeft: 0, marginBottom: 20 }}>
+            <Icon active name='mail' />
             <Input
-              autoCapitalize="none"
+              placeholder='Email'
+              placeholderTextColor="#b2b2b2"
               value={this.state.email}
               keyboardType="email-address"
               onChangeText={v => this.handleChange('email', v)}
             />
           </Item>
-          <Item stackedLabel>
-            <Label>Password</Label>
+          <Item style={{ marginLeft: 0 }}>
+            <Icon active name='lock' />
             <Input
+              placeholder='Mots de passe'
+              placeholderTextColor="#b2b2b2"
               secureTextEntry
               onChangeText={v => this.handleChange('password', v)}
             />
           </Item>
-          <SpacerView size={20} />
-          <ButtonView onPress={this.handleSubmit} label={'Se connection'} isLoading={isLoading} />
         </Form>
-        <TouchableOpacity onPress={() => toggleAuthentication('signUp')}>
-            <Text>S'inscrire</Text>
+        <ButtonView onPress={this.handleSubmit} label={'Se connecter'} isLoading={isLoading} />
+        <TouchableOpacity style={[styles.layoutCenter, { marginTop: 20 }]} onPress={() => toggleAuthentication('forgotPassword')}>
+          <TextLinkLogin>Mots de passe oublié ?</TextLinkLogin>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => toggleAuthentication('forgotPassword')}>
-            <Text>Mots de passe oublié</Text>
+        <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('signUp')}>
+          <TextLinkLogin>Vous voulez devenir riche ? S'inscrire</TextLinkLogin>
         </TouchableOpacity>
       </Content>
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   member: state.member || {},
