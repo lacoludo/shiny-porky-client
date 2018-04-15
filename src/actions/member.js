@@ -135,8 +135,7 @@ export function login(formData, dispatch) {
             getUserData(dispatch);
             dispatch({ type: 'USER_LOGIN_SUCCESS', data: res });
           }
-        })
-        .catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
+        }).catch((resp) => { dispatch({ type: 'USER_ERROR', data: resp.message })});
     });
 }
 
