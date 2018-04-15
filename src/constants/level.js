@@ -1,35 +1,50 @@
 export const LEVELS = [ {
 	"level" : 1,
-	"required" : 0
+	"total" : 0,
+	"required": 0,
 }, {
 	"level" : 2,
+	"total": 5,
 	"required" : 5
 }, {
 	"level" : 3,
-	"required" : 15
+	"total" : 15,
+	"required": 10,
 }, {
 	"level" : 4,
-	"required" : 30
+	"total" : 30,
+	"required": 15,
 }, {
 	"level" : 5,
-	"required" : 50
+	"total": 50,
+	"required" : 20
 }, {
 	"level" : 6,
-	"required" : 75
+	"total": 75,
+	"required" : 25
 }, {
 	"level" : 7,
-	"required" : 100,
+	"total": 100,
+	"required" : 25,
 }, {
 	"level" : 8,
-	"required" : 135
+	"total": 135,
+	"required" : 35,
 }, {
 	"level" : 9,
-	"required" : 175
+	"total": 175,
+	"required" : 40
 }, {
 	"level" : 10,
-	"required" : 250
+	"total": 250,
+	"required" : 75
 }, {
 	"level" : 11,
-	"required" : 300
+	"total": 375,
+	"required" : 75
+}, {
+	"level" : 12,
+	"total": 500,
+	"required" : 125
 } ];
     

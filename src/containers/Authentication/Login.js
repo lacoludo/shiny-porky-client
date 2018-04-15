@@ -83,7 +83,7 @@ class Login extends Component {
           <TextLinkLogin>Mots de passe oublié ?</TextLinkLogin>
         </TouchableOpacity>
         <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('signUp')}>
-          <TextLinkLogin>Vous voulez devenir riche ? S'inscrire</TextLinkLogin>
+          <TextLinkLogin>Tu veux devenir riche ? Inscris toi !</TextLinkLogin>
         </TouchableOpacity>
       </Content>
     );

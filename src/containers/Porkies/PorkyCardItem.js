@@ -5,6 +5,7 @@ import { Image, TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 import { TextCard, TextLevelCard, TextLevelLabelCard } from '../../components/styles/StyledText';
 import FavoritePorky from '../../components/FavoritePorky';
 import PorkyIcon from './../../images/porky-icon.png';
+import { timestampToFormatFr } from '../../utils/dateFormatter';
 
 class PorkyCardItem extends Component {
   static propTypes = {
@@ -36,11 +37,11 @@ class PorkyCardItem extends Component {
           </Left>
           <Body style={{ borderBottomWidth: 0 }}>
             <TextCard style={{ fontSize: 30 }}>{porky.name.toUpperCase()}</TextCard>
-            <TextCard style={{ fontSize: 15 }} note>{'Last update'.toUpperCase()}</TextCard>
+            <TextCard style={{ fontSize: 14 }} note>{timestampToFormatFr(porky.lastUpdate).toUpperCase()}</TextCard>
           </Body>
           <Right style={{ borderBottomWidth: 0, alignItems: 'center' }}>
             <TextCard>N I V.</TextCard>
-            <TextCard style={{ fontSize: 40 }}>{porky.level}</TextCard>
+            <TextCard style={{ fontSize: 40 }}>{porky.level.level}</TextCard>
           </Right>
         </ListItem>
         <CardItem cardBody style={styles.Shadow}>
