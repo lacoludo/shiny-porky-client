@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Container, Content, ListItem, Text } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Button, Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { Permissions } from 'expo';
 import { setReminderNotif } from '../../../actions/member';
@@ -21,18 +21,54 @@ const textInactive = {
   color: '#d4af37',
 };
 
-const buttonActive = {
+const buttonActiveLeft = {
+  flex: 1,
+  backgroundColor: '#d4af37',
+  borderColor: '#d4af37',
+  borderWidth: 1,
+  borderTopLeftRadius: 10,
+  borderBottomLeftRadius: 10,
+}
+
+const buttonInactiveLeft = {
+  flex: 1,
+  backgroundColor: '#fff',
+  borderColor: '#d4af37',
+  borderWidth: 1,
+  borderTopLeftRadius: 10,
+  borderBottomLeftRadius: 10,
+}
+
+const buttonActiveMiddle = {
   flex: 1,
   backgroundColor: '#d4af37',
   borderColor: '#d4af37',
   borderWidth: 1,
 }
 
-const buttonInactive = {
+const buttonInactiveMiddle = {
   flex: 1,
   backgroundColor: '#fff',
   borderColor: '#d4af37',
   borderWidth: 1,
+}
+
+const buttonActiveRight = {
+  flex: 1,
+  backgroundColor: '#d4af37',
+  borderColor: '#d4af37',
+  borderWidth: 1,
+  borderTopRightRadius: 10,
+  borderBottomRightRadius: 10,
+}
+
+const buttonInactiveRight = {
+  flex: 1,
+  backgroundColor: '#fff',
+  borderColor: '#d4af37',
+  borderWidth: 1,
+  borderTopRightRadius: 10,
+  borderBottomRightRadius: 10,
 }
 
 class MyNotifications extends Component {
@@ -63,29 +99,40 @@ class MyNotifications extends Component {
       <Container>
         <HeaderView title="Gestion des notifications" />
         {success && <MessageView message={'Demande enregistrée.'} type={'success'}/>}
-        <Content>
-          <View style={{ marginTop: 20, marginBottom: 20 }}>
-            <Text style={{ textAlign: 'center', fontSize: 20 }}>{'Etre rappelé tous les :'}</Text>
+        <Content padder>
+          <View style={{ marginTop: 40, marginBottom: 20 }}>
+            <Text style={{ textAlign: 'center', fontSize: 20 }}>Etre rappelé tous les :</Text>
           </View>
-          <View padder style={{ marginRight: 15, marginBottom: 20 }}>
-            <ListItem
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
+            <TouchableOpacity
               onPress={() => this.onPress('never')}
-              style={reminderValue === 'never' ? buttonActive : buttonInactive}
+              style={reminderValue === 'never' ? buttonActiveLeft : buttonInactiveLeft}
             >
               <Text style={reminderValue === 'never' ? textActive : textInactive}>Jamais</Text>
-            </ListItem>
-            <ListItem
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => this.onPress('week')}
-              style={reminderValue === 'week' ? buttonActive : buttonInactive}
+              style={reminderValue === 'week' ? buttonActiveMiddle : buttonInactiveMiddle}
             >
               <Text style={reminderValue === 'week' ? textActive : textInactive}>Semaines</Text>
-            </ListItem>
-            <ListItem
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => this.onPress('month')}
-              style={reminderValue === 'month' ? buttonActive : buttonInactive}
+              style={reminderValue === 'month' ? buttonActiveRight : buttonInactiveRight}
             >
               <Text style={reminderValue === 'month' ? textActive : textInactive}>Mois</Text>
-            </ListItem>
+            </TouchableOpacity>
+          </View>
+          <View style={{ marginTop: 15, marginBottom: 20 }}>
+            <Text style={{ textAlign: 'center', fontSize: 20 }}>Etre informé régulièrement de l'achat d'or :</Text>
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 40 }}>
+            <TouchableOpacity style={buttonActiveLeft}>
+              <Text style={textActive}>Oui</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={buttonInactiveRight}>
+              <Text style={textInactive}>Non</Text>
+            </TouchableOpacity>
           </View>
           <ButtonView onPress={this.onSubmitForm} label={'Mettre à jour'} isLoading={isLoading} />
         </Content>
