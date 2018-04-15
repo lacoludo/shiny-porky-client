@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Button, Container, Content, Text } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { Permissions } from 'expo';
 import { setReminderNotif } from '../../../actions/member';
