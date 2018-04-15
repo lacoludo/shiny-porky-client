@@ -1,15 +1,29 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import { Content, Form, Item, Label, Input, Text, Button } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Content, Form, Icon, Input, Item, Text } from 'native-base';
 import { login } from '../../actions/member';
-import { TouchableOpacity } from 'react-native';
 import ButtonView from './../../components/ButtonView';
 import MessageView from './../../components/MessageView';
-import HeaderView from './../../components/HeaderView';
 import SpacerView from './../../components/Spacer';
+import PorkyIcon from './../../images/porky-icon.png';
+
+const styles = StyleSheet.create({
+  margins: {
+    marginTop: 100,
+    marginBottom: 100,
+  },
+  layoutCenter: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  colorGold: {
+    color: '#d4af37',
+  },
+});
 
 class Login extends Component {
   static propTypes = {
@@ -43,39 +57,52 @@ class Login extends Component {
 
     return (
       <Content padder>
-        <HeaderView title="Bienvenue" content="Please use your email and password to login." />
         {error && <MessageView message={error} />}
-        <Form>
-          <Item stackedLabel>
-            <Label>Email</Label>
-            <Input
-              autoCapitalize="none"
-              value={this.state.email}
-              keyboardType="email-address"
-              onChangeText={v => this.handleChange('email', v)}
-            />
-          </Item>
-          <Item stackedLabel>
-            <Label>Password</Label>
-            <Input
-              secureTextEntry
-              onChangeText={v => this.handleChange('password', v)}
-            />
-          </Item>
-          <SpacerView size={20} />
-          <ButtonView onPress={this.handleSubmit} label={'Se connection'} isLoading={isLoading} />
-        </Form>
-        <TouchableOpacity onPress={() => toggleAuthentication('signUp')}>
-            <Text>S'inscrire</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => toggleAuthentication('forgotPassword')}>
-            <Text>Mots de passe oublié</Text>
-        </TouchableOpacity>
+        <View>
+          <View style={styles.margins}>
+            <View style={styles.layoutCenter}>
+              <Image source={PorkyIcon} />
+            </View>
+          </View>
+          <View>
+            <Form>
+              <Item>
+                <Icon active name='mail' />
+                <Input
+                  placeholder='Email'
+                  value={this.state.email}
+                  keyboardType="email-address"
+                  onChangeText={v => this.handleChange('email', v)}
+                />
+              </Item>
+              <SpacerView size={20} />
+              <Item>
+                <Icon active name='lock' />
+                <Input
+                  placeholder='Mot de passe'
+                  secureTextEntry
+                  onChangeText={v => this.handleChange('password', v)}
+                />
+              </Item>
+              <SpacerView size={20} />
+              <ButtonView onPress={this.handleSubmit} label={'Se connecter'} isLoading={isLoading} />
+              <SpacerView size={20} />
+            </Form>
+            <View>
+              <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('forgotPassword')}>
+                <Text style={styles.colorGold}>Mots de passe oublié ?</Text>
+              </TouchableOpacity>
+              <SpacerView size={20} />
+              <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('signUp')}>
+                <Text style={styles.colorGold}>Vous voulez devenir riche ? S'inscrire</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
       </Content>
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   member: state.member || {},
