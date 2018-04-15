@@ -148,8 +148,10 @@ export function resetPassword(formData, dispatch) {
 
   return Firebase.auth()
     .sendPasswordResetEmail(email)
-    .then(() => dispatch({ type: 'USER_FORGOT_PASSWORD_SUCCESS' }))
-    .catch((resp) => {
+    .then(() => {
+      dispatch({ type: 'USER_FORGOT_PASSWORD_SUCCESS' });
+      setTimeout(() => dispatch({ type: 'USER_RESET_MESSAGE' }), 4000);
+    }).catch((resp) => {
       dispatch({ type: 'USER_ERROR',  data: 'Vous avez dépassé la limite de demande de réinitialisation de mots de passe.' });
       setTimeout(() => dispatch({ type: 'USER_RESET_MESSAGE' }), 4000);
     });

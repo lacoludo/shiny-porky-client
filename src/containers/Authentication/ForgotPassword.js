@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Content, Form, Icon, Input, Item, Text } from 'native-base';
 import MessageView from './../../components/MessageView';
-import SpacerView from './../../components/Spacer';
 import ButtonView from './../../components/ButtonView';
 import { resetPassword } from '../../actions/member';
-import PorkyIcon from './../../images/porky-icon.png';
+import { TextLinkLogin, FontAwesomeForm } from '../../components/styles/StyledText';
+import { SubTitleText } from '../../components/styles/StyledTitleView';
+import Header from './Header';
 
 const styles = StyleSheet.create({
   margins: {
@@ -19,9 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  colorGold: {
-    color: '#d4af37',
+    marginTop: 20,
   },
 });
 
@@ -55,37 +54,29 @@ class ForgotPassword extends Component {
     const { error, success, toggleAuthentication, isLoading } = this.props;
 
     return (
-      <Content padder>
+      <Content style={{ padding: 30 }}>
         {error && <MessageView message={error} />}
         {success && <MessageView message={'Un email a été envoyé afin de réinitialiser votre mots de passe.'} />}
-        <View>
-          <View style={styles.margins}>
-            <View style={styles.layoutCenter}>
-              <Image source={PorkyIcon} />
-            </View>
-          </View>
-          <View>
-            <Form>
-              <Item>
-                <Icon active name='mail' />
-                <Input
-                  placeholder='Email'
-                  value={this.state.email}
-                  keyboardType="email-address"
-                  onChangeText={v => this.handleChange('email', v)}
-                />
-              </Item>
-              <SpacerView size={20} />
-              <ButtonView onPress={this.handleSubmit} label={'Réinitialiser'} isLoading={isLoading} />
-              <SpacerView size={20} />
-            </Form>
-          </View>
-          <View>
-            <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('login')}>
-              <Text style={styles.colorGold}>Se connecter</Text>
-            </TouchableOpacity>
-          </View>
+        <Header />
+        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+          <SubTitleText>Réinitialisation de mots de passe</SubTitleText>
         </View>
+        <Form style={{ marginBottom: 20 }}>
+          <Item style={{ marginLeft: 0 }}>
+            <FontAwesomeForm></FontAwesomeForm>
+            <Input
+              style={{ marginLeft: 10 }}
+              placeholder='Email'
+              placeholderTextColor="#b2b2b2"
+              value={this.state.email}
+              onChangeText={v => this.handleChange('email', v)}
+            />
+          </Item>
+        </Form>
+        <ButtonView onPress={this.handleSubmit} label={'Réinitialiser'} isLoading={isLoading} />
+        <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('login')}>
+          <TextLinkLogin>Revenir à la page connexion</TextLinkLogin>
+        </TouchableOpacity>
       </Content>
     )
   }

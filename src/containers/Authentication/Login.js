@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Content, Form, Icon, Input, Item, Text } from 'native-base';
 import { login } from '../../actions/member';
 import ButtonView from './../../components/ButtonView';
 import MessageView from './../../components/MessageView';
-import SpacerView from './../../components/Spacer';
-import PorkyIcon from './../../images/porky-icon.png';
+import { TextLinkLogin } from '../../components/styles/StyledText';
+import { SubTitleText } from '../../components/styles/StyledTitleView';
+import Header from './Header';
 
 const styles = StyleSheet.create({
-  margins: {
-    marginTop: 100,
-    marginBottom: 100,
-  },
   layoutCenter: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  colorGold: {
-    color: '#d4af37',
+    marginBottom: 20,
   },
 });
 
@@ -56,49 +51,40 @@ class Login extends Component {
     const { isLoading, error, toggleAuthentication } = this.props;
 
     return (
-      <Content padder>
+      <Content style={{ padding: 30 }}>
         {error && <MessageView message={error} />}
-        <View>
-          <View style={styles.margins}>
-            <View style={styles.layoutCenter}>
-              <Image source={PorkyIcon} />
-            </View>
-          </View>
-          <View>
-            <Form>
-              <Item>
-                <Icon active name='mail' />
-                <Input
-                  placeholder='Email'
-                  value={this.state.email}
-                  keyboardType="email-address"
-                  onChangeText={v => this.handleChange('email', v)}
-                />
-              </Item>
-              <SpacerView size={20} />
-              <Item>
-                <Icon active name='lock' />
-                <Input
-                  placeholder='Mot de passe'
-                  secureTextEntry
-                  onChangeText={v => this.handleChange('password', v)}
-                />
-              </Item>
-              <SpacerView size={20} />
-              <ButtonView onPress={this.handleSubmit} label={'Se connecter'} isLoading={isLoading} />
-              <SpacerView size={20} />
-            </Form>
-            <View>
-              <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('forgotPassword')}>
-                <Text style={styles.colorGold}>Mots de passe oublié ?</Text>
-              </TouchableOpacity>
-              <SpacerView size={20} />
-              <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('signUp')}>
-                <Text style={styles.colorGold}>Vous voulez devenir riche ? S'inscrire</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+        <Header />
+        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+          <SubTitleText>Se connecter sur Shiny Porky</SubTitleText>
         </View>
+        <Form style={{ marginBottom: 20 }}>
+          <Item style={{ marginLeft: 0, marginBottom: 20 }}>
+            <Icon active name='mail' />
+            <Input
+              placeholder='Email'
+              placeholderTextColor="#b2b2b2"
+              value={this.state.email}
+              keyboardType="email-address"
+              onChangeText={v => this.handleChange('email', v)}
+            />
+          </Item>
+          <Item style={{ marginLeft: 0 }}>
+            <Icon active name='lock' />
+            <Input
+              placeholder='Mots de passe'
+              placeholderTextColor="#b2b2b2"
+              secureTextEntry
+              onChangeText={v => this.handleChange('password', v)}
+            />
+          </Item>
+        </Form>
+        <ButtonView onPress={this.handleSubmit} label={'Se connecter'} isLoading={isLoading} />
+        <TouchableOpacity style={[styles.layoutCenter, { marginTop: 20 }]} onPress={() => toggleAuthentication('forgotPassword')}>
+          <TextLinkLogin>Mots de passe oublié ?</TextLinkLogin>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.layoutCenter} onPress={() => toggleAuthentication('signUp')}>
+          <TextLinkLogin>Vous voulez devenir riche ? S'inscrire</TextLinkLogin>
+        </TouchableOpacity>
       </Content>
     );
   }
