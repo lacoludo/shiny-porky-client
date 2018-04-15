@@ -97,11 +97,13 @@ class MyNotifications extends Component {
     const { isLoading, success } = this.props;
     return (
       <Container>
-        <HeaderView title="Gestion des notifications" />
+        <View style={{ marginTop: 40 }}>
+          <HeaderView title="Gestion des notifications" />
+        </View>
         {success && <MessageView message={'Demande enregistrée.'} type={'success'}/>}
         <Content padder>
-          <View style={{ marginTop: 40, marginBottom: 20 }}>
-            <Text style={{ textAlign: 'center', fontSize: 20 }}>Etre rappelé tous les :</Text>
+          <View style={{ marginTop: 20, marginBottom: 20 }}>
+            <Text style={{ fontSize: 18 }}>Etre rappelé tous les :</Text>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
             <TouchableOpacity
@@ -124,7 +126,7 @@ class MyNotifications extends Component {
             </TouchableOpacity>
           </View>
           <View style={{ marginTop: 15, marginBottom: 20 }}>
-            <Text style={{ textAlign: 'center', fontSize: 20 }}>Etre informé régulièrement de l'achat d'or :</Text>
+            <Text style={{ fontSize: 18 }}>Etre informé régulièrement de l'achat d'or :</Text>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 40 }}>
             <TouchableOpacity style={buttonActiveLeft}>
