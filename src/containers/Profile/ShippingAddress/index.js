@@ -8,6 +8,7 @@ import MessageView from './../../../components/MessageView';
 import HeaderView from './../../../components/HeaderView';
 import SpacerView from './../../../components/Spacer';
 import FormShippingAddress from './formShippingAddress';
+import { TextCard } from '../../../components/styles/StyledText';
 import { Background } from './../../../components/styles/StyledContainer';
 import { getCustomerStripe, postShippingAddressToCustomer } from '../../../actions/stripes';
 
@@ -23,16 +24,31 @@ class ShippingAddress extends Component {
   }
 
   render() {
-    const { isLoading, postShippingAddress, shippingAddress } = this.props;
+    const {
+      isLoading,
+      postShippingAddress,
+      shippingAddress,
+      isSaving,
+    } = this.props;
+
     return ( 
       <Background>
         <Container>
-          <HeaderView title="Mettre à jour votre adresse de livraison" />
-          {isLoading ? (
-            <ActivityIndicator size="large" color="#000" style={{ height: 329}} />
-          ) : (
-            <FormShippingAddress shippingAddress={shippingAddress} onSubmitForm={this.onSubmitForm} />
-          )}
+          <Content padder>
+            <HeaderView title="Mettre à jour votre adresse de livraison" />
+            <View style={{ marginVertical: 20, paddingBottom: 10, borderBottomWidth: 2, borderBottomColor: '#DDD' }}>
+              <TextCard>Une adresse de livraison est indispensable pour récupérer l'or d'un Shiny Porky !</TextCard>
+            </View>
+            {isLoading ? (
+              <ActivityIndicator size="large" color="#000" style={{ height: 329}} />
+            ) : (
+              <FormShippingAddress
+                shippingAddress={shippingAddress}
+                onSubmitForm={this.onSubmitForm}
+                isSaving={isSaving}
+              />
+            )}
+          </Content>
         </Container>
       </Background>
     )
@@ -43,13 +59,13 @@ const mapStateToProps = state => ({
   isLoading: state.shippingAddress.isLoading,
   customerStripe: state.member.customerStripe,
   shippingAddress: state.shippingAddress.address,
+  isSaving: state.shippingAddress.isSaving,
 });
   
 const mapDispatchToProps = (dispatch) => {
   return {
     getCustomerStripe: (customer) => getCustomerStripe(customer, dispatch),
     postShippingAddress: (customer, formData) => postShippingAddressToCustomer(customer, formData, dispatch),
-    dispatch,
   };
 };
   

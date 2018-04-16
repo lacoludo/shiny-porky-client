@@ -23,7 +23,7 @@ export default function appReducer(state = initialState, action) {
       return {
         error: null,
         isLoading: false,
-        success: true,
+        success: null,
         token: action.data.id || '',
         number: action.data.last4 || '',
         expMonth: action.data.exp_month || '',
@@ -31,13 +31,28 @@ export default function appReducer(state = initialState, action) {
         fullName: action.data.fullName || '',
       };
     }
+    case 'SAVE_CREDIT_CARD_SUCCESS': {
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        success: true,
+      };
+    }
     case 'CREDIT_CARD_ERROR': {
-
       return {
         ...state,
         isLoading: false,
         success: false,
         error: action.data.error,
+      };
+    }
+    case 'CREDIT_CARD_RESET_MESSAGE': {
+      return {
+        ...state,
+        isLoading: false,
+        success: false,
+        error: null,
       };
     }
     default:

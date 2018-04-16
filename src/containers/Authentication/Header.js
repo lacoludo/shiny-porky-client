@@ -1,12 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import PorkyIcon from './../../images/porky-icon.png';
+import PorkyIcon from './../../images/porky.png';
 
 const styles = StyleSheet.create({
-  margins: {
-    marginTop: 100,
-    marginBottom: 100,
-  },
   layoutCenter: {
     flex: 1,
     flexDirection: 'row',
@@ -18,9 +14,9 @@ const styles = StyleSheet.create({
 class Header extends PureComponent {
   render() {
     return (
-      <View style={styles.margins}>
+      <View style={{ marginVertical: 30 }}>
         <View style={styles.layoutCenter}>
-          <Image source={PorkyIcon} />
+          <Image source={PorkyIcon} style={{ marginLeft: -30, width: 260, height: 260 }}/>
         </View>
       </View>
     )

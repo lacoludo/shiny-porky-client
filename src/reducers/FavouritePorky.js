@@ -26,16 +26,21 @@ export default function appReducer(state = initialState, action) {
           id: key,
           gramme: transactions[key].gramme,
           status: transactions[key].status,
+          datetime: porky.transactions[key].datetime,
         }));
         array.filter((transaction) => transaction.status !== 'In progress').map((transaction) => {
           gramme += transaction.gramme;
         });
+
+        porky.lastUpdate = array[array.length - 1].datetime;
       }
+
       return {
         loading: false,
         id: action.id,
         name: porky.name,
         childName: porky.childName,
+        lastUpdate: porky.lastUpdate,
         gramme,
         level: levelGetter(gramme),
       };
