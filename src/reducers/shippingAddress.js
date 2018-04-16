@@ -1,5 +1,6 @@
 export const initialState = {
   isLoading: false,
+  isSaving: false,
   address: {
     line1: '',
     line2: '',
@@ -31,6 +32,18 @@ export const initialState = {
             phone: action.data.shipping.phone || '',
             postalCode: address.postal_code || '',
           },
+        };
+      }
+      case 'SAVE_SHIPPING_ADDRESS': {
+        return {
+          ...state,
+          isSaving: true,
+        };
+      }
+      case 'SAVE_SHIPPING_ADDRESS_SUCCESS': {
+        return {
+          ...state,
+          isSaving: false,
         };
       }
       default:

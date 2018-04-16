@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, CheckBox, Button, View } from 'native-base';
+import { Form, Item, Label, Input, View } from 'native-base';
 import ButtonView from './../../../components/ButtonView';
 
 class ShippingAddressForm extends Component {
   static propTypes = {
     onSubmitForm: PropTypes.func.isRequired,
     shippingAddress: PropTypes.shape({}).isRequired,
+    isSaving: PropTypes.bool.isRequired,
   }
 
   constructor(props) {
@@ -34,17 +35,17 @@ class ShippingAddressForm extends Component {
   }
 
   render () {
-    const { shippingAddress } = this.props;
+    const { shippingAddress, isSaving } = this.props;
     return ( 
-      <Content padder>
-        <Item floatingLabel style={{ marginTop: 20 }}>
+      <Form>
+        <Item floatingLabel style={{ marginLeft: 0, marginTop: 10 }}>
           <Label>Adresse</Label>
           <Input
             value={`${this.state.line1}`}
             onChangeText={v => this.handleChange('line1', v)}
           />
         </Item>
-        <Item floatingLabel style={{ marginTop: 20 }}>
+        <Item floatingLabel style={{ marginLeft: 0, marginTop: 20 }}>
           <Label>Informations supplémentaires (optionnel)</Label>
           <Input
             value={`${this.state.line2}`}
@@ -67,22 +68,23 @@ class ShippingAddressForm extends Component {
             />
           </Item>
         </View>
-        <Item floatingLabel style={{ marginTop: 20, width: '70%' }}>
+        <Item floatingLabel style={{ marginLeft: 0, marginTop: 20, width: '70%' }}>
           <Label>Pays</Label>
           <Input
             value={this.state.country}
             onChangeText={v => this.handleChange('country', v)}
           />
         </Item>
-        <Item floatingLabel style={{ marginTop: 20, marginBottom: 20, width: '50%' }}>
+        <Item floatingLabel style={{ marginLeft: 0, marginTop: 20, marginBottom: 20, width: '50%' }}>
           <Label>Téléphone</Label>
           <Input
             value={this.state.phone}
             onChangeText={v => this.handleChange('phone', v)}
           />
         </Item>
-        <ButtonView onPress={this.submitForm} label={'Mettre à jour'}/>
-      </Content>
+        <ButtonView onPress={this.submitForm} label={'Mettre à jour'} isLoading={isSaving} />
+        <View style={{ height: 45 }} />
+      </Form>
     )
   }
 }

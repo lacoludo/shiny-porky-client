@@ -32,10 +32,8 @@ export function createToken(customerId, formData, dispatch) {
   .then((resp) => resp.json())
   .then((creditCard) => {
     updateCreditCard(dispatch, creditCard);
-    dispatch({
-      type: 'CREDIT_CARD_SUCCESS',
-      data: creditCard,
-    });
+    dispatch({ type: 'SAVE_CREDIT_CARD_SUCCESS', data: creditCard });
+    setTimeout(() => dispatch({ type: 'CREDIT_CARD_RESET_MESSAGE' }), 4000);
   });
 }
 
@@ -49,10 +47,7 @@ export function getUserCreditCard(dispatch) {
     
       return ref.on('value', (snapshot) => {
         const userData = snapshot.val() || [];
-        return dispatch({
-          type: 'CREDIT_CARD_SUCCESS',
-          data: userData,
-        });
+        return dispatch({ type: 'CREDIT_CARD_SUCCESS', data: userData });
       });
     }
     return () => new Promise(() => resolve());
@@ -125,6 +120,7 @@ export function getCustomerStripe(customerStripe, dispatch) {
       country,
       phone,
     } = formData;
+    dispatch({ type: 'SAVE_SHIPPING_ADDRESS' });
 
     return fetch(`https://api.stripe.com/v1/customers/${customerStripe}?shipping[name]=Principal&shipping[address][line1]=${line1}`
       + `&shipping[address][line2]=${line2}`
@@ -141,7 +137,7 @@ export function getCustomerStripe(customerStripe, dispatch) {
       }
     })
     .then((response) => {
-      getCustomerStripe(customerStripe, dispatch);
+      dispatch({ type: 'SAVE_SHIPPING_ADDRESS_SUCCESS'});
     });
   }
       

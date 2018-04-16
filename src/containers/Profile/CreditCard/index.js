@@ -25,8 +25,8 @@ class CreditCardUser extends Component {
   }
 
   createCard = (formData) => {
-    const { dispatch, member } = this.props;
-    this.props.createCard(member.customerStripe, formData, dispatch);
+    const { member } = this.props;
+    this.props.createCard(member.customerStripe, formData);
   }
 
   render() {
@@ -36,7 +36,7 @@ class CreditCardUser extends Component {
         <Content padder>
           <HeaderView title="Informations bancaires" />
           {creditCard.error && <MessageView message={creditCard.error} />}
-          {creditCard.success && <MessageView message={'Informations enregistrées !'} type={'success'}/>}
+          {creditCard.success && <MessageView message={'Informations enregistrées !'} type={'success'} />}
           <CreditCardForm creditCard={creditCard} onSubmitForm={this.createCard} />
         </Content>
       </Container>
@@ -45,15 +45,14 @@ class CreditCardUser extends Component {
 }
 
 const mapStateToProps = state => ({
-  member: state.member || {},
-  creditCard: state.creditCard || null,
+  member: state.member,
+  creditCard: state.creditCard,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    createCard: (customer, formData, dispatch) => createToken(customer, formData, dispatch),
+    createCard: (customer, formData) => createToken(customer, formData, dispatch),
     getUserCreditCard: () => getUserCreditCard(dispatch),
-    dispatch,
   };
 };
 
