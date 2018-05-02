@@ -23,8 +23,8 @@ export const initialState = {
           status: data[key].status,
         }));
         
-        currentTransactions = array.filter((transaction) => transaction.status === 'In progress');
-        historicalTransactions = array.filter((transaction) => transaction.status !== 'In progress');
+        currentTransactions = array.filter((transaction) => transaction.status !== 'Terminé');
+        historicalTransactions = array.filter((transaction) => transaction.status === 'Terminé');
 
         return {
           ...state,
