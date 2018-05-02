@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import PorkyIcon from './../../images/porky.png';
 
@@ -11,7 +11,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends PureComponent {
+class Header extends Component {
+
+  shouldComponentUpdate() {
+    return false;
+  }
   render() {
     return (
       <View style={{ marginVertical: 30 }}>

@@ -28,7 +28,7 @@ export default function appReducer(state = initialState, action) {
           status: transactions[key].status,
           datetime: porky.transactions[key].datetime,
         }));
-        array.filter((transaction) => transaction.status !== 'In progress').map((transaction) => {
+        array.filter((transaction) => transaction.status === 'Terminé').map((transaction) => {
           gramme += transaction.gramme;
         });
 
