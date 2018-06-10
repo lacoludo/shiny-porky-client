@@ -19,9 +19,16 @@ export default function appReducer(state = initialState, action) {
     }
     case 'FAVOURITE_PORKY_SUCCESS': {
       const porky = action.data;
+      if (!porky) {
+        return {
+          ...state,
+          loading: false,
+        };
+      }
+
       const transactions = porky.transactions;
       let gramme = 0;
-      if (transactions) {
+      if (porky.transactions) {
         const array = Object.keys(transactions).map((key, item) => ({
           id: key,
           gramme: transactions[key].gramme,

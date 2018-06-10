@@ -5,9 +5,9 @@ import { Container, Content, Text, Body, ListItem, Form, Item, Label, Input, Che
 import { Actions } from 'react-native-router-flux';
 import Messages from '../../../native/components/Messages';
 import Loading from '../../../native/components/Loading';
-import Header from '../../../native/components/Header';
 import Spacer from '../../../native/components/Spacer';
-
+import HeaderView from './../../../components/HeaderView';
+import ButtonView from './../../../components/ButtonView';
 import { createPorky } from '../../../actions/porkies';
 
 class NewPorky extends React.Component {
@@ -52,36 +52,31 @@ class NewPorky extends React.Component {
     return (
       <Container>
         <Content padder>
-          <Header
-            title="Create a porky"
-            content="You can create a porky for your children !"
-          />
-
+          <HeaderView title="Créer un Porky" />
           {error && <Messages message={error} />}
           {success && <Messages message={success} type="success" />}
-
-          <Form>
+          <Form style={{ marginLeft: -15 }} >
             <Item stackedLabel>
-              <Label>Name</Label>
+              <Label>Nom du Porky</Label>
               <Input
+                placeholder="Ex: Porky"
+                placeholderTextColor="#b2b2b2"
                 value={this.state.name}
                 onChangeText={v => this.handleChange('name', v)}
               />
             </Item>
-
             <Item stackedLabel>
-              <Label>Child Name</Label>
+              <Label>A quel enfant appartient ce Porky?</Label>
               <Input
+                placeholder="Ex: Corentin"
+                placeholderTextColor="#b2b2b2"
                 value={this.state.childName}
                 onChangeText={v => this.handleChange('childName', v)}
               />
             </Item>
             <Spacer size={20} />
-
-            <Button block onPress={this.handleSubmit}>
-              <Text>Create Porky</Text>
-            </Button>
           </Form>
+          <ButtonView onPress={this.handleSubmit} label='Créer le Porky'/>
         </Content>
       </Container>
     );

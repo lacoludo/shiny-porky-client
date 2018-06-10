@@ -24,7 +24,7 @@ export default function appReducer(state = initialState, action) {
         error: null,
         isLoading: false,
         success: null,
-        token: action.data.id || '',
+        token: action.data.token || '',
         number: action.data.last4 || '',
         expMonth: action.data.exp_month || '',
         expYear: action.data.exp_year || '',

@@ -38,7 +38,7 @@ class CreditCardForm extends Component {
     const { creditCard } = props;
 
     this.state = {
-      number: `************${creditCard.number}`,
+      number: creditCard.number ? `************${creditCard.number}` : '',
       exp_month: creditCard.expMonth,
       exp_year: creditCard.expYear,
       name: creditCard.fullName,
