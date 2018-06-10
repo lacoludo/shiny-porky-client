@@ -14,6 +14,7 @@ import RemoveButton from './RemoveButton';
 import AnimatedGramme from './AnimatedGramme';
 import { SubTitleText } from '../../components/styles/StyledTitleView';
 import { TextPurchaseLevel } from '../../components/styles/StyledText';
+import MessageView from './../../components/MessageView';
 import { levelGetter } from '../../utils/levelGetter';
 
 const GOLD_COLOR = '#D4AF37';
@@ -45,6 +46,7 @@ class PurchasePage extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (this.props.porky !== nextProps.porky
+      || this.props.isLoading !== nextProps.isLoading
       || this.props.member !== nextProps.member
       || this.props.successMessage !== nextProps.successMessage
       || this.props.errorMessage !== nextProps.errorMessage
@@ -59,7 +61,6 @@ class PurchasePage extends Component {
     const { token } = this.props.creditCard;
     const { customerStripe } = this.props.member;
     const { grammeAdded } = this.state;
-    console.log(this.props.creditCard);
     this.props.purchaseGold(token, this.props.porky, customerStripe, grammeAdded);
   }
 
@@ -108,7 +109,6 @@ class PurchasePage extends Component {
     }
     if (calculCurrentLvlProgress < 0) {
       const currentNextLevel = levelGetter(this.props.porky.gramme + grammeAdded);
-      console.log(nextLevel);
       nextLevel = currentNextLevel.level;
       nextGrammeBase = this.props.porky.gramme - currentNextLevel.total;
       nextExpRequired = currentNextLevel.expRequired;
@@ -126,11 +126,13 @@ class PurchasePage extends Component {
   }
 
   render () {
-    const { porky } = this.props;
+    const { porky, isLoading, success } = this.props;
+    console.log('success', success); 
     return (      
     <Container>
       <Content padder>
         <HeaderView title={`${porky.name} a besoin d'or !`} />
+        {success && <MessageView message={'La transaction a bien été effectuée !'} type={'success'} />}
         <CardItem cardBody style={{ marginTop: 10, marginBottom: 10 }}>
           <TextPurchaseLevel>
             Ton porky est actuellement niveau {porky.level.level}, il te manque {porky.level.remainingExp}g d'or avant le prochain niveau.
@@ -171,7 +173,7 @@ class PurchasePage extends Component {
             </Right>
           </CardItem>
         </Card>
-        <ButtonView onPress={this.purchaseGold} label={'Acheter'}/>
+        <ButtonView onPress={this.purchaseGold} label="Acheter" isLoading={isLoading}/>
         <View style={{ height: 50 }} />
       </Content>
     </Container>);
@@ -183,6 +185,8 @@ const mapStateToProps = state => ({
   creditCard: state.creditCard || null,
   errorMessage: state.status.error || null,
   successMessage: state.status.success || null,
+  isLoading: state.transactions.isLoading,
+  success: state.transactions.success,
 });
 
 function mapDispatchToProps(dispatch) {

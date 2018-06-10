@@ -74,8 +74,7 @@ export function updateCreditCard(dispatch, creditCard) {
 export function purchaseGold(token, porkyId, customerStripe, gramme, dispatch) {
   const amount = gramme * 100;
   const description = `${gramme}g of golds`;
-
-  console.log(token);
+  dispatch({ type: 'LOAD_ADD_TRANSACTIONS' });
   return fetch(`https://api.stripe.com/v1/charges?source=${token}&customer=${customerStripe}&currency=eur&amount=${amount}&description=${description}`, {
       method: 'post',
       headers: {
@@ -86,8 +85,9 @@ export function purchaseGold(token, porkyId, customerStripe, gramme, dispatch) {
   })
   .then((resp) => resp.json())
   .then((data) => {
-    console.log(data);
+    dispatch({ type: 'LOAD_ADD_TRANSACTIONS_SUCCESS', data });
     addTransactionToPorky(porkyId, data.id, gramme, dispatch);
+    setTimeout(() => dispatch({ type: 'ADD_TRANSACTIONS_RESET_MESSAGE' }), 4000);
   });
 }
 

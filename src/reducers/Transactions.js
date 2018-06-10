@@ -6,10 +6,19 @@ export const initialState = {
   
   export default function appReducer(state = initialState, action) {
     switch (action.type) {
+      case 'LOAD_ADD_TRANSACTIONS':
       case 'LOAD_TRANSACTIONS': {
         return { 
           ...state,
-          isLoading :true,
+          isLoading: true,
+        };
+      }
+      case 'LOAD_ADD_TRANSACTIONS_SUCCESS': {
+        return {
+          ...state,
+          success: true,
+          error: false,
+          isLoading: false,
         };
       }
       case 'LOAD_TRANSACTIONS_SUCCESS': {
@@ -33,8 +42,14 @@ export const initialState = {
           isLoading: false,
         };
       }
+      case 'ADD_TRANSACTIONS_RESET_MESSAGE': {
+        return {
+          ...state,
+          isLoading: false,
+          success: false,
+        };
+      }
       case 'LOAD_TRANSACTIONS_ERROR': {
-  
         return {
           ...state,
           isLoading: false,

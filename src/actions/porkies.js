@@ -51,7 +51,6 @@ export function call(dispatch) {
   const ref = FirebaseRef.child(`porkies/${UID}`);
   return ref.on('value', (snapshot) => {
     const porkies = snapshot.val() || [];
-
     return dispatch({
       type: 'PORKIES_REPLACE',
       data: porkies,

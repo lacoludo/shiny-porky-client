@@ -21,7 +21,7 @@ export default function appReducer(state = initialState, action) {
       const porky = action.data;
       if (!porky) {
         return {
-          ...state,
+          ...initialState,
           loading: false,
         };
       }

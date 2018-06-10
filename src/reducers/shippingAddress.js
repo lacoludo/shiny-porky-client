@@ -22,7 +22,7 @@ export const initialState = {
       case 'LOAD_SHIPPING_ADDRESS_SUCCESS': {
         if (!action.data.shipping) {
           return {
-            ...state,
+            ...initialState,
             isLoading: false,
           }
         }
