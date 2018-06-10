@@ -75,6 +75,7 @@ export function purchaseGold(token, porkyId, customerStripe, gramme, dispatch) {
   const amount = gramme * 100;
   const description = `${gramme}g of golds`;
 
+  console.log(token);
   return fetch(`https://api.stripe.com/v1/charges?source=${token}&customer=${customerStripe}&currency=eur&amount=${amount}&description=${description}`, {
       method: 'post',
       headers: {
@@ -85,6 +86,7 @@ export function purchaseGold(token, porkyId, customerStripe, gramme, dispatch) {
   })
   .then((resp) => resp.json())
   .then((data) => {
+    console.log(data);
     addTransactionToPorky(porkyId, data.id, gramme, dispatch);
   });
 }
@@ -104,7 +106,7 @@ export function getCustomerStripe(customerStripe, dispatch) {
   })
   .then((resp) => resp.json())
   .then((data) => {
-    dispatch({ type: 'SHIPPING_ADDRESS_SUCCESS', data});
+    dispatch({ type: 'LOAD_SHIPPING_ADDRESS_SUCCESS', data });
   });
 }
 

@@ -206,7 +206,7 @@ export function updateProfile(formData) {
 
         // Update Redux
         await getUserData(dispatch);
-        await statusMessage(dispatch, 'success', 'Profile Updated');
+        await statusMessage(dispatch, 'success', 'Profil mis à jour.');
         resolve();
       }).catch(reject);
   }).catch(async (err) => { await statusMessage(dispatch, 'error', err.message); throw err.message; });

@@ -59,6 +59,7 @@ class PurchasePage extends Component {
     const { token } = this.props.creditCard;
     const { customerStripe } = this.props.member;
     const { grammeAdded } = this.state;
+    console.log(this.props.creditCard);
     this.props.purchaseGold(token, this.props.porky, customerStripe, grammeAdded);
   }
 
@@ -132,7 +133,7 @@ class PurchasePage extends Component {
         <HeaderView title={`${porky.name} a besoin d'or !`} />
         <CardItem cardBody style={{ marginTop: 10, marginBottom: 10 }}>
           <TextPurchaseLevel>
-            Ton porky est actuellement niveau {porky.level.level}, il te manque {porky.level.remainingExp}g d'or.
+            Ton porky est actuellement niveau {porky.level.level}, il te manque {porky.level.remainingExp}g d'or avant le prochain niveau.
           </TextPurchaseLevel>
         </CardItem>
         <Card style={styles.Shadow}>
@@ -171,6 +172,7 @@ class PurchasePage extends Component {
           </CardItem>
         </Card>
         <ButtonView onPress={this.purchaseGold} label={'Acheter'}/>
+        <View style={{ height: 50 }} />
       </Content>
     </Container>);
   }

@@ -19,7 +19,13 @@ export const initialState = {
           isLoading :true,
         };
       }
-      case 'SHIPPING_ADDRESS_SUCCESS': {
+      case 'LOAD_SHIPPING_ADDRESS_SUCCESS': {
+        if (!action.data.shipping) {
+          return {
+            ...state,
+            isLoading: false,
+          }
+        }
         const { address } = action.data.shipping;
         return {
           ...state,

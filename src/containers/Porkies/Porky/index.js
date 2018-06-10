@@ -45,7 +45,7 @@ class Porky extends Component {
 
     return (
       <Container>
-        <Content style={{ marginRight: 15 }}>
+        <Content style={{ margin: 15 }}>
           <HeaderView title={porky.name} />
           <SubTitleView>
             <SubTitleText>Transactions en cours</SubTitleText>

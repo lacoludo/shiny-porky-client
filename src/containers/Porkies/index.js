@@ -8,6 +8,7 @@ import PorkyCard from './PorkyCard';
 import HeaderView from '../../components/HeaderView';
 import ButtonView from '../../components/ButtonView';
 import { getUserPorkies, favoritePorky, setError } from '../../actions/porkies';
+import { TextCard } from '../../components/styles/StyledText';
 
 class PorkieListing extends Component {
   static propTypes = {
@@ -53,20 +54,26 @@ class PorkieListing extends Component {
             />
           ) : (
             <View>
-            {porkies.map((item) => {
-              return (
-                <PorkyCard
-                  key={item.id}
-                  favouritePorkyId={favouritePorkyId}
-                  onFavoritePorky={this.onFavoritePorky}
-                  porky={item}
-                  onPress={this.onPress}
-                  reFetch={this.fetchPorkies}
-                />
-              )
-            })}
+              {porkies.length === 0 ? (
+                <View style={{ paddingBottom: 10, paddingTop: 10 }}><TextCard>Vous n'avez actuellement aucun Porky. Créez en pour acheter de l'or !</TextCard></View>
+              ) : (
+                <View>
+                  {porkies.map((item) => {
+                    return (
+                      <PorkyCard
+                        key={item.id}
+                        favouritePorkyId={favouritePorkyId}
+                        onFavoritePorky={this.onFavoritePorky}
+                        porky={item}
+                        onPress={this.onPress}
+                        reFetch={this.fetchPorkies}
+                      />
+                    )
+                  })}
+                </View>
+              )}
             </View>
-          )}
+          )} 
           <ButtonView onPress={Actions.newPorky} label={'Nouveau Porky'}/>
           <View style={{ height: 30 }} />
         </Content>

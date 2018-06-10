@@ -30,7 +30,6 @@ class ShippingAddress extends Component {
       shippingAddress,
       isSaving,
     } = this.props;
-
     return ( 
       <Background>
         <Container>

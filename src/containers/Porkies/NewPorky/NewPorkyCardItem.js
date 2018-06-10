@@ -9,8 +9,7 @@ class NewPorkyCardItem extends PureComponent {
   render() {
     return (
         <TouchableOpacity onPress={Actions.newPorky}>
-          <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          </View>
+          <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' }} />
         </TouchableOpacity>
     );
   }

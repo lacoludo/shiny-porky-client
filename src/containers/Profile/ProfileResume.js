@@ -17,7 +17,7 @@ class ProfileResume extends PureComponent {
       <Grid style={{ marginTop: 5, backgroundColor: '#FFF' }}>
         <ColProfileResume title={`Prix de l'or`} number={currentGoldValue} right />
         <ColProfileResume title={`Message(s)`} number={messagesUnseen} />
-        <ColProfileResume title={`Or total`} number={230} left />
+        <ColProfileResume title={`Or total`} number={0} left />
       </Grid>
     );
   }
